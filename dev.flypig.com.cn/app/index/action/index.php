@@ -78,4 +78,8 @@ $arrUser = aac('user')->getHotUser(16);
 
 if($TS_CF['mobile']) $sitemb = tsUrl('moblie');
 
+
+$topvisitlist=$new['index']->getTopVisitlist();
+
+
 include template("index");

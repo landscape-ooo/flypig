@@ -17,4 +17,12 @@ $title = $strSpecial['title'];
 
 $linkurl = $strSpecial['linkurl'];
 
+//增加浏览次数
+$new['special']->update('special', array(
+		'specialid' => $specialid,
+), array(
+		'count_click' => $strSpecial['count_click'] + 1,
+));
+
+
 header("Location: ".$linkurl);

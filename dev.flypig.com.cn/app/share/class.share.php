@@ -146,16 +146,16 @@ class share extends tsApp{
 	
 	//最top visit 分享
 	public function getTopVisitlist(){
-		$arrShare = $this->findAll('share',null,
+		$arrList = $this->findAll('share',null,
 				'count_view desc',
-				"shareid,title ,count_view" ,
-				10
-				);
-		
-		foreach($arrShare as $key=>$item){
-			$arrShare[$key]['title']=htmlspecialchars($item['title']);
+				"'share' as type,shareid,title ,count_view" ,
+				5
+		);
+	
+		foreach($arrList as $key=>$item){
+			$arrList[$key]['title']=htmlspecialchars($item['title']);
 		}
-		return $arrShare;
+		return $arrList;
 	}
 	
 }

@@ -46,4 +46,19 @@ class special extends tsApp{
 		return $strSpecial;
 	}
 	
+	//最top visit 分享
+	public function getTopVisitlist(){
+		$arrList = $this->findAll('special',null,
+				'count_click desc',
+				"'special' as type,specialid,title ,count_click" ,
+				5
+		);
+	
+		foreach($arrList as $key=>$item){
+			$arrList[$key]['title']=htmlspecialchars($item['title']);
+		}
+		
+		return $arrList;
+	}
+	
 }

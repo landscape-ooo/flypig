@@ -108,4 +108,22 @@ class ask extends tsApp{
 		}
 	}
 	
+	
+	
+	
+
+
+	//最top visit 分享
+	public function getTopVisitlist(){
+		$arrList = $this->findAll('ask',null,
+				'count_view desc',
+				"'ask' as type,askid,title ,count_view" ,
+				5
+		);
+	
+		foreach($arrList as $key=>$item){
+			$arrList[$key]['title']=htmlspecialchars($item['title']);
+		}
+		return $arrList;
+	}
 }

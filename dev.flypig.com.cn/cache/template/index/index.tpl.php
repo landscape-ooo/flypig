@@ -78,6 +78,21 @@
 			</ol>
 		</div>
 		
+		
+		
+		<div id="hot_review" class="com-box">
+			<h3>
+				<span class="icon icon-fire"></span>
+				推荐热门文章
+			</h3>
+			<ul class="content">
+				<?php foreach((array)$topvisitlist as $key=>$item) {?>
+				<li>
+					<h4><a href="<?php echo tsurl($item['type'],'show',array('id'=>$item[$item['type'].'id']))?>" target="_blank"><?php echo $item['title'];?></a></h4>
+				</li>
+				<?php }?>
+			</ul>
+		</div>
 		<!--广告位-->
 		<?php doAction('gobad','300')?>
 		

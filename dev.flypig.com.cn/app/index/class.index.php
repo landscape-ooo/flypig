@@ -78,4 +78,30 @@ class index extends tsApp{
 		return true;
 	}
 	
+	
+	/**
+	 * 最top visit 分享 (merge)
+	 */
+	public function getTopVisitlist(){
+		$ret=array();
+	 	$tmp=aac('ask')->getTopVisitlist();
+	 	$ret=array_merge($ret,$tmp);
+	 	$tmp=aac('share')->getTopVisitlist();
+		$ret=array_merge($ret,$tmp);
+		$tmp=aac('book')->getTopVisitlist();
+		$ret=array_merge($ret,$tmp);
+		$tmp=aac('review')->getTopVisitlist();
+		$ret=array_merge($ret,$tmp);
+		
+		usort($ret, function($a,$b){
+			if($a['count_view']>$b['count_view']) return -1;
+			return 1;
+		});
+		$ret=array_chunk($ret, 6)[0];
+		foreach($ret as $key=>$item){
+			$ret[$key]['title']=htmlspecialchars($item['title']);
+		}
+		return $ret;
+	}
+	
 }

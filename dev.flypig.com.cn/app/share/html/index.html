@@ -66,6 +66,20 @@
 		</div>
 		{/if}
 		
+		
+		<div id="hot_review" class="com-box">
+			<h3>
+				<span class="icon icon-fire"></span>
+				热门分享
+			</h3>
+			<ul class="content">
+				{loop $topvisitlist $key $item}
+				<li>
+					<h4><a href="{tsUrl('review','show',array('id'=>$item['reviewid']))}" target="_blank">{$item['title']}</a></h4>
+				</li>
+				{/loop}
+			</ul>
+		</div>
 		<!--广告位-->
 		{php doAction('gobad','300')}
 		

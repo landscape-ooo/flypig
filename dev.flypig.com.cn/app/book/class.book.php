@@ -271,6 +271,21 @@ class book extends tsApp{
 		}
 	}
 	
+	
+	//最top visit 分享
+	public function getTopVisitlist(){
+		$arrList = $this->findAll('book',null,
+				'count_view desc',
+				"'book' as type,bookid,title ,count_view" ,
+				5
+		);
+	
+		foreach($arrList as $key=>$item){
+			$arrList[$key]['title']=htmlspecialchars($item['title']);
+		}
+		return $arrList;
+	}
+	
 	//析构函数
 	public function __destruct(){
 		

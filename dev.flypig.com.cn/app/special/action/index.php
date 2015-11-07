@@ -68,4 +68,12 @@ if(!empty($cateid)){
 //分页
 $pageUrl = pagination($specialNum, $pagesize, $page, $url);
 
+/*
+ * 侧栏
+ * */
+//top visit share
+$topvisitlist=$new['special']->getTopVisitlist();
+
+
+
 include template("index");

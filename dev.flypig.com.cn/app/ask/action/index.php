@@ -93,4 +93,14 @@ $askNum = $new['ask']->findCount('ask', $findWhere);
 $url = tsUrl('ask', 'index', array('ts'=>$ts,'page'=>''));
 $pageUrl = pagination($askNum, $pagesize, $page, $url);
 
+
+
+/*
+ * 侧栏
+ * */
+//top visit share
+$topvisitlist=$new['ask']->getTopVisitlist();
+
+
+
 include template('index');

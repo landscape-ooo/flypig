@@ -139,6 +139,21 @@ class review extends tsApp{
 		return $arrReview;
 	}
 	
+	
+
+	//最top visit 分享
+	public function getTopVisitlist(){
+		$arrList = $this->findAll('review',null,
+				'count_view desc',
+				"'review' as type,reviewid,title ,count_view" ,
+				5
+		);
+	
+		foreach($arrList as $key=>$item){
+			$arrList[$key]['title']=htmlspecialchars($item['title']);
+		}
+		return $arrList;
+	}
 	//析构函数
 	public function __destruct(){
 		

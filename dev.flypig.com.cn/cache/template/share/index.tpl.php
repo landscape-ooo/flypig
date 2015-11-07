@@ -56,7 +56,7 @@
 					<a class="tag<?php if($cateid=='0') { ?> current<?php } ?>" href="<?php echo tsurl('share')?>"><span>全部</span></a>
 					<a class="tag_count" href="<?php echo tsurl('share')?>"><?php echo $shareNumAll;?></a>
 				</li>
-				<?php foreach((array)$topvisitlist as $key=>$item) {?>
+				<?php foreach((array)$arrMyCate as $key=>$item) {?>
 				<li>
 					<a class="tag<?php if($cateid==$item['cateid']) { ?> current<?php } ?>" href="<?php echo tsurl('share','index',array(cateid=>$item['cateid']))?>"><span><?php echo $item['catename'];?></span></a>
 					<a class="tag_count" href="<?php echo tsurl('share','index',array(cateid=>$item['cateid']))?>"><?php echo $item['count_share'];?></a>
@@ -66,28 +66,20 @@
 		</div>
 		<?php } ?>
 		
+		
 		<div id="hot_review" class="com-box">
 			<h3>
 				<span class="icon icon-fire"></span>
-				热门书评
+				热门分享
 			</h3>
 			<ul class="content">
 				<?php foreach((array)$topvisitlist as $key=>$item) {?>
-				sss<br>
 				<li>
 					<h4><a href="<?php echo tsurl('review','show',array('id'=>$item['reviewid']))?>" target="_blank"><?php echo $item['title'];?></a></h4>
-					<span class="r-grey">
-						<span class="icon icon-bubble2"></span>
-						<a href="<?php echo tsurl('review','show',array('id'=>$item['reviewid']))?>" target="_blank" title="评论数"><?php echo $item['count_comment'];?></a>
-					</span>
-					<p class="b-titles">
-						<span class="b-titles-l">来自：<a title="<?php echo $item['book']['bookname'];?>" target="_blank" href="<?php echo tsurl('book','show',array('id'=>$item['bookid']))?>">《<?php echo cututf8(t($item['book']['bookname']),0,14)?>》</a></span>
-					</p>
 				</li>
 				<?php }?>
 			</ul>
 		</div>
-		
 		<!--广告位-->
 		<?php doAction('gobad','300')?>
 		

@@ -79,7 +79,7 @@ if ($TS_CF ['mobile'])
  * 侧栏
  * */
 //top visit share
-$arrShare['topvisitlist']=$new['share']->getTopVisitlist();
+$topvisitlist=$new['share']->getTopVisitlist();
 
 
 
