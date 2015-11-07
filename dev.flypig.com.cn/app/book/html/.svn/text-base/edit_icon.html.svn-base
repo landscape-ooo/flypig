@@ -1,0 +1,51 @@
+{template header}
+
+<div id="bd" class="bd clearfix">
+	<h1 id="edit-title">
+		<span class="icon icon-pen"></span>
+		{$title}
+	</h1>
+	<div class="bd-left">
+		
+		<div id="edit-icon" class="com-box">
+			<div id="edit-menu">
+				{template edit_menu}
+			</div>
+			<div id="edit-body">
+				
+				<form method="POST" action="{tsUrl('book','do',array('ts'=>'edit_icon'))}" enctype="multipart/form-data" >
+				<table class="com-table">
+					<tr>
+						<th>图书封面：</th>
+						<td>
+							<img alt="{$strBook[bookname]}" title="{$strBook[bookname]}" valign="middle" src="{if $strBook[photo]}{php echo tsXimg($strBook[photo],'book','180','0',$strBook[path])}?v={php echo rand();}{else}{SITE_URL}public/images/book.jpg{/if}">
+						</td>
+					</tr>
+					<tr>
+						<th>选择图片：</th>
+						<td>
+							<input type="file" name="picfile">
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<input type="hidden" name="bookid" value="{$strBook[bookid]}" />
+							<button type="submit" class="btn btn-success">上传照片</button>
+						</td>
+					</tr>
+				</table>
+				</form>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{template edit_right}
+		
+	</div>
+</div>
+
+{template footer}

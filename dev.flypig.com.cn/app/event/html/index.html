@@ -1,0 +1,95 @@
+{template header}
+
+<div id="path">
+	<span class="icon icon-home"></span>
+	<a href="{SITE_URL}" title="{$TS_SITE['base']['site_title']}首页">首页</a>  &gt;  <a href="{tsUrl($app)}" title="{$TS_APP['options']['appname']}">{$TS_APP['options']['appname']}</a>{if !empty($cateid)}  &gt;  <a href="{tsUrl($app,'index',array('cateid'=>$cateid))}">{$catename}</a>{/if}  &gt;  最新活动
+</div>
+
+<div id="bd" class="bd clearfix">
+	<div class="bd-left">
+		
+		<div id="event_list">
+			<ul>
+				{loop $arrEvent $key $item}
+				<li class="event-box clearfix" onclick="window.open('{tsUrl($app,'show',array('id'=>$item['eventid']))}', '_blank');return false;">
+					<div class="li-pic">
+						<a href="{tsUrl($app,'show',array('id'=>$item['eventid']))}" target="_blank"><img src="{$item['thumb']}"></a>
+					</div>
+					<div class="li-text">
+						<a class="title wordfix" href="{tsUrl($app,'show',array('id'=>$item['eventid']))}" target="_blank">{$item['title']}</a>
+						<div class="baseinfo">
+							{if $item['catename']}
+							<dl class="clearfix">
+								<dt>
+									<span class="icon icon-tag"></span>
+									<span class="t">活动类型：</span>
+								</dt>
+								<dd>{$item['catename']}</dd>
+							</dl>
+							{/if}
+							{if $item['PCA']}
+							<dl class="clearfix">
+								<dt>
+									<span class="icon icon-location2"></span>
+									<span class="t">活动地点：</span>
+								</dt>
+								<dd>
+									{if $item['PCA']}{$item['PCA']}{/if}
+								</dd>
+							</dl>
+							{/if}
+							<dl class="clearfix">
+								<dt>
+									<span class="icon icon-clock"></span>
+									<span class="t">开始时间：</span>
+								</dt>
+								<dd>{$item['time_start']}</dd>
+							</dl>
+						</div>
+						<div class="desc">{php echo cututf8(t($item[content]),'0','250')}</div>
+					</div>
+				</li>
+				{/loop}
+			</ul>
+			<div class="com-page">{$pageUrl}</div>
+			
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		<br>
+		{if $TS_APP[options][iscreate]==0 || $TS_USER[user][isadmin]==1}
+		<a class="btn3d btn3d-full" href="{if $cateid}{tsUrl($app, 'add', array('cateid'=>$cateid))}{else}{tsUrl($app, 'add')}{/if}"><span class="icon-pen"></span> 发起活动</a><br><br>
+		{/if}
+		
+		<div id="event-cate-list" class="com-box">
+			<div class="com-bar3 clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-tags"></span>
+					活动分类
+				</div>
+				<div class="com-bar-more">
+					&nbsp;&nbsp;
+				</div>
+			</div>
+			<ul>
+				<li>
+					<a class="tag{if $cateid=='0'} current{/if}" href="{tsUrl($app)}"><span>全部</span></a>
+					<a class="tag_count" href="{tsUrl($app)}">{$eventNumAll}</a>
+				</li>
+				{loop $arrEventCate $key $item}
+				<li>
+					<a class="tag{if $cateid==$item['cateid']} current{/if}" href="{tsUrl($app,'index',array(cateid=>$item['cateid']))}"><span>{$item['catename']}</span></a>
+					<a class="tag_count" href="{tsUrl($app,'index',array(cateid=>$item['cateid']))}">{$item['count_event']}</a>
+				</li>
+				{/loop}
+			</ul>
+		</div>
+		
+		<!--广告位-->
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{template footer}

@@ -1,0 +1,14 @@
+<h2>专题管理</h2>
+<div class="tabnav">
+<ul>
+<li{if $mg=='options'} class="select"{/if}><a href="{SITE_URL}index.php?app=special&ac=admin&mg=options">专题配置</a></li>
+<li{if $mg=='special' && $ts=='list'} class="select"{/if}><a href="{SITE_URL}index.php?app=special&ac=admin&mg=special&ts=list">专题列表</a></li>
+
+<li{if ($mg=='cate' && $ts=='list' || $mg=='cate' && $ts=='edit')} class="select"{/if}><a href="{SITE_URL}index.php?app=special&ac=admin&mg=cate&ts=list">专题分类列表</a></li>
+<li{if $mg=='cate' && $ts=='add'} class="select"{/if}><a href="{SITE_URL}index.php?app=special&ac=admin&mg=cate&ts=add">添加分类</a></li>
+
+
+
+
+</ul>
+</div>

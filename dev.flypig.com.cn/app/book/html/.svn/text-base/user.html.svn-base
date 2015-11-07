@@ -1,0 +1,93 @@
+{template header}
+
+<div class="midder">
+
+<div class="mc">
+
+<div class="cleft">
+
+
+<div class="bbox">
+<h2>{$strBook['bookname']}组长</h2>
+<div class="bc">
+<a class="nbg" href="{tsUrl('user','space',array('id'=>$strLeader[userid]))}"><img alt="{$strLeader[username]}" src="{$strLeader[face]}" width="48" height="48" /></a>
+<p>{$strLeader[username]}</p>
+</div>
+</div>
+
+<div class="bbox">
+<h2>{$strBook['bookname']}管理员</h2>
+<div class="bc">
+
+<div class="facelist">
+<ul>
+{loop $arrAdmin $key $item}
+<li>
+<a href="{tsUrl('user','space',array('id'=>$item[userid]))}"><img alt="{$item[username]}" src="{$item[face]}" width="48" height="48" /></a>
+<p>{$item[username]}</p>
+<p>{if $strBook['userid']==$TS_USER['user']['userid'] || $TS_USER['user']['isadmin']==1}
+
+<a href="javascript:void('0');" onclick="setAdmin('{$strBook[bookid]}','{$item['userid']}','{$_SESSION['token']}')">
+{if $item['isadmin']==1}
+取消管理员
+{elseif $item['isadmin']==0}
+设为管理员
+{/if}
+</a>
+{/if}</p>
+</li>
+{/loop}
+</ul>
+</div>
+
+</div>
+</div>
+
+
+<div class="bbox">
+<h2>{$strBook['bookname']}成员</h2>
+<div class="bc">
+
+<div class="facelist">
+
+<ul>
+{loop $arrBookUser $key $item}
+<li>
+<a href="{tsUrl('user','space',array('id'=>$item[userid]))}"><img alt="{$item[username]}" src="{$item[face]}" width="48" height="48" /></a>
+<p>{$item[username]}</p>
+<p>
+{if $strBook['userid']==$TS_USER['user']['userid'] || $TS_USER['user']['isadmin']==1}
+
+{if $item['isadmin']==1}
+<a href="javascript:void('0');" onclick="setAdmin('{$strBook[bookid]}','{$item['userid']}','{$_SESSION['token']}')">取消管理员</a>
+{elseif $item['isadmin']==0 && $strBook['userid']!=$item['userid']}
+<a href="javascript:void('0');" onclick="setAdmin('{$strBook[bookid]}','{$item['userid']}','{$_SESSION['token']}')">设为管理员</a>
+<br /><a href="javascript:void('0');" onclick="kickedBook('{$strBook['bookid']}','{$item['userid']}')" title="踢出">X</a>
+{/if}
+
+{/if}</p>
+</li>
+{/loop}
+</ul>
+
+</div>
+
+</div>
+</div>
+
+
+
+</div>
+
+
+<div class="cright">
+<div class="bbox">
+<div class="bc">
+<a href="{tsUrl('book','show',array('id'=>$strBook[bookid]))}">返回{$strBook[bookname]}</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{template footer}

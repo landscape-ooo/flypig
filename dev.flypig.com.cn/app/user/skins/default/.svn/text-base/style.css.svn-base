@@ -1,0 +1,78 @@
+/* 用户设置title */
+#user-title{height:40px;line-height:40px;margin:10px 0;font-size:20px;}
+#user-title .icon{color:#919f0a;}
+
+/*  用户设置menu */
+#set-menu{}
+
+/*  用户设置body */
+#set-body{padding:10px;}
+
+/* 标签列表 */
+.tag_list .tag{background: none repeat scroll 0 0 #E3F9F7;border-radius: 12px;color: #1E726A;display: inline-block;height: 24px;line-height: 24px;margin-right: 10px;padding: 0 10px;vertical-align: middle;}
+.tag_list .tag .close{background: url("/theme/flypig/tag_close.png") no-repeat scroll left top rgba(0, 0, 0, 0);cursor: pointer;display: inline-block;height: 13px;margin: 5px 0 0 4px;overflow: hidden;vertical-align: top;width: 14px;}
+.tag_add{padding:10px 10px;}
+.tag_add .icon{color:#919f0a;}
+
+/*  */
+#passport{height:100px;}
+#passport p{padding:5px 0;}
+
+/* 邀请码 */
+.invitecode{width:600px;margin:0 auto;}
+.invitecode ul{}
+.invitecode ul li{float:left;width:300px;font-size:14px;padding:10px 0;}
+
+/* 会员中心 */
+#space{}
+
+/* 动态 */
+#space .feed{}
+#space .feed .mbtl {float: left;margin: 8px 7px 0 0;padding: 0;width: 55px;}
+#space .feed .mbtr {border-bottom: 1px solid #EEEEEE;margin: 5px 0;min-height: 55px;overflow: hidden;padding: 5px 0;}
+#space .feed .pl {color: #666666;line-height: 1.5;}
+#space .feed .broadsmr {color: #999999;padding: 5px 24px;}
+#space .feed .indentrec {color: #333333;line-height: 1.6em;margin-left: 24px;}
+#space .feed .quote {background: url("http://t.douban.com/pics/quotel.gif") no-repeat scroll left 4px transparent;margin: 8px 0 0 26px;overflow: hidden;padding: 0 24px 5px 15px;width: auto;word-wrap: break-word;}
+#space .feed .quote .inq {background: url("http://t.douban.com/pics/quoter.gif") no-repeat scroll right bottom transparent;color: #333333;display: inline-block;padding-right: 15px;}
+#space .feed .broadimg {border: 1px solid #DDDDDD;float: right;margin-left: 14px;}
+#space .feed .indentrec {color: #333333;line-height: 1.6em;margin-left: 24px;}
+#space .feed .timeline-album {float: left;margin: 8px 12px 8px 0;}
+
+/* 留言列表 */
+#space .gbook-list{height:600px;}
+#space .gbook-list ul{}
+#space .gbook-list ul li{border-bottom: 1px solid #ddd;overflow: hidden;padding: 10px 0;}
+
+#space .gbook-list li .face{float:left;width:50px;}
+#space .gbook-list li .message{float:right;width:550px;}
+
+
+/* 右侧用户信息 */
+#user-box{overflow: hidden;}
+#user-box .face{float:left;margin:10px 0 0 10px;}
+#user-box .face img{padding:2px;border:1px solid #eee;}
+#user-box .info{margin:10px 10px 0 80px;}
+#user-box .info h4 {margin: 0 0 5px 0;}
+#user-box .other {border-top: solid 1px #eee;margin-top: 10px;}
+#user-box .other li {float: left;padding: 10px 15px;}
+#user-box .fmore {border-top: solid 1px #eee;margin-top: 10px;padding: 0 10px;line-height: 30px;}
+
+/* 右侧关注用户 */
+#user-follow{}
+#user-follow .obu {display: inline;float: left;margin: 0 0 10px;width: 70px;}
+#user-follow .obu dt {height: 50px;line-height: 16px;margin: 0;overflow: hidden;text-align: center;}
+#user-follow .obu dd {margin: 0; height: 30px;overflow: hidden;text-align: center;}
+
+/* 右侧关注小组 */
+#user-groups .ob {float: left;margin: 0 0 10px;text-align: center;width: 70px;}
+#user-groups .ob dt {height: 50px;margin: 0;overflow: hidden;text-align: center;}
+#user-groups .ob dd {height: 30px;margin: 0;overflow: hidden;text-align: center;}
+#user-groups .ob span {white-space: nowrap;}
+
+/* 左侧通用列表*/
+.commlist ul li {
+	padding: 8px;
+	border-bottom: dashed 1px #ddd
+}
+.commlist ul li i{float:right;}

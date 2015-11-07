@@ -1,0 +1,1 @@
+<?php defined('IN_TS') or die('Access Denied.');//插件信息return array('name' => 'kindeditor编辑器','version' => '1.0','desc' => 'kindeditor编辑器','url' => 'http://www.flypig.com.cn','email' => '38388742@qq.com','author' => 'adan','author_url' => 'http://www.flypig.com.cn','isedit'	=> '0',);

@@ -1,0 +1,73 @@
+{template header}
+
+<div id="bd" class="bd clearfix">
+	<h1 id="user-title">
+		<span class="icon icon-cog"></span>
+		用户设置
+	</h1>
+	<div class="bd-left">
+		
+		<div class="com-box">
+			<div id="set-menu">
+				{template set_menu}
+			</div>
+			<div id="set-body">
+				
+				<div class="tag_list">
+					{loop $arrTag $key $item}
+					<span id="tag_{$item[tagid]}" class="tag">
+						{$item[tagname]}<span class="close" onclick="delTag({$userid},{$item[tagid]});"></span>
+					</span>
+					{/loop}
+				</div>
+				<div id="tagFrom" style="vertical-align:middle;display:none">
+					<input type="text" name="tags" id="tags" size="40" />
+					<button class="btn btn-success" type="submit" onClick="savaTag({$userid})">添加</button>
+					<a href="javascript:void(0);" onClick="showTagFrom()">取消</a>
+					<br>多个标签请用“英文空格、逗号”分开
+				</div>
+				<div class="tag_add">
+					<span class="icon icon-plus"></span> <a href="javascript:void('0');" onclick="showTagFrom()">添加个人标签</a>
+				</div>
+				
+			</div>
+
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{template set_right}
+		
+	</div>
+</div>
+
+<script type="text/javascript">
+/*显示标签界面*/
+function showTagFrom(){
+	$('#tagFrom').toggle('fast');
+}
+/*提交标签*/
+function savaTag(userid){
+	var tag = $('#tags').val();
+	if(tag ==''){
+		alert('请输入标签哟^_^');
+		$('#tagFrom').show('fast');
+	}else{
+		var url = siteUrl+'index.php?app=tag&ac=add_ajax&ts=do';
+		$.post(url,{objname:'user',idname:'userid',objid:userid,tags:tag},function(rs){
+			window.location.reload();
+		});
+	}
+}
+function delTag(userid,tagid) {
+	if(confirm('确认要删除此标签吗？') == false){ return false; }
+	var url = siteUrl+'index.php?app=tag&ac=del_ajax&ts=do';
+	$.post(url,{objname:'user',idname:'userid',objid:userid,tagid:tagid},function(rs){
+		$("#tag_"+tagid).hide();
+		//window.location.reload();
+	});
+}
+</script>
+
+{template footer}

@@ -1,0 +1,75 @@
+{template header}
+
+<div id="path" class="bd clearfix">
+	<span class="icon icon-home"></span>
+	<a href="{SITE_URL}" title="{$TS_SITE['base']['site_title']}首页">首页</a>  &gt;  <a href="{tsUrl('share')}" title="{$TS_APP['options']['appname']}">{$TS_APP['options']['appname']}</a>  &gt;  {if !empty($cateid)}<a href="{tsUrl('share','index',array('cateid'=>$cateid))}">{$catename}</a>  &gt;  {/if}最新分享
+</div>
+
+<div id="bd" class="bd clearfix">
+	<div class="bd-left">
+		
+		<div id="share_list">
+			<ul>
+				{loop $arrShare $key $item}
+				<li class="share-box clearfix">
+					<div class="li-pic">
+						<a href="{tsUrl('share','show',array('id'=>$item['shareid']))}" target="_blank"><img src="{$item['thumb']}"></a>
+					</div>
+					<div class="li-text">
+						<h2 class="title wordfix">
+							<a href="{tsUrl('share','show',array('id'=>$item['shareid']))}" target="_blank">{$item['title']}</a>
+						</h2>
+						<div class="content wordfix">
+							{php echo cututf8(t($item['summary']),'0','80')}
+						</div>
+						<div class="mata">
+							{$item['addtime']}&nbsp;&nbsp;来自 <a href="{tsUrl('user','space',array('id'=>$item['userid']))}" target="_blank">{$item['user']['username']}</a>
+						</div>
+					</div>
+				</li>
+				{/loop}
+			</ul>
+			<div class="com-page">{$pageUrl}</div>
+			
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{if $TS_APP['options']['iscreate']=='0' || $TS_USER['user']['isadmin']=='1'}
+		<a class="btn3d btn3d-full" href="{if $cateid>0}{tsUrl('share', 'add', array('cateid'=>$cateid))}{else}{tsUrl('share', 'add')}{/if}"><span class="icon-pencil"></span> 发布分享</a>
+		{/if}
+		
+		{if isset($TS_USER['user']['userid'])}
+		<div id="share-cate-list" class="com-box" style="margin-top:30px;">
+			<div class="com-bar3 clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-tags"></span>
+					我的分享分类
+				</div>
+				<div class="com-bar-more">
+					&nbsp;&nbsp;<a href="{tsUrl('share', 'cate', array('ts'=>'list'))}">管理</a>
+				</div>
+			</div>
+			<ul>
+				<li>
+					<a class="tag{if $cateid=='0'} current{/if}" href="{tsUrl('share')}"><span>全部</span></a>
+					<a class="tag_count" href="{tsUrl('share')}">{$shareNumAll}</a>
+				</li>
+				{loop $arrMyCate $key $item}
+				<li>
+					<a class="tag{if $cateid==$item['cateid']} current{/if}" href="{tsUrl('share','index',array(cateid=>$item['cateid']))}"><span>{$item['catename']}</span></a>
+					<a class="tag_count" href="{tsUrl('share','index',array(cateid=>$item['cateid']))}">{$item['count_share']}</a>
+				</li>
+				{/loop}
+			</ul>
+		</div>
+		{/if}
+		
+		<!--广告位-->
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{template footer}

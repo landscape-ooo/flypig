@@ -1,0 +1,30 @@
+{template header}
+
+<div class="midder">
+<div class="mc">
+<div class="bbox">
+<div class="bc">
+{template s_menu}
+
+<div class="s_top">获得约 {$ask_num} 条结果</div>
+
+<!--{loop $arrBook $key $item}-->
+<div class="result">
+<div class="pic">
+</div>
+<div class="content">
+<h3><span>[问答] </span>&nbsp;<a href="{tsUrl('ask','show',array('id'=>$item[askid]))}">{$item[title]}</a></h3>
+<div class="info">收录于 {php echo date('Y-m-d',$item[addtime])} &nbsp;</div>
+<p></p>
+</div>
+</div>
+<!--{/loop}-->
+
+
+<div class="page">{$pageUrl}</div>
+</div>
+</div>
+</div>
+</div>
+
+{template footer}

@@ -1,0 +1,43 @@
+{php include template("admin/header");}
+
+<div class="midder">
+
+{php include template("admin/menu");}
+
+<form method="POST" action="{SITE_URL}index.php?app=feed&ac=admin&mg=type&ts=edit_do">
+<table>
+	<tr>
+		<td width="100">类型名称：</td>
+		<td><input name="typename" value="{$strType['typename']}" /></td>
+	</tr>
+	<tr>
+		<td>关联APP：</td>
+		<td>
+			<input name="appflag" value="{$strType['appflag']}" />
+			修改后需更改相关动作输出接口，慎重修改
+		</td>
+	</tr>
+	<tr>
+		<td>类型标识：</td>
+		<td>
+			<input name="typeflag" value="{$strType['typeflag']}" />
+			修改后需更改相关动作接收接口，慎重修改
+		</td>
+	</tr>
+	<tr>
+		<td>类型模板：</td>
+		<td><textarea style="width:300px;" name="template">{$strType[template]}</textarea></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			<input type="hidden" name="typeid" value="{$strType['typeid']}" />
+			<input type="submit" value="修改类型" />
+		</td>
+	</tr>
+</table>
+</form>
+
+</div>
+
+{php include template("admin/footer");}

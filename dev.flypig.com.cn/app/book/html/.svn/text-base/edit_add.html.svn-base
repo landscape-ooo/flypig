@@ -1,0 +1,53 @@
+{template header}
+
+<div id="bd" class="bd clearfix">
+	<h1 id="edit-title">
+		<span class="icon icon-pen"></span>
+		{$title}
+	</h1>
+	<div class="bd-left">
+		
+		<div id="edit-add" class="com-box">
+			<div id="edit-menu">
+				{template edit_menu}
+			</div>
+			<div id="edit-body">
+				
+				<form method="post" action="{tsUrl('book','do',array('ts'=>'edit_add'))}">
+				<table class="com-table">
+					<tr>
+						<th>书名：</th>
+						<td><input type="text" name="bookname" value="{$strBook[bookname]}" style="width:494px;" disabled></td>
+					</tr>
+					<tr>
+						<th valign="top">{$addtypename}：</th>
+						<td>
+							<textarea name="addcontent" style="width:500px;height:300px;" id="addcontent">{$strBook[addcontent]}</textarea>
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<input type="hidden" name="bookid" value="{$strBook[bookid]}" />
+							<input type="hidden" name="addtype" value="{$strBook[addtype]}" />
+							<button class="btn btn-success" type="submit">更新</button>
+							&nbsp;&nbsp;<a href="{tsUrl('book','show',array('id'=>$strBook[bookid]))}">返回</a>
+						</td>
+					</tr>
+				</table>
+				</form>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{template edit_right}
+		
+	</div>
+</div>
+
+{php doAction('tseditor2','#addcontent','bookadd')}
+
+{template footer}

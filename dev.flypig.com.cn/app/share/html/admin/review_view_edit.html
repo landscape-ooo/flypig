@@ -1,0 +1,18 @@
+{php include template("admin/header");}
+
+<!--main-->
+<div class="midder">
+
+{php include template("admin/menu");}
+
+<div class="mb10"> <a class="btn mr10" href="index.php?app=share&ac=admin&mg=share&ts=list_edit">返回</a>  <a class="btn mr10" href="index.php?app=share&ac=admin&mg=share&ts=update&shareid={$strShare['shareid']}">更新数据</a></div>
+
+<div>
+<h1>{$strShare['title']}</h1>
+<div>{$strShare['content']}</div>
+<div style="clear:both"></div>
+<div>{$strShare['addtime']}</div>
+</div>
+
+</div>
+{php include template("admin/footer");}

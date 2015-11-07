@@ -1,0 +1,50 @@
+{template header}
+
+<div id="bd" class="bd clearfix">
+	<h1 id="user-title">
+		<span class="icon icon-cog"></span>
+		用户设置
+	</h1>
+	<div class="bd-left">
+		
+		<div class="com-box">
+			<div id="set-menu">
+				{template set_menu}
+			</div>
+			<div id="set-body">
+				
+				{if $TS_SITE['base']['isface']=='1' && $strUser['face'] == SITE_URL.'public/images/user_normal.jpg'}
+				<div class="alert">提示：你需要上传头像才可以正常使用网站！</div>
+				{/if}
+				
+				<form method="POST" action="{tsUrl('user','do',array('ts'=>'setface'))}" enctype="multipart/form-data">
+				<table class="com-table">
+					<tr>
+						<th>当前头像：</th>
+						<td><img alt="{$TS_USER[uname]}" src="{$strUser[face]}?v={php echo rand();}" width="60" /></td>
+					</tr>
+					<tr>
+						<th>选择本地头像：</th>
+						<td><input type="file" name="picfile" /></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<button class="btn btn-success" type="submit">上传头像</button>
+							<!--<a class="btn" href="{tsUrl('user','set',array('ts'=>'flash'))}">使用Flash上传并裁切头像</a>-->
+						</td>
+					</tr>
+				</table>
+				</form>
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{template set_right}
+		
+	</div>
+</div>
+
+{template footer}

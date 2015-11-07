@@ -1,0 +1,123 @@
+{template header}
+
+<div id="path" class="bd clearfix">
+	<!--<a href="#" target="_blank" class="join_link">分类反馈</a>-->
+	<span class="icon icon-home"></span>
+	<a href="{SITE_URL}" title="{$TS_SITE[base][site_title]}首页">首页</a>  &gt;  <a href="{tsUrl('book','index')}" title="飞猪网精品图书汇">精品汇</a>  &gt;  全部分类
+</div>
+
+<div id="bd" class="bd clearfix">
+	<div class="bd-left">
+
+		{if $arrCate}
+		<div id="cate_opt" class="com-cate-opt">
+			{$bookcates}
+		</div>
+		{/if}
+		<div id="cate_opt_list">
+			<h2 class="com-bar clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-search"></span>
+					<span>{$bookNum}本</span> 图书
+				</div>
+				<!--
+				<a class="look_bookreview" href="javascript:void(0);">好书评</a>
+				<div class="page_mini">
+					<span class="number">500</span>
+					/512
+					<a class="" href="/hospital/0_0_0_0_0_0_0_0_0_2/0_0_0_0/499">
+						<span class="prev"></span>
+					</a>
+					<a class="two" href="/hospital/0_0_0_0_0_0_0_0_0_2/0_0_0_0/501">
+						<span class="next"></span>
+					</a>
+				</div>
+				-->
+			</h2>
+			{if count($arrFilterBook)>0}
+			<ul>
+				{loop $arrFilterBook $key $item}
+				<li class="clearfix" onclick="window.open('{tsUrl('book','show',array('id'=>$item[bookid]))}', '_blank');return false;">
+					<div class="pic">
+						<a href="{tsUrl('book','show',array('id'=>$item[bookid]))}" title="{$item[bookname]}" target="_blank"><img src="{$item[icon_120]}" alt="{$item[bookname]}封面" title="{$item[bookname]}" /></a>
+					</div>
+					<div class="info">
+						<a href="{tsUrl('book','show',array('id'=>$item[bookid]))}" class="name">《{$item[bookname]}》</a>
+						{if $item[title] && $item[title]!=$item[bookname]}<p class="title"><em>——</em> {$item[title]}</p>{/if}
+						{if $item[description]}<p class="desc">{$item[description]}</p>{/if}
+						{if $item[star]}<p class="star"><em>推荐星级：</em>{$item[star]}</p>{/if}
+						{if $item[author]}<p class="author"><em>　　作者：</em>{$item[author]}</p>{/if}
+						{if $item[pubhouse]}<p class="pubhouse"><em>　出版社：</em>{$item[pubhouse]}</p>{/if}
+						{if $item[age]}<p class="age"><em>阅读年龄：</em>{$item[age]}</p>{/if}
+						{if $item[intel]}<p class="intel"><em>图书智能：</em>{$item[intel]}</p>{/if}
+						{if $item[theme]}<p class="theme"><em>阅读主体：</em>{$item[theme]}</p>{/if}
+						{if $item[spec]}<p class="spec"><em>其　　它：</em>{$item[spec]}</p>{/if}
+					</div>
+				</li>
+				{/loop}
+			</ul>
+			<div class="com-page">{$pageUrl}</div>
+			{else}
+			<p style="width:640px;margin:80px auto;text-align:center;color:gray;">当前 0 个搜索结果</p>
+			{/if}
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{if $TS_APP[options][iscreate]==0 || $TS_USER[user][isadmin]==1}
+		<a class="btn3d btn3d-full" href="{tsUrl('book','add')}"><span class="icon-book"></span> 创建图书</a>
+		{/if}
+		
+		<div class="com-box">
+			<h3>
+				<span class="icon icon-clock2"></span>
+				最新图书
+			</h3>
+			<div class="content line23">
+				{if $arrNewBook}
+				{loop $arrNewBook $key $item}
+				<a href="{tsUrl('book','show',array('id'=>$item[bookid]))}">《{$item[bookname]}》</a><br>
+				{/loop}
+				{/if}
+			</div>
+		</div>
+		
+		<div id="hot_review" class="com-box">
+			<h3>
+				<span class="icon icon-fire"></span>
+				热门书评
+			</h3>
+			<ul class="content">
+				{loop $arrReview $key $item}
+				<li>
+					<h4><a href="{tsUrl('review','show',array('id'=>$item['reviewid']))}" target="_blank">{$item['title']}</a></h4>
+					<span class="r-grey">
+						<span class="icon icon-bubble2"></span>
+						<a href="{tsUrl('review','show',array('id'=>$item['reviewid']))}" target="_blank" title="评论数">{$item['count_comment']}</a>
+					</span>
+					<p class="b-titles">
+						<span class="b-titles-l">来自：<a title="{$item['book']['bookname']}" target="_blank" href="{tsUrl('book','show',array('id'=>$item['bookid']))}">《{php echo cututf8(t($item['book']['bookname']),0,14)}》</a></span>
+					</p>
+				</li>
+				{/loop}
+			</ul>
+		</div>
+		
+		<!--广告位-->
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('#filter_list').find('li').each(function(){
+		$(this).hover(function(){
+			$(this).addClass('hover');
+		},function(){
+			$(this).removeClass('hover');
+		});
+	});
+});
+</script>
+{template footer}

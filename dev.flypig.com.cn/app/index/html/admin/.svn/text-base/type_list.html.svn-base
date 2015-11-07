@@ -1,0 +1,36 @@
+{php include template("admin/header");}
+
+<div class="midder">
+
+{php include template("admin/menu");}
+
+<table>
+	<tr class="old">
+		<td>ID</td>
+		<td>类型名称</td>
+		<td>关联APP</td>
+		<td>类型标识</td>
+		<td>操作</td>
+	</tr>
+	{loop $arrType $key $item}
+	<tr class="odd">
+		<td>{$item['typeid']}</td>
+		<td>{$item['typename']}</td>
+		<td>{$item['appflag']}</td>
+		<td>{$item['typeflag']}</td>
+		<td>
+			<a href="{SITE_URL}index.php?app=index&ac=admin&mg=type&ts=status&typeid={$item['typeid']}" onclick="return confirm('确定要操作?')">{if $item['status']==0}<font color="lightgrey">[取消禁用]</font>{else}[禁用]{/if}</a>
+			{if $TS_USER[admin][userid] == '1'}
+			<a href="{SITE_URL}index.php?app=index&ac=admin&mg=type&ts=edit&typeid={$item['typeid']}">[修改]</a>
+			<!--
+			<a href="{SITE_URL}index.php?app=index&ac=admin&mg=type&ts=del&typeid={$item['typeid']}" onclick="return confirm('确定删除?')">[删除]</a>
+			-->
+			{/if}
+		</td>
+	</tr>
+	{/loop}
+</table>
+
+</div>
+
+{php include template("admin/footer");}

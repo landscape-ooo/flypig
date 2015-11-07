@@ -1,0 +1,64 @@
+{template header}
+
+<div id="path" class="bd clearfix">
+	<span class="icon icon-home"></span>
+	<a href="{SITE_URL}" title="{$TS_SITE['base']['site_title']}首页">首页</a>  &gt;  <a href="{tsUrl('share','index')}" title="飞猪网好分享">好分享</a>  &gt;  编辑分类
+</div>
+
+<div id="bd" class="bd clearfix">
+	<div class="bd-left">
+		
+		<div class="com-bar clearfix">
+			<div class="com-bar-tit">
+				<span class="icon icon-plus"></span>
+				编辑分类
+			</div>
+			<div class="com-bar-more">
+				&nbsp;&nbsp;<span class="icon icon-cog"></span> <a href="{tsUrl('share','cate')}">我的分类</a>
+			</div>
+		</div>
+		
+		<div id="cate-edit" class="com-box">
+			
+			<form method="POST" action="{tsUrl('share','cate',array('ts'=>'edit_do'))}">
+			<table class="com-table">
+				<tr>
+					<th>分类名称：</th>
+					<td><input name="catename" value="{$strCate['catename']}" style="width:300px" /></td>
+				</tr>
+				{if $TS_SITE['base']['isauthcode']}
+				<tr>
+					<th>验证码：</th>
+					<td>
+						<input name="authcode" /> <img align="absmiddle" src="{tsUrl('pubs','code')}" onclick="javascript:newgdcode(this,this.src);" title="点击刷新验证码" alt="点击刷新验证码" style="cursor:pointer;"/>
+					</td>
+				</tr>
+				{/if}
+				<tr>
+					<th></th>
+					<td>
+						<input type="hidden" name="cateid" value="{$strCate[cateid]}" />
+						<input type="hidden" name="token" value="{$_SESSION['token']}" />
+						<button class="btn btn-success" type="submit">确认编辑</button>
+						&nbsp;&nbsp;<a href="{tsUrl('share','cate')}">返回</a>
+					</td>
+				</tr>
+			</table>
+			</form>
+			
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{if $TS_APP['options']['iscreate']==0 || $TS_USER['user']['isadmin']==1}
+		<a class="btn3d btn3d-full" href="{tsUrl('share','add',array('cateid'=>{$strCate['cateid']}))}" style="margin-top:30px;"><span class="icon-pen"></span> 发布分享</a>
+		{/if}
+		
+		<!--广告位-->
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{template footer}

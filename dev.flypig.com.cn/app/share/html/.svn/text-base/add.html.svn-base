@@ -1,0 +1,121 @@
+{template header}
+
+<div id="path" class="bd clearfix">
+	<span class="icon icon-home"></span>
+	<a href="{SITE_URL}" title="{$TS_SITE['base']['site_title']}首页">首页</a>  &gt;  <a href="{tsUrl($app)}" title="{$TS_APP['options']['appname']}">{$TS_APP['options']['appname']}</a>  &gt;  发布分享
+</div>
+
+<div id="bd" class="bd clearfix">
+	<h1 id="edit-title">
+		<span class="icon icon-pencil2"></span>
+		发布分享
+	</h1>
+	<div class="bd-left">
+		
+		<div class="com-box">
+			<div id="edit-body">
+				
+				<form method="POST" action="{tsUrl('share','add',array('ts'=>'do'))}" enctype="multipart/form-data" onsubmit="return mainFormCheck()">
+				<table class="com-table">
+					<tr>
+						<th>分类：</th>
+						<td>
+							<select name="cateid">
+								<option value='0' >请选择分类</option>
+								{loop $arrCate $key $item}
+								<option value="{$item[cateid]}"{if $cateid==$item[cateid]} selected{/if}>{$item[catename]}</option>
+								{/loop}
+							</select>
+							&nbsp;&nbsp;<a href="{tsUrl('share','cate',array('ts'=>'add'))}">添加分类</a>
+						</td>
+					</tr>
+					<tr>
+						<th>标题：</th>
+						<td><input type="text" name="title" style="width:494px;" /></td>
+					</tr>
+					<tr>
+						<th>图片：</th>
+						<td>
+							<input type="file" name="photo">
+						</td>
+					</tr>
+					<tr>
+						<th valign="top">内容：</th>
+						<td>
+							<textarea type="text" name="content" id="content" style="width:500px;height:300px;"></textarea>
+						</td>
+					</tr>
+					{if $TS_USER['user']['isadmin']=="1"}
+					<!--
+					<tr>
+						<th>标签：</th>
+						<td><input style="width:250px;" type="text" name="tag" /> (多个标签请用,号分割)</td>
+					</tr>
+					<tr>
+						<th>评论：</th>
+						<td><input type="radio" checked="select" name="iscomment" value="0" />允许 <input type="radio" name="iscomment" value="1" />不允许</td>
+					</tr>
+					-->
+					{/if}
+					{if $TS_SITE['base']['isauthcode']}
+					<tr>
+						<th>验证码：</th>
+						<td>
+							<input name="authcode" /> <img align="absmiddle" src="{tsUrl('pubs','code')}" onclick="javascript:newgdcode(this,this.src);" title="点击刷新验证码" alt="点击刷新验证码" style="cursor:pointer;"/>
+						</td>
+					</tr>
+					{/if}
+					<tr>
+						<th></th>
+						<td>
+							<input type="hidden" name="token" value="{$_SESSION['token']}" />
+							<button class="btn btn-success" type="submit">提交</button>
+							{if $cateid}
+							<a href="{tsUrl('share','index',array('cateid'=>$cateid))}">返回</a>
+							{else}
+							<a href="{tsUrl('share')}">返回</a>
+							{/if}
+						</td>
+					</tr>
+				</table>
+				</form>
+				<script type="text/javascript">
+				function mainFormCheck(){
+					var title = $("input[name='title']").val();
+					var photo = $("input[name='photo']").val();
+					var content = $("textarea[name='content']").val();
+					if(title == '' || photo == '' || content == ''){
+						alert('请填写标题、图片和内容');
+						return false;
+					}
+					{if $TS_SITE['base']['isauthcode']}
+					var authcode = $('input[name=authcode]').val();
+					if(authcode == ''){
+						alert('请填写验证码');
+						return false;
+					}
+					{/if}
+					$("button[type='submit']").html('正在提交^_^').css({'background':'#ccc'}).removeAttr('type');
+				}
+				</script>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		<div class="com-box">
+			<div class="content">
+				&gt; {if $cateid}<a href="{tsUrl('share','index',array('cateid'=>$cateid))}">返回</a>{else}<a href="{tsUrl('share')}">返回</a>{/if}
+			</div>
+		</div>
+		
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{php doAction('tseditor2','#content')}
+
+{template footer}

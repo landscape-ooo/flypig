@@ -1,0 +1,41 @@
+{template header}
+
+<div class="midder">
+<div class="mc">
+
+{template menu}
+
+
+<div><a href="{tsUrl('book','cate')}">分类</a> >> <a href="{tsUrl('book','cate',array('ts'=>'2','cateid'=>$oneCate['cateid']))}">{$oneCate['catename']}</a> >> <a href="{tsUrl('book','cate',array('ts'=>'3','cateid'=>$twoCate['cateid']))}">{$twoCate['catename']}</a> >> <a href="{tsUrl('book','cate',array('ts'=>'book','cateid'=>$strCate['cateid']))}">$strCate['catename']</a></div>
+
+
+<div id="book_content">
+{loop $arrBook $key $item}
+<div class="sub-item">
+<div class="pic">
+<a href="{tsUrl('book','show',array('id'=>$item[bookid]))}">
+{if $item['photo']}
+<img src="{php echo tsXimg($item['photo'],'book','48','48',$item['path'],'1')}" alt="{$item[bookname]}" width="48" height="48" />
+{else}
+<img src="{SITE_URL}public/images/book.jpg" alt="{$item[bookname]}" width="48" height="48" />
+{/if}
+</a>
+</div>
+<div class="info">
+<a href="{tsUrl('book','show',array('id'=>$item[bookid]))}">{$item[bookname]}</a>  <font color="#999999">{$item[count_user]}人加入</font>             
+<p>{php echo cututf8($item[bookdesc],0,50)}</p>
+</div>
+</div>
+{/loop}
+
+<div class="clear"></div>
+<div class="page">{$pageUrl}</div>
+</div>
+
+
+
+
+
+</div>
+</div>
+{template footer}

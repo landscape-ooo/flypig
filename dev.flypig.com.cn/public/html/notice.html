@@ -1,0 +1,14 @@
+{php include pubTemplate("header");}
+
+{if $isAutoGo}
+<meta http-equiv="refresh" content="0;url={$url}" />
+{/if}
+
+<div class="bd">
+	<div id="com-tsnotice">
+		<p>{$notice}</p>
+		<p class="tolink">{if $button}<a href="{$url}">{$button}</a>{/if}</p>
+	</div>
+</div>
+
+{php include pubTemplate("footer");}

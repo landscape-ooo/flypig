@@ -1,0 +1,59 @@
+{php include template("admin/header");}
+
+<div class="midder">
+	
+	{php include template("admin/menu");}
+	<form name="form1" action="{SITE_URL}index.php?app=book&ac=admin&mg=author&ts=uporder" method="post">
+	<table  cellpadding="0" cellspacing="0">
+		<tr class="old">
+			<td width="50">分类ID</td>
+			<td width="100">排序</td>
+			<td>分类名字</td>
+			<td>操作</td>
+		</tr>
+		{loop $arrAuthors $key $item}
+		<tr class="odd">
+			<td>{$item['auid']}</td>
+			<td></td>
+			<td>I、{$item['auname']}</td>
+			<td>
+				<a href="{SITE_URL}index.php?app=book&ac=admin&mg=author&ts=add&referid={$item['auid']}">[添加二级分类]</a>
+				<a href="{SITE_URL}index.php?app=book&ac=admin&mg=author&ts=edit&auid={$item['auid']}">[修改]</a>
+				{if $item['status']==1}
+				<a href="{SITE_URL}index.php?app=book&ac=admin&mg=author&ts=del&auid={$item['auid']}" onclick="return confirm('确定删除?')">[删除]</a>
+				{else}
+				<a href="{SITE_URL}index.php?app=book&ac=admin&mg=author&ts=del&auid={$item['auid']}" onclick="return confirm('要恢复吗?')">[已删除]</a>
+				{/if}
+			</td>
+		</tr>
+		{loop $item['two'] $subkey $subitem}
+		<tr class="odd">
+			<td>{$subitem[auid]}</td>
+			<td>
+				<input type="hidden" name="ids[]" value="{$subitem['auid']}">
+				<input type="text" name="orderids[]" value="{$subitem['orderid']}" size="10">
+			</td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II、{$subitem[auname]}</td>
+			<td>
+				<a href="{SITE_URL}index.php?app=book&ac=admin&mg=author&ts=edit&auid={$subitem[auid]}&referid={$subitem[referid]}">[修改]</a>
+				{if $subitem['status']==1}
+				<a href="{SITE_URL}index.php?app=book&ac=admin&mg=author&ts=del&auid={$subitem['auid']}" onclick="return confirm('确定删除?')">[删除]</a>
+				{else}
+				<a href="{SITE_URL}index.php?app=book&ac=admin&mg=author&ts=del&auid={$subitem['auid']}" onclick="return confirm('要恢复吗?')">[已删除]</a>
+				{/if}
+			</td>
+		</tr>
+		{/loop}
+		{/loop}
+		<tr class="old">
+			<td width="50">&nbsp;</td>
+			<td width="100"><input type="submit" value="更新排序"></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+	</form>
+
+</div>
+
+{php include template("admin/footer");}

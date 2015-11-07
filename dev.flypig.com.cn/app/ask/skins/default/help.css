@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+.top-main-static {
+    padding: 20px 0;
+}
+.top-main-static h1 {
+    font-size: 20px;
+}
+.top-main-static h1 a {
+    color: #333333;
+}
+.help-page{padding:10px;}
+.join-page h2, .help-page dt, .help-page h2, .help-page-index dt, .help-page-index h2 {
+    color: #666666;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+	padding-top: 10px;
+}
+.help-page .main dl {
+    margin-bottom: 20px;
+}
+.help-page .main dl dt {
+    color: #006699;
+    font-size: 14px;
+    line-height: 2em;
+}
+.help-page .main dl dd {
+    background-color: #FAFAFA;
+    border: 1px solid #F0F0F0;
+    border-radius: 5px 5px 5px 5px;
+    color: #666666;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+#help-nav{color:#999999;}
+#help-nav ul{margin:10px 0 15px 0;}
+#help-nav li {margin:5px 0 0 20px;list-style-position:outside;list-style-type:decimal;}

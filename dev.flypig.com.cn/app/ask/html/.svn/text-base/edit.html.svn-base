@@ -1,0 +1,93 @@
+{template header}
+
+<div id="path" class="bd clearfix">
+	<span class="icon icon-home"></span>
+	<a href="{SITE_URL}" title="{$TS_SITE[base][site_title]}首页">首页</a>  &gt;  <a href="{tsUrl('ask')}" title="{$TS_APP[options][appname]}">{$TS_APP[options][appname]}</a>  &gt;  修改问题
+</div>
+
+<div id="bd" class="bd clearfix">
+	<div class="bd-left">
+		
+		<div id="ask-edit" class="com-box">
+			<div class="editor">
+				
+				<form method="POST" action="{SITE_URL}index.php?app=ask&ac=edit&ts=do" onsubmit="return askFormCheck(this)">
+				<table class="com-table">
+					<tr>
+						<th>问题标题：</th>
+						<td>
+							<input type="text" name="title" value="{$strAsk['title']}" style="width:524px;height:24px;" maxlength="64">
+						</td>
+					</tr>
+					<tr>
+						<th>详细说明：</th>
+						<td>
+							<textarea name="content" style="width:530px;height:300px;" id="content">{$strAsk['content']}</textarea>
+						</td>
+					</tr>
+					<tr>
+						<th>分类：</th>
+						<td>
+							<i>将问题投递到正确的分类会有助于更快的获得解答</i><br>
+							<div id="tag-cates" class="tag-cates clearfix">
+								{loop $arrCate $v}
+								<a data-id="{$v['cateid']}" class="tag-cate{loop $askCate $c}{if $c['cateid'] == $v['cateid']} selected{/if}{/loop}" href="javascript:void 0;">{$v['catename']}</a>
+								{/loop}
+								{loop $askCate $c}
+								<input type="hidden" id="tag-cate{$c['cateid']}" name="tag[]" value="{$c['cateid']}">
+								{/loop}
+							</div>
+						</td>
+					</tr>
+					{if $TS_SITE['base']['isauthcode']}
+					<tr>
+						<th>验证码：</th>
+						<td>
+							<input name="authcode" /> <img align="absmiddle" src="{tsUrl('pubs','code')}" onclick="javascript:newgdcode(this,this.src);" title="点击刷新验证码" alt="点击刷新验证码" style="cursor:pointer;"/>
+						</td>
+					</tr>
+					{/if}
+					<tr>
+						<th></th>
+						<td>
+							<input type="hidden" name="askid" value="{$strAsk[askid]}" />
+							<input type="hidden" name="token" value="{$_SESSION['token']}" />
+							<button class="btn btn-ok" type="submit">提 交</button>
+							&nbsp;&nbsp;<a href="{tsUrl('ask')}">取消</a>
+						</td>
+					</tr>
+				</table>
+				</form>
+				<script type="text/javascript">
+				function askFormCheck(that){
+					var title = $(that).find('input[name=title]').val();
+					var content = $(that).find('input[name=content]').val();
+					if(title == '' || content == ''){alert('请填写标题和内容'); return false;}
+					var tags = 0;
+					$("input[name^=tag]").each(function() {
+						if($(this).val()!='') tags = tags + 1;
+					});
+					
+					if(tags == 0){alert('请选择分类'); return false;}
+					{if $TS_SITE['base']['isauthcode']}
+					var authcode = $(that).find('input[name=authcode]').val();
+					if(authcode == ''){alert('请填写验证码'); return false;}
+					{/if}
+					$(that).find('input[type=submit]').val('正在提交^_^').attr('disabled',true);
+				}
+				</script>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{php doAction('tseditor2','#content')}
+
+{template footer}

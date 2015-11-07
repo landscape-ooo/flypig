@@ -1,0 +1,77 @@
+{template header}
+
+<script src="{SITE_URL}public/js/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="{SITE_URL}public/js/uploadify/uploadify.css">
+
+<script type="text/javascript">
+	$(function() {
+		$('#file_upload').uploadify({
+			'auto': true,
+
+			'method':'post',
+			'multi': true,
+			'queueSizeLimit': 5,
+			'fileSizeLimit': '1MB',
+
+			'fileTypeDesc': 'jpeg,jpg,gif,png图片格式',
+			'fileTypeExts': '*.jpeg;*.jpg;*.gif;*.png',
+			'buttonImage': '{SITE_URL}public/images/upload.png',
+			'swf': '{SITE_URL}public/js/uploadify/uploadify.swf',
+			'uploader': '{SITE_URL}index.php?app=photo&ac=upload&ts=do',
+			'onUploadSuccess': function (file, data, response){
+				if(data){
+					$.ajax({
+						url:'{SITE_URL}index.php?app=photo&ac=upload&ts=callback',
+						type:'post',
+						async:false,
+						data:{'albumid':'{$albumid}','photoid':data,'time':new Date()},
+						dataType:'html',
+						success:function(rs){
+							if(rs==0){
+								art.dialog({
+									lock: true,
+									content: '非法操作',
+									time: 2000
+								});
+								return false;
+							}
+						}
+					})
+				}
+			},
+			'onQueueComplete': function(queueData) {
+				//setTimeout(function(){
+					window.location.href = siteUrl+"index.php?app=photo&ac=album&ts=info&albumid={$albumid}&addtime={$addtime}";
+				//},1000);
+				
+			}
+		});
+	});
+</script>
+
+<div class="midder">
+
+<div class="mc">
+
+<div class="bbox">
+
+{template menu}
+
+<h1>上传照片 - {$strAlbum[albumname]}</h1>
+
+<div style="padding:0 10px;">
+
+<p style="padding:10px 0;">上传文件只支持：jpg，gif，png格式；上传最大支持1M的图片</p>
+
+
+<div id="queue"></div>
+<input id="file_upload" name="file_upload" type="file" multiple="true">
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+{template footer}

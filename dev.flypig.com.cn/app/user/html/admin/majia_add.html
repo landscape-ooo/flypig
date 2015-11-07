@@ -1,0 +1,18 @@
+{php include template("admin/header");}
+
+<div class="midder">
+
+{php include template("admin/menu");}
+
+<div>
+<form method="post" action="{SITE_URL}index.php?app=user&ac=admin&mg=majia&ts=add_do">
+<table>
+<tr><td>创建数量:</td><td><input type="text" name="usernum" /></td></tr>
+<tr><td></td><td><input type="submit" value="执行" /></td></tr>
+</table>
+</form>
+</div>
+
+</div>
+
+{php include template("admin/footer");}

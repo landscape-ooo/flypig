@@ -1,0 +1,18 @@
+{php include template("admin/header");}
+
+<!--main-->
+<div class="midder">
+
+{php include template("admin/menu");}
+
+<div class="mb10"> <a class="btn mr10" href="index.php?app=review&ac=admin&mg=review&ts=list_edit">返回</a>  <a class="btn mr10" href="index.php?app=review&ac=admin&mg=review&ts=update&reviewid={$strReview['reviewid']}">更新数据</a></div>
+
+<div>
+<h1>{$strReview['title']}</h1>
+<div>{$strReview['content']}</div>
+<div style="clear:both"></div>
+<div>{$strReview['addtime']}</div>
+</div>
+
+</div>
+{php include template("admin/footer");}

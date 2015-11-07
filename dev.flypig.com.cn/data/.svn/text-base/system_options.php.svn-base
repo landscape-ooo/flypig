@@ -1,0 +1,25 @@
+<?php
+defined('IN_TS') or die('Access Denied.');
+return array (
+  'site_title' => '飞猪网',
+  'site_subtitle' => '精品绘本学习分享交流平台',
+  'site_key' => 'flypig,飞猪,绘本,儿童绘本,分享交流',
+  'site_desc' => '飞猪网是国内首个专注精品儿童绘本阅读的学习分享交流平台。',
+  'site_url' => 'http://dev.flypig.com.cn/',
+  'site_email' => 'admin@admin.com',
+  'site_icp' => '京ICP备12049363号',
+  'isface' => '1',
+  'isinvite' => '0',
+  'isverify' => '0',
+  'isauthcode' => '0',
+  'isfeed' => '1',
+  'isgzip' => '0',
+  'timezone' => 'Asia/Hong_Kong',
+  'site_theme' => 'flypig',
+  'site_urltype' => '1',
+  'photo_size' => '2',
+  'photo_type' => 'jpg,gif,png',
+  'attach_size' => '2',
+  'attach_type' => 'zip,rar,doc,txt,ppt',
+  'logo' => 'logo.jpg',
+);

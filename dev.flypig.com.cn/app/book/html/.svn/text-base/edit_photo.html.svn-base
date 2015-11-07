@@ -1,0 +1,122 @@
+{template header}
+
+<link rel="stylesheet" type="text/css" href="{SITE_URL}public/js/uploadify/uploadify.css">
+<script src="{SITE_URL}public/js/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	$(function() {
+		$('#file_upload').uploadify({
+			'auto'     : true,
+			'fileTypeDesc' : 'jpeg,jpg,gif,png图片格式',
+			'fileTypeExts' : '*.jpeg;*.jpg;*.gif;*.png',
+			'buttonImage' : '{SITE_URL}public/images/upload.png',
+			'swf'      : '{SITE_URL}public/js/uploadify/uploadify.swf',
+			
+			'formData' : { 
+				'bookid':'{$bookid}',
+				'addtime':'{$addtime}',
+				'tokens':"{php echo md5('unique_salt' . $addtime)}"
+			},
+			
+			'uploader' : '{SITE_URL}index.php?app=book&ac=upload&ts=do',
+			//'uploader' : "{tsUrl('book','upload',array('ts'=>'do','bookid'=>$bookid))}",
+
+			'onQueueComplete' : function(queueData) {
+				console.log('a');
+				//window.location = siteUrl+"index.php?app=photo&ac=album&ts=info&albumid={$albumid}&addtime={$addtime}";
+				window.location = siteUrl+"index.php?app=book&ac=edit&ts=photo&bookid={$bookid}&addtime={$addtime}";
+			}
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$(function() {
+		/* $('#file_upload').uploadify({
+			'auto'     : true,
+			'swf'      : '{SITE_URL}public/js/uploadify/uploadify.swf',
+			'fileTypeDesc' : 'jpeg,jpg,gif,png图片格式',
+			'fileTypeExts' : '*.jpeg;*.jpg;*.gif;*.png',
+			'buttonImage' : '{SITE_URL}public/images/upload.png',
+			'uploader' : "{tsUrl('book','upload',array('ts'=>'do','bookid'=>$bookid))}",
+			'onQueueComplete' : function(queueData) {
+				window.location = siteUrl+"index.php?app=book&ac=edit&ts=photo&bookid={$bookid}&addtime={$addtime}";
+				//window.location = "{tsUrl('book','edit',array('ts'=>'photo','bookid'=>$bookid))}";
+			},
+			'onFallback':function(){
+				alert("您未安装FLASH控件，无法上传图片！请安装FLASH控件后再试。");
+			}
+		}); */
+	});
+</script>
+
+<div id="bd" class="bd clearfix">
+	<h1 id="edit-title">
+		<span class="icon icon-pen"></span>
+		{$title}
+	</h1>
+	<div class="bd-left">
+		
+		<div id="edit-photo" class="com-box">
+			<div id="edit-menu">
+				{template edit_menu}
+			</div>
+			<div id="edit-body">
+				
+				<table class="com-table">
+					<tr>
+						<th valign="top">图书内页：</th>
+						<td valign="top">
+							<div style="padding:0 10px;">
+								<p style="padding:3px 0;">上传文件只支持：jpg，gif，png格式；上传最大支持1M的图片</p>
+								<div id="queue"></div>
+								<input id="file_upload" name="file_upload" type="file" multiple="true">
+							</div>
+						</td>
+					</tr>
+				</table>
+				
+				<form method="POST" action="{SITE_URL}index.php?app=book&ac=do&ts=edit_photo" enctype="multipart/form-data" >
+				<table class="com-table">
+					<tr>
+						<th>&nbsp;</th>
+						<td>
+							{loop $arrBookPhoto $key $item}
+							<fieldset>
+								<legend><label><input type="checkbox" name="isdel[]" value="{$item[id]}" /> 删除？</label></legend>
+								<div class="photo-item clearfix">
+									<div class="cover">
+										<a href="{$item[src]}" target="_blank"><img src="{$item[thumb]}"></a>
+									</div>
+									<div class="intro">
+										<input type="hidden" name="photoid[]" value="{$item[id]}" />
+										图片名称：<input type="input" name="photoname[]" value="{$item[name]}" />
+										<br>图片简介：<textarea style="height:60px;" name="photodesc[]">{$item[desc]}</textarea>
+									</div>
+								</div>
+							</fieldset>
+							{/loop}
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<input type="hidden" name="bookid" value="{$strBook[bookid]}" />
+							<button type="submit" class="btn btn-success">保存</button>
+						</td>
+					</tr>
+				</table>
+				</form>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{template edit_right}
+		
+	</div>
+</div>
+
+{template footer}

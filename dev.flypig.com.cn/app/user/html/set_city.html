@@ -1,0 +1,97 @@
+{template header}
+
+<script type="text/javascript">
+$(function(){
+	$("#sel_province").change(function(){
+		var provinceId = $(this).val();
+		var provinceUrl = "{SITE_URL}index.php?app=user&ac=city&provinceid=" + provinceId;
+		$("#citySpan").load(provinceUrl, function(){
+			$("#areaSpan").html('<select id="sel_area" name="sel_area"><option value="0">请选择区</option></select>');
+			if($("#sel_city").length > 0){
+				$("#sel_city").change(function(){
+					var cityId = $(this).val();
+					var cityUrl = "{SITE_URL}index.php?app=user&ac=area&cityid=" + cityId;
+					$("#areaSpan").load(cityUrl);
+				});
+			}
+		});
+	});
+})
+</script>
+
+<div id="bd" class="bd clearfix">
+	<h1 id="user-title">
+		<span class="icon icon-cog"></span>
+		用户设置
+	</h1>
+	<div class="bd-left">
+		
+		<div class="com-box">
+			<div id="set-menu">
+				{template set_menu}
+			</div>
+			<div id="set-body">
+				
+				<form method="post" action="{tsUrl('user','do',array('ts'=>'setcity'))}" onSubmit="return checkSel();">
+				<table class="com-table" width="100%">
+					<tr>
+						<th>常居地：</th>
+						<td>
+							{if $strUser['province']}{$strProvince['province']}{/if} &nbsp;
+							{if $strUser['city']}{$strCity['city']}{/if} &nbsp;
+							{if $strUser['area']}{$strArea['area']}{/if} &nbsp;
+						</td>
+					</tr>
+					<tr>
+						<th>修改常居地：</th>
+						<td>
+							<select id="sel_province" name="sel_province">
+								<option value='0' >请选择省</option>
+								{loop $province $k $v}
+								<option value="{$v['provinceid']}">{$v['province']}</option>
+								{/loop}
+							</select>
+							<span id="citySpan">
+								<select id="sel_city" name="sel_city">
+									<option value="0">请选择市</option>
+								</select>
+							</span>
+							<span id="areaSpan">
+								<select id="sel_area" name="sel_area">
+									<option value="0">请选择区</option>
+								</select>
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td><button class="btn btn-success" type="submit">修改</button></td>
+					</tr>
+				</table>
+				</form>
+
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{template set_right}
+		
+	</div>
+</div>
+
+<script type="text/javascript">
+function checkSel(){
+	var sel_province = $('#sel_province').val();
+	var sel_city = $('#sel_city').val();
+	var sel_area = $('#sel_area').val();
+	if(sel_province =='0' && sel_city=='0' && sel_area=='0'){
+		alert('请选择选项！^_^');
+		return false;
+	}
+	return true;
+}
+</script>
+
+{template footer}

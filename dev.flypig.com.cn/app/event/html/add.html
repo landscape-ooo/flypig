@@ -1,0 +1,175 @@
+{template header}
+<script type="text/javascript" src="{SITE_URL}public/js/date/WdatePicker.js?4.72"></script>
+<script type="text/javascript">
+$(function(){
+	$("#sel_province").change(function(){
+		var provinceId = $(this).val();
+		var provinceUrl = "{SITE_URL}index.php?app=user&ac=city&provinceid=" + provinceId;
+		$("#citySpan").load(provinceUrl, function(){
+			$("#areaSpan").html('<select id="sel_area" name="sel_area"><option value="0">请选择区</option></select>');
+			if($("#sel_city").length > 0){
+				$("#sel_city").change(function(){
+					var cityId = $(this).val();
+					var cityUrl = "{SITE_URL}index.php?app=user&ac=area&cityid=" + cityId;
+					$("#areaSpan").load(cityUrl);
+				});
+			}
+		});
+	});
+})
+</script>
+
+<div id="path">
+	<span class="icon icon-home"></span>
+	<a href="{SITE_URL}" title="{$TS_SITE[base][site_title]}首页">首页</a>  &gt;  <a href="{tsUrl('event')}" title="{$TS_APP[options][appname]}">{$TS_APP[options][appname]}</a>  &gt;  发起新活动
+</div>
+
+<div id="bd" class="bd clearfix">
+	<div class="bd-left">
+		
+		<div id="event-edit" class="com-box">
+			<div class="editor">
+				
+				<form method="POST" action="{SITE_URL}index.php?app=event&ac=add&ts=do" enctype="multipart/form-data" onsubmit="return addFormCheck()">
+				<table class="com-table">
+					<tr>
+						<th>活动标题：</th>
+						<td><input type="text" name="title" value="" style="width:494px;"></td>
+					</tr>
+					<tr>
+						<th>活动类型：</th>
+						<td>
+							<select name="cateid">
+								<option value='0' >请选择活动类型</option>
+								{loop $arrCate $key $item}
+								<option value="{$item[cateid]}"{if $cateid==$item[cateid]} selected{/if}>{$item[catename]}</option>
+								{/loop}
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th>开始时间：</th>
+						<td>
+							<i>必填项</i><br>
+							<input name="time_start" value="" onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd HH:mm',minDate:'{php echo date('Y-m-d H:i')}'})" class="Wdate" readOnly />
+						</td>
+					</tr>
+					<tr>
+						<th>结束时间：</th>
+						<td>
+							<i>留空则表示一直有效</i><br>
+							<input name="time_end" value="" onfocus="WdatePicker({doubleCalendar:true,dateFmt:'yyyy-MM-dd HH:mm'})" class="Wdate" readOnly />
+						</td>
+					</tr>
+					<tr>
+						<th>活动地点：</th>
+						<td>
+							<select id="sel_province" name="sel_province">
+								<option value='0' >请选择省</option>
+								{loop $province $k $v}
+								<option value="{$v['provinceid']}">{$v['province']}</option>
+								{/loop}
+							</select>
+							<span id="citySpan">
+								<select id="sel_city" name="sel_city">
+									<option value="0">请选择市</option>
+								</select>
+							</span>
+							<span id="areaSpan">
+								<select id="sel_area" name="sel_area">
+									<option value="0">请选择区</option>
+								</select>
+							</span>
+							<br><i>详细地点（例如：东三环中路乙10号艾维克大厦2401A室，不必再重复省、市、区）</i>
+							<br><input type="text" name="address" style="width:494px;" />
+						</td>
+					</tr>
+					<tr>
+						<th>活动说明：</th>
+						<td>
+							<textarea name="content" style="width:500px;height:300px;" id="content"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<th>活动海报：</th>
+						<td>
+							<input type="file" name="photo">
+						</td>
+					</tr>
+					{if $TS_SITE['base']['isauthcode']}
+					<tr>
+						<th>验证码：</th>
+						<td>
+							<input name="authcode" /> <img align="absmiddle" src="{tsUrl('pubs','code')}" onclick="javascript:newgdcode(this,this.src);" title="点击刷新验证码" alt="点击刷新验证码" style="cursor:pointer;"/>
+						</td>
+					</tr>
+					{/if}
+					<tr>
+						<th></th>
+						<td>
+							<input type="hidden" name="token" value="{$_SESSION['token']}" />
+							<button class="btn btn-success" type="submit">提 交</button>
+							&nbsp;&nbsp;<a href="javascript:history.back(-1);">取消</a>
+						</td>
+					</tr>
+				</table>
+				</form>
+				<script type="text/javascript">
+				function addFormCheck(){
+					var title = $("input[name='title']").val();
+					var content = $("textarea[name='content']").val();
+					if(title == '' || content == ''){
+						alert('请填写活动标题和活动说明');
+						return false;
+					}
+					var cateid = $("select[name='cateid'] option:selected").val();
+					if(cateid == '0'){
+						alert('请选择活动类型');
+						return false;
+					}
+					var time_start = $("input[name='time_start']").val();
+					if(time_start == ''){
+						alert('请至少设置活动起始时间');
+						return false;
+					}
+					{if $TS_SITE['base']['isauthcode']}
+					var authcode = $('input[name=authcode]').val();
+					if(authcode == ''){
+						alert('请填写验证码');
+						return false;
+					}
+					{/if}
+					$("button[type='submit']").html('正在提交^_^').css({'background':'#ccc'}).removeAttr('type');
+				}
+				</script>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		<div class="com-box">
+			<div class="content">
+				&gt; <a href="javascript:history.back(-1);">返回</a>
+			</div>
+		</div>
+		
+		<div id="createTip" class="com-box">
+			<h3>
+				<span class="icon icon-bullhorn"></span>
+				友情提示
+			</h3>
+			<div class="content">
+				<p>&nbsp;</p>
+			</div>
+		</div>
+		
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{php doAction('tseditor2','#content')}
+
+{template footer}

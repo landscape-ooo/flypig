@@ -1,0 +1,38 @@
+{template header}
+
+<div id="bd" class="bd clearfix">
+	<h1 id="msg-title">
+		<span class="icon icon-envelope"></span>
+		消息中心
+	</h1>
+	<div class="bd-left">
+		
+		<div class="com-box">
+			<div id="msg-menu">
+				{template msg_menu}
+			</div>
+			<div id="msg-body">
+				
+				<div class="msgbox">
+					<ul>
+						{loop $arrToUser $key $item}
+						<li>
+							<a href="{tsUrl('message','user',array('touserid'=>$item['userid']))}"><img alt="{$item[user][username]}" class="m_sub_img" width="16" src="{$item[user][face]}" align="absmiddle"> {$item[user][username]} </a>
+							{if $item[count] > 0}({$item[count]}){/if}
+						</li>
+						{/loop}
+					</ul>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{template msg_right}
+		
+	</div>
+</div>
+
+{template footer}

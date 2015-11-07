@@ -1,0 +1,12 @@
+<h2>首页管理</h2>
+<div class="tabnav">
+<ul>
+<li {if $mg=='options'}class="select"{/if}><a href="{SITE_URL}index.php?app=index&ac=admin&mg=options">配置</a></li>
+
+<li {if $mg=='index' && $ts=='list'}class="select"{/if}><a href="{SITE_URL}index.php?app=index&ac=admin&mg=index&ts=list">内容列表</a></li>
+
+<li {if ($mg=='type' && $ts=='list' || $mg=='type' && $ts=='edit')}class="select"{/if}><a href="{SITE_URL}index.php?app=index&ac=admin&mg=type&ts=list">类型管理</a></li>
+<li {if $mg=='type' && $ts=='add'}class="select"{/if}><a href="{SITE_URL}index.php?app=index&ac=admin&mg=type&ts=add">添加类型</a></li>
+
+</ul>
+</div>

@@ -1,0 +1,97 @@
+@charset "utf-8";
+
+/* 首页列表 */
+.event-box{padding:20px 0;margin:20px 0;border-bottom:1px dashed #999999;cursor:pointer;}
+.event-box:hover{background:#f4ffe8;}
+
+.baseinfo dl{font-size:12px;}
+.baseinfo dl dt{float:left;width:80px;padding-right:5px;color:#888;}
+.baseinfo dl dd{float:left;width:280px;overflow:hidden;}
+.baseinfo dl dt span{display:inline-block;}
+.baseinfo dl dt .icon{color:#ff7b01;}
+.baseinfo dl dt .t{
+	display:inline-block;
+	width:60px;
+	height:13px;
+	line-height:15px;
+	overflow:hidden;
+	text-align:justify;
+	text-justify:distribute-all-lines;/*ie6-8*/
+	text-align-last:justify;/* ie9*/
+	-moz-text-align-last:justify;/*ff*/
+	-webkit-text-align-last:justify;/*chrome 20+*/
+}
+@media screen and (-webkit-min-device-pixel-ratio:0){/* chrome*/
+	.baseinfo dl dt .t:after{
+		content:".";
+		display: inline-block;
+		width:100%;
+		height:0;
+		overflow:hidden;
+	}
+}
+
+
+#event-cate-list{}
+#event-cate-list li{margin:6px 0;background:url("1_line.jpg") repeat-x scroll 0 center transparent;overflow:hidden;}
+#event-cate-list li .tag{float:left;display:inline-block;padding-left:10px;background:#fff;}
+#event-cate-list li .tag span{height:20px;line-height:20px;padding:0 6px;color:#fff;background:#ccc;border-radius:15px 15px 15px 15px;white-space:nowrap;}
+#event-cate-list li .current span{background:#87BD43;}
+#event-cate-list li .tag_count{background:#fff;float:right;padding-left:10px;}
+.tag.selected {background-color:#87BD43;}
+
+/************************************************************************************/
+								/* show */
+/************************************************************************************/
+
+/* 活动基本信息 */
+#show-base{border-top:1px solid #dedede;margin-bottom:20px;}
+#show-base .pic{float:left;width:240px;}
+#show-base .pic img{margin-top:25px;}
+#show-base .info{float:right;width:400px;}
+#show-base .info h1{margin:18px 0 0 0;padding:5px 0 15px 0;font-size:24px;}
+#show-base .info em{color:#888;}
+#show-base .title{color:#666;}
+
+#show-base ul{padding:5px 0;}
+#show-base ul li{line-height:20px;clear:both;}
+#show-base dl{font-size:12px;}
+#show-base dl dt{float:left;width:80px;padding-right:5px;color:#888;}
+#show-base dl dd{float:left;width:280px;overflow:hidden;}
+
+#show-base dl dt span{
+	display:inline-block;
+}
+#show-base dl dt .icon{color:#ff7b01;}
+#show-base dl dt .t{
+	display:inline-block;
+	width:60px;
+	height:13px;
+	line-height:15px;
+	overflow:hidden;
+	text-align:justify;
+	text-justify:distribute-all-lines;/*ie6-8*/
+	text-align-last:justify;/* ie9*/
+	-moz-text-align-last:justify;/*ff*/
+	-webkit-text-align-last:justify;/*chrome 20+*/
+}
+@media screen and (-webkit-min-device-pixel-ratio:0){/* chrome*/
+	#show-base dl dt .t:after{
+		content:".";
+		display: inline-block;
+		width:100%;
+		height:0;
+		overflow:hidden;
+	}
+}
+
+/*******************************************添加编辑*********************************************************/
+/* title */
+#edit-title{height:38px;line-height:38px;margin:10px 0;font-size:18px;}
+#edit-title .icon{color:#919f0a;}
+.editor {overflow:hidden;padding:10px;}
+.editor i{color:#ccc;font-size:11px;}
+
+#createTip p{color:#999999;}
+#createTip ul{margin:10px 0 15px 0;}
+#createTip li{list-style-position:outside;list-style-type:decimal;margin:5px 0 0 20px;}

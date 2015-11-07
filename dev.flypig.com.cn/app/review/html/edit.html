@@ -1,0 +1,80 @@
+{template header}
+
+<div id="bd" class="bd clearfix">
+	<h1 id="edit-title">
+		<span class="icon icon-pencil2"></span>
+		编辑书评<span class="f12">《{$strBook[bookname]}》</span>
+	</h1>
+	<div class="bd-left">
+		
+		<div class="com-box">
+			<div id="edit-body">
+				
+				<form method="POST" action="{SITE_URL}index.php?app=review&ac=edit&ts=do">
+				<table class="com-table">
+					<tr>
+						<th>书名：</th>
+						<td><input type="text" name="bookname" value="{$strBook['bookname']}" disabled style="width:494px;" /></td>
+					</tr>
+					<tr>
+						<th>标题：</th>
+						<td><input type="text" name="title" value="{$strReview['title']}" style="width:494px;" /></td>
+					</tr>
+					<tr>
+						<th>评价：</th>
+						<td>
+							<label><input type="radio" value="40" name="rating" {if $strReview['rating']==40}checked{/if}>很差</label>
+							<label><input type="radio" value="50" name="rating" {if $strReview['rating']==50}checked{/if}>较差</label>
+							<label><input type="radio" value="60" name="rating" {if $strReview['rating']==60}checked{/if}>还行</label>
+							<label><input type="radio" value="80" name="rating" {if $strReview['rating']==80}checked{/if}>推荐</label>
+							<label><input type="radio" value="90" name="rating" {if $strReview['rating']==90}checked{/if}>力荐</label>
+						</td>
+					</tr>
+					<tr>
+						<th valign="top">内容：</th>
+						<td>
+							<textarea type="text" id="content" name="content" style="width:500px;height:300px;">{$strReview['content']}</textarea>
+						</td>
+					</tr>
+					<!--
+					<tr>
+						<th>标签:</th>
+						<td>
+							<input style="width:250px;" type="text" name="tag" value="{$strReview['tag']}" /> (多个标签请用,号分割)
+						</td>
+					</tr>
+					-->
+					{if $TS_SITE['base']['isauthcode']}
+					<tr>
+						<th>验证码：</th>
+						<td>
+							<input name="authcode" /> <img align="absmiddle" src="{tsUrl('pubs','code')}" onclick="javascript:newgdcode(this,this.src);" title="点击刷新验证码" alt="点击刷新验证码" style="cursor:pointer;"/>
+						</td>
+					</tr>
+					{/if}
+					<tr>
+						<th></th>
+						<td>
+							<input type="hidden" name="reviewid" value="{$strReview[reviewid]}" />
+							<input type="hidden" name="token" value="{$_SESSION['token']}" />
+							<button class="btn btn-success" type="submit">修改</button>
+							<a href="{tsUrl('review','show',array('id'=>$strReview[reviewid]))}">返回</a>
+						</td>
+					</tr>
+				</table>
+				</form>
+
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{template common_right}
+		
+	</div>
+</div>
+
+{php doAction('tseditor2','#content')}
+
+{template footer}

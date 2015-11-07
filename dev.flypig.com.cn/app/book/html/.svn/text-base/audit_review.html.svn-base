@@ -1,0 +1,47 @@
+{template header}
+
+<div id="bd" class="bd clearfix">
+	<h1 id="edit-title">
+		<span class="icon icon-cog"></span>
+		审核书评<span class="f12">《{$strBook[bookname]}》</span>
+	</h1>
+	<div class="bd-left">
+		
+		<div class="com-box">
+			<div id="edit-body">
+				
+				<table width="100%" cellspacing="1">
+					<tr bgcolor="#F0F0F0">
+						<th width="90%" height="30">书评</th>
+						<th width="10%">操作</th>
+					</tr>
+					{if count($arrReview)>0}
+					{loop $arrReview $key $item}
+					<tr>
+						<td height="30">{$item['title']}</td>
+						<td>
+							<a href="{SITE_URL}index.php?app=book&ac=do&ts=audit_review&reviewid={$item['reviewid']}&bookid={$item['bookid']}" onClick="return confirm('确认审核吗！');">审核</a> |  <a href="{SITE_URL}index.php?app=book&ac=do&ts=delete_review&reviewid={$item['reviewid']}&bookid={$item['bookid']}" onClick="return confirm('确定删除吗？');">删除</a>
+						</td>
+					</tr>
+					{/loop}
+					{else}
+					<tr>
+						<td colspan="2">
+							<div id="com-tsnotice">暂无待审核书评，点击返回 <a href="{tsUrl('book','show',array('id'=>$strBook[bookid]))}">《{$strBook[bookname]}》</a></div>
+						</td>
+					</tr>
+					{/if}
+				</table>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{template edit_right}
+		
+	</div>
+</div>
+
+{template footer}

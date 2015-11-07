@@ -1,0 +1,238 @@
+{if $TS_SITE[base][isgzip]==1}{php ob_start('ob_gzip');}{/if}
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+{if $app=='home' && $ac=='index'}
+{$TS_SITE[base][site_title]}{if $title}_{$title}{/if}
+{elseif $app!='home' && $ac=='index'}
+{$TS_APP[options][appname]}{if $title}_{$title}{/if}_{$TS_SITE[base][site_title]}
+{else}
+{if $title}{$title}_{/if}{$TS_APP[options][appname]}_{$TS_SITE[base][site_title]}
+{/if}
+</title>
+{if $app=='home' && $ac=='index'}
+<meta name="keywords" content="{$TS_SITE[base][site_key]}" />
+<meta name="description" content="{$TS_SITE[base][site_desc]}" />
+{else}
+{if $sitekey}<meta name="keywords" content="{$sitekey}" />{/if}
+{if $sitedesc}<meta name="description" content="{$sitedesc}" />{/if}
+{/if}
+{if $sitemb}
+<meta http-equiv="mobile-agent" content="format=xhtml; url={$sitemb}" />
+{/if}
+<link rel="shortcut icon" href="{SITE_URL}favicon.ico" />
+{if is_file('theme/'.$tstheme.'/base.css')}
+<link rel="stylesheet" type="text/css" href="{SITE_URL}theme/{$tstheme}/base.css" />
+{/if}
+{if is_file('theme/'.$tstheme.'/style.css')}
+<link rel="stylesheet" type="text/css" href="{SITE_URL}theme/{$tstheme}/style.css" id="tsTheme" />
+{/if}
+{if is_file('app/'.$app.'/skins/'.$skin.'/style.css')}
+<link rel="stylesheet" type="text/css" href="{SITE_URL}app/{$app}/skins/{$skin}/style.css">
+{/if}
+<link rel="stylesheet" type="text/css" href="{SITE_URL}public/artDialog/skins/default.css" rel="stylesheet" />
+<script type="text/javascript">var siteUrl = '{SITE_URL}';</script>
+<script type="text/javascript" src="{SITE_URL}public/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="{SITE_URL}public/js/scrollfix/jquery.scrollfix.js" type="text/javascript"></script>
+<script type="text/javascript" src="{SITE_URL}public/js/lazyload/jquery.lazyload.min.js"></script> 
+<script type="text/javascript" src="{SITE_URL}public/js/jquery.imgLoader.js"></script>
+<script type="text/javascript" src="{SITE_URL}public/artDialog/artDialog.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}public/js/jquery.slides.min.js"></script>
+{php doAction('pub_header_top')}
+<script type="text/javascript"> 
+$(function(){
+	$("img").lazyload({
+		placeholder : "img/grey.gif",
+		event : "click",
+		effect: "fadeIn"
+	});
+});
+</script>
+</head>
+{if is_array($TS_SITE['appnav']) && $TS_SITE['appnav'][$app]!=''}
+<body class="app-{$app}">
+<!--
+{loop $TS_SITE[appnav] $key $item}
+{if $app==$key}<body class="app-{$key}">{/if}
+{/loop}
+-->
+{else}
+<body>
+{/if}
+<div id="top">
+	<div class="clearfix">
+		<div class="user">
+			{if $TS_USER[user] == ''}
+			<a href="{tsUrl('user','register')}"><img class="fimg" src="{SITE_URL}public/images/user_normal.jpg" width="24" height="24" align="absmiddle" alt="欢迎" /></a> 欢迎
+			<a href="{tsUrl('user','login')}">登陆</a> | <a href="{tsUrl('user','register')}">注册</a>
+			{else}
+			<a href="{tsUrl('user','space',array('id'=>$TS_USER[user][userid]))}">
+			<img class="fimg" src="{if $TS_USER[user][face]==""}{SITE_URL}public/images/user_normal.jpg{else}{php echo tsXimg($TS_USER[user][face],'user','18','18',$TS_USER[user][path],'1')}{/if}" width="18" align="absmiddle" alt="{$TS_USER['user']['username']}" /> 
+			</a>
+			<a href="{tsUrl('user','space',array('id'=>$TS_USER[user][userid]))}">{$TS_USER[user][username]}</a>，<a href="{tsUrl('message','my')}" class="msg">消息<span id="newmsg"></span></a> | <a href="{tsUrl('user','set',array(ts=>base))}" >设置</a> | 
+			{if $TS_USER['user']['isadmin']=='1'}
+			<a target="_blank" href="{SITE_URL}index.php?app=system">管理</a> | 
+			{/if}
+			{if $TS_SITE['base']['isinvite']=='1'}
+			<a href="{tsUrl('user','invite')}">邀请</a> | 
+			{/if}
+			<a href="{tsUrl('user','login',array(ts=>out))}">退出</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			{if !isset($_SESSION['tscover']) || (isset($_SESSION['tscover']['isadmin']) && $_SESSION['tscover']['isadmin']=='1')}
+			<input name="cross_userid" value="" style="width:50px;height:15px;margin:0;padding:0;border:0;" />
+			<span id="cross_do">ID穿越</span>
+			<script type="text/javascript">
+			$(function(){
+				$("#cross_do").css({'cursor':'pointer'}).click(function(){
+					var cross_userid = $("input[name='cross_userid']").val();
+					if(cross_userid != ''){
+						window.location = "{SITE_URL}index.php?app=user&ac=across&ts=do&userid=" + cross_userid + "&token={$_SESSION['token']}";
+					}
+				});
+			});
+			</script>
+			{if $tsMajiaUser}
+			<select id="cross_majia" style="width:50px;height:15px;line-height:15px;margin:0;padding:-2px;border:0;font:normal 10px '\5FAE\8F6F\96C5\9ED1','Microsoft YaHei','Arial','simsun';">
+			<option value=""> </option>
+			{loop $tsMajiaUser $key $value}
+			<option value="{$value['userid']}">{$value['username']}</option>
+			{/loop}
+			</select>
+			<script type="text/javascript">
+			$(function(){
+				$("#cross_majia").change(function(){
+					var cross_userid = $(this).children('option:selected').val();
+					if(cross_userid != ''){
+						window.location = "{SITE_URL}index.php?app=user&ac=across&ts=do&userid=" + cross_userid + "&token={$_SESSION['token']}";
+					}
+				});
+			});
+			</script>
+			{/if}
+			{/if}
+			{if isset($_SESSION['tscover']['isadmin']) && $_SESSION['tscover']['isadmin']=='1'}
+			 | <span id="cross_back">恢复身份</span>
+			<script type="text/javascript">
+			$(function(){
+				$("#cross_back").css({'cursor':'pointer'}).click(function(){
+					window.location = "{tsUrl('user','across',array('ts'=>'back','token'=>{$_SESSION['token']}))}";
+				});
+			});
+			</script>
+			{/if}
+			{/if}
+		</div>
+		<ul id="nav">
+			<li{if $app=='index'} class="select"{/if}><a href="{SITE_URL}">{$TS_SITE[appnav][index]}</a></li>
+			<li{if $app=='ask'} class="select"{/if}><a href="{tsUrl('ask')}">{$TS_SITE[appnav][ask]}</a></li>
+			<li{if $app=='book'} class="select"{/if}><a href="{tsUrl('book')}">{$TS_SITE[appnav][book]}</a></li>
+			<li{if $app=='review'} class="select"{/if}><a href="{tsUrl('review')}">{$TS_SITE[appnav][review]}</a></li>
+			<li{if $app=='share'} class="select"{/if}><a href="{tsUrl('share')}">{$TS_SITE[appnav][share]}</a></li>
+			<li{if $app=='special'} class="select"{/if}><a href="{tsUrl('special')}">{$TS_SITE[appnav][special]}</a></li>
+			<li{if $app=='event'} class="select"{/if}><a href="{tsUrl('event')}">{$TS_SITE[appnav][event]}</a></li>
+		</ul>
+	</div>
+</div>
+<div id="hd" class="clearfix">
+	<div class="logo clearfix">
+		<a class="main" href="{SITE_URL}" title="{$TS_SITE[base][site_title]}首页"><img title="{$TS_SITE[base][site_title]}" src="{SITE_URL}uploadfile/logo/{$TS_SITE[base][logo]}?v={php echo rand();}" alt="{$TS_SITE[base][site_title]}" width="190" height="64" /></a>
+		{if $TS_APP[options][appname]}
+		<a class="channel" href="{tsUrl($app)}" title="{$TS_SITE[base][site_title]}{$TS_APP[options][appname]}频道">{$TS_APP[options][appname]}{if $TS_APP[options][appdesc]}<span>{$TS_APP[options][appdesc]}</span>{/if}</a>
+		{/if}
+	</div>
+	<div class="search">
+		<form method="GET" action="{SITE_URL}index.php">
+		<input type="hidden" name="app" value="search" />
+		<input type="hidden" name="ac" value="s" />
+		<div class="search_input clearfix">
+			<input id="searchkw" type="text" name="kw" value="" placeholder="书评、图书、问答、活动" />
+			<a class="search_btn" onclick="searchon()"></a>
+		</div>
+		<span style="display:none;"><input id="searchto" type="submit" value="搜索" /></span>
+		</form>
+	</div>
+</div>
+<div class="bd">
+	{if $app=='index'}
+	<style type="text/css">
+	#slides{width:960px;height:283px;position:relative;}
+	#slides li{list-style:none;}
+	.slide-pic{width:960px;height:283px;overflow:hidden;}
+	.slide-op{position:absolute;right:10px;bottom:10px;z-index:100;}
+	.slide-op li{width:20px;height:20px;line-height:20px;border-radius:20px;background:#fff;color:#000;text-align:center;float:left;cursor:pointer;filter:alpha(opacity=50);-moz-opacity:0.5;opacity:0.5;}
+	.slide-op li.cur{background:#000;color:#fff;}
+	</style>
+	<div id="slides">
+		<ul class="slide-pic">
+			<li class="cur"><img src="http://www.flypig.com.cn/attached/image/20141012/20141012194358_85143.jpg" alt=""></li>
+			<li><img src="http://www.flypig.com.cn/attached/image/20150407/20150407031741_88365.jpg" alt=""></li>
+			<li><img src="http://www.flypig.com.cn/attached/image/20150407/20150407032044_76445.jpg" alt=""></li>
+			<li><img src="http://www.flypig.com.cn/attached/image/20141130/20141130234649_20373.jpg" alt=""></li>
+		</ul>
+		<ul class="slide-op">
+			<li class="cur">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+	</div>
+	<script>
+	jQuery(function($){
+		if ($(".slide-pic").length > 0){
+			var defaultOpts = { interval: 5000, fadeInTime: 300, fadeOutTime: 200 };
+			var _ops = $("ul.slide-op li");
+			var _bodies = $("ul.slide-pic li");
+			var _count = _ops.length;
+			var _current = 0;
+			var _intervalID = null;
+			var stop = function () { window.clearInterval(_intervalID); };
+			var slide = function (opts) {
+				if (opts) {
+				_current = opts.current || 0;
+				} else {
+				_current = (_current >= (_count - 1)) ? 0 : (++_current);
+				};
+				_bodies.filter(":visible").fadeOut(defaultOpts.fadeOutTime, function () {
+				_bodies.eq(_current).fadeIn(defaultOpts.fadeInTime);
+				_bodies.removeClass("cur").eq(_current).addClass("cur");
+				});
+				_ops.removeClass("cur").eq(_current).addClass("cur");
+			};
+			var go = function () {
+				stop();
+				_intervalID = window.setInterval(function () { slide(); }, defaultOpts.interval);
+			};
+			var itemMouseOver = function (target, items) {
+				stop();
+				var i = $.inArray(target, items);
+				slide({ current: i });
+			};
+			_ops.hover(function () { if ($(this).attr('class') != 'cur') { itemMouseOver(this, _ops); } else { stop(); } }, go);
+			_bodies.hover(stop, go);
+			go();
+		}
+	});
+	</script>
+	{else}
+	{php doAction('gobad','960')}
+	{/if}
+</div>
+
+<script type="text/javascript">
+$(window).scroll(function () {
+	//var top_n = $('#hd .inner').offset().top + $('#hd .inner').height();
+	var top = document.documentElement.scrollTop || document.body.scrollTop;
+	var top_n = 0;
+	if(top > top_n){
+		if(typeof document.body.style.maxHeight === "undefined"){
+			$('#top').css({'position':'absolute', 'top':top, 'left':'0', 'z-index':'9999'});
+		}else{
+			$('#top').css({'position':'fixed', 'top':'0', 'left':'0', 'z-index':'9999'});
+		}
+	}else{
+		$('#top').css({'position': 'static'});
+	}
+});
+</script>

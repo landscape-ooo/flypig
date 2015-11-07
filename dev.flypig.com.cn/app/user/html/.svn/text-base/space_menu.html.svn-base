@@ -1,0 +1,14 @@
+<div class="com-tabnav">
+	<ul>
+		{if 0}
+		<li {if $ac=='space'}class="on"{/if}><a href="{tsUrl('user','space',array('id'=>$strUser['userid']))}">首页</a></li>
+		{/if}
+		<li {if $ac=='review'}class="on"{/if}><a href="{tsUrl('user','review',array('id'=>$strUser['userid']))}">书评</a></li>
+		{if 0}
+		<li {if $ac=='book'}class="on"{/if}><a href="{tsUrl('user','book',array('id'=>$strUser['userid']))}">图书</a></li>
+		{/if}
+		<li {if $ac=='ask'}class="on"{/if}><a href="{tsUrl('user','ask',array('id'=>$strUser['userid']))}">问答</a></li>
+		<li {if $ac=='event'}class="on"{/if}><a href="{tsUrl('user','event',array('id'=>$strUser['userid']))}">活动</a></li>
+		<li {if $ac=='guestbook'}class="on"{/if}><a href="{tsUrl('user','guestbook',array('id'=>$strUser['userid']))}">留言</a></li>
+	</ul>
+</div>

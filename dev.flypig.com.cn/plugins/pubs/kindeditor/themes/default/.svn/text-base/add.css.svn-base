@@ -1,0 +1,6 @@
+@CHARSET "UTF-8"; 
+html {margin:0;padding:0;}
+body {margin:0;padding:5px;}
+body, td {font:14px/1.5 '\5FAE\8F6F\96C5\9ED1','Microsoft YaHei';}
+body, p, div {font-size:14px;line-height:26px;word-wrap: break-word;}
+p {margin:8px 0;}

@@ -1,0 +1,7 @@
+		<div class="com-box">
+			<div class="content">
+				&gt; <a href="{tsUrl('book','show',array('id'=>$strBook[bookid]))}">返回《{$strBook[bookname]}》</a>
+			</div>
+		</div>
+
+		{php doAction('gobad','300')}

@@ -1,0 +1,148 @@
+{template header}
+
+<link type="text/css" href="{SITE_URL}public/js/multiselect2side/style.css" rel="stylesheet" />
+<script type="text/javascript" src="{SITE_URL}public/js/multiselect2side/jquery.multiselect2side.js"></script>
+<script type="text/javascript" src="{SITE_URL}public/js/date/WdatePicker.js?4.72"></script>
+<div id="bd" class="bd clearfix">
+	<h1 id="edit-title">
+		<span class="icon icon-pen"></span>
+		{$title}
+	</h1>
+	<div class="bd-left">
+		
+		<div id="edit-cate" class="com-box">
+			<div id="edit-menu">
+				{template edit_menu}
+			</div>
+			<div id="edit-body">
+				
+				<form method="post" action="{SITE_URL}index.php?app=book&ac=do&ts=edit_cate">
+				<table class="com-table">
+					<tr>
+						<th>书名：</th>
+						<td colspan="3">
+							<input type="text" style="width:480px;" value="{$strBook[bookname]}" name="bookname" disabled />
+						</td>
+					</tr>
+					<tr>
+						<th>阅读年龄：</th>
+						<td colspan="3" class="author-box">
+							<select name="ages[]" id='age' multiple='multiple' size="5"></select>
+							<script>
+							$().ready(function() {
+								var urlage = "{SITE_URL}index.php?app=book&ac=ajax&ts=edit_cate&bookid={$strBook[bookid]}&cateflag=age";
+								$('#age').load(urlage,function(){
+									$('#age').multiselect2side({
+										selectedPosition: "left",
+										labelsx: "&nbsp;已选择:&nbsp;",
+										//moveOptions: false,
+										labeldx: "&nbsp;~请选择~:&nbsp;",
+										labelTop: false,
+										labelBottom: false,
+										labelUp: "↑",
+										labelDown: "↓",
+										labelSort: false
+									});
+								});
+							});
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th>图书智能：</th>
+						<td colspan="3" class="author-box">
+							<select name="intels[]" id='intel' multiple='multiple' size="8"></select>
+							<script>
+							$().ready(function() {
+								var urlintel = "{SITE_URL}index.php?app=book&ac=ajax&ts=edit_cate&bookid={$strBook[bookid]}&cateflag=intel";
+								$('#intel').load(urlintel,function(){
+									$('#intel').multiselect2side({
+										selectedPosition: "left",
+										labelsx: "&nbsp;已选择:&nbsp;",
+										//moveOptions: false,
+										labeldx: "&nbsp;~请选择~:&nbsp;",
+										labelTop: false,
+										labelBottom: false,
+										labelUp: "↑",
+										labelDown: "↓",
+										labelSort: false
+									});
+								});
+							});
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th>阅读主题：</th>
+						<td colspan="3" class="author-box">
+							<select name="themes[]" id='theme' multiple='multiple' size="8"></select>
+							<script>
+							$().ready(function() {
+								var urltheme = "{SITE_URL}index.php?app=book&ac=ajax&ts=edit_cate&bookid={$strBook[bookid]}&cateflag=theme";
+								$('#theme').load(urltheme,function(){
+									$('#theme').multiselect2side({
+										selectedPosition: "left",
+										labelsx: "&nbsp;已选择:&nbsp;",
+										//moveOptions: false,
+										labeldx: "&nbsp;~请选择~:&nbsp;",
+										labelTop: false,
+										labelBottom: false,
+										labelUp: "↑",
+										labelDown: "↓",
+										labelSort: false
+									});
+								});
+							});
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th>其它特殊：</th>
+						<td colspan="3" class="author-box">
+							<select name="specs[]" id='spec' multiple='multiple' size="5"></select>
+							<script>
+							$().ready(function() {
+								var urlspec = "{SITE_URL}index.php?app=book&ac=ajax&ts=edit_cate&bookid={$strBook[bookid]}&cateflag=spec";
+								$('#spec').load(urlspec,function(){
+									$('#spec').multiselect2side({
+										selectedPosition: "left",
+										labelsx: "&nbsp;已选择:&nbsp;",
+										//moveOptions: false,
+										labeldx: "&nbsp;~请选择~:&nbsp;",
+										labelTop: false,
+										labelBottom: false,
+										labelUp: "↑",
+										labelDown: "↓",
+										labelSort: false
+									});
+								});
+							});
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td colspan="3">
+							<input type="hidden" name="bookid" value="{$strBook[bookid]}" />
+							<input type="hidden" name="token" value="{$_SESSION['token']}" />
+							<button class="btn btn-success" type="submit">更新设置</button>
+							&nbsp;&nbsp;<a href="{tsUrl('book','show',array('id'=>$strBook[bookid]))}">返回</a>
+						</td>
+					</tr>
+				</table>
+				</form>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{template edit_right}
+		
+	</div>
+</div>
+
+{php doAction('tseditor','mini')}
+
+{template footer}

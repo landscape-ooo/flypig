@@ -1,0 +1,32 @@
+{php include template("admin/header");}
+
+<!--main-->
+<div class="midder">
+
+{php include template("admin/menu");}
+
+<div class="page">{$pageUrl}</div>
+
+<table  cellpadding="0" cellspacing="0">
+	<tr class="old">
+		<td width="20">ID</td>
+		<td width="200">图书名字</td>
+		<td>书评统计</td>
+		<td>成员统计</td>
+		<td>创建时间</td>
+		<td>操作</td>
+	</tr>
+	{loop $arrAllBook $key $item}
+	<tr class="odd">
+		<td>{$item[bookid]}</td><td><a href="{tsUrl('book','show',array('id'=>$item['bookid']))}" target="_blank">[{$item[bookname]}]</a></td><td>{$item[count_review]}</td><td>{$item[count_user]}</td><td>{php echo date('Y-m-d H:i:s',$item[addtime])}</td>
+		<td>
+			<a href="{SITE_URL}index.php?app=book&ac=admin&mg=book&ts=isaudit&bookid={$item[bookid]}">{if $item[isaudit]=='1'}[取消审核]{else}[审核]{/if}</a>
+			<a href="{SITE_URL}index.php?app=book&ac=admin&mg=book&ts=isrecommend&bookid={$item[bookid]}">{if $item[isrecommend]=='1'}[取消推荐]{else}[推荐]{/if}</a>
+			<a href="{SITE_URL}index.php?app=book&ac=admin&mg=upuser&bookid={$item[bookid]}">[投送]</a> <a href="{SITE_URL}index.php?app=book&ac=edit&bookid={$item[bookid]}&ts=base" target="_blank">[修改]</a> <a href="{SITE_URL}index.php?app=book&ac=admin&mg=book&ts=del&bookid={$item[bookid]}">[删除]</a>
+		</td>
+	</tr>
+	{/loop}
+</table>
+
+</div>
+{php include template("admin/footer");}

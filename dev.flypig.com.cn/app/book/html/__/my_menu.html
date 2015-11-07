@@ -1,0 +1,10 @@
+
+<div class="tabnav">
+<ul>
+<li {if $ac=='user'}class="select"{/if}><a href="{SITE_URL}index.php">最新书评</a></li>
+<li {if $ac=='my' && $ts=='review'}class="select"{/if}><a href="{tsUrl('book','my',array('ts'=>'review'))}">我发起的书评</a></li>
+<li {if $ac=='my' && $ts=='reply'}class="select"{/if}><a href="{tsUrl('book','my',array('ts'=>'reply'))}">我回复的书评</a></li>
+<li {if $ac=='my' && $ts=='collect'}class="select"{/if}><a href="{tsUrl('book','my',array('ts'=>'collect'))}">我收藏的书评</a></li>
+</ul>
+</div>
+<div class="clear"></div>

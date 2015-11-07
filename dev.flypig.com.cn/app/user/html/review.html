@@ -1,0 +1,42 @@
+{template header}
+
+<div id="bd" class="bd clearfix">
+	<h1 id="user-title">
+		<span class="icon icon-cog"></span>
+		会员中心
+	</h1>
+	<div class="bd-left">
+		
+		<div id="space" class="com-box">
+			<div id="space-menu">
+				{template space_menu}
+			</div>
+			<div class="content">
+				
+				<div class="commlist">
+					<ul>
+						{loop $arrReview $key $item}
+						<li>
+							<a href="{tsUrl('review','show',array('id'=>$item['reviewid']))}">{php echo htmlspecialchars($item['title'])}</a> <i>{$item['count_comment']}</i>
+						</li>
+						{/loop}
+					</ul>
+				</div>
+				
+				<div class="com-page">{$pageUrl}</div>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{template userinfo}
+		
+		<!--广告位-->
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{template footer}

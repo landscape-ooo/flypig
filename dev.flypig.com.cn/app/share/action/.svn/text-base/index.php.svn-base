@@ -1,0 +1,78 @@
+<?php
+defined('IN_TS') or die('Access Denied.');
+//cateid
+$cateid = isset($_GET['cateid']) ? intval($_GET['cateid']) : 0;
+$catename = '';
+if(!empty($cateid)){
+	$strCate = $new['share']->find('share_cate',array(
+		'cateid'=>$cateid
+	));
+	if(!$strCate){
+		tsNotice('分类不存在，参数错误');
+		exit;
+	}
+	$catename = $strCate['catename'];
+}
+
+if(isset($TS_USER['user']['userid'])){
+	//我的分类
+	$userid = $TS_USER['user']['userid'];
+	$arrMyCate = $new['share']->findAll('share_cate',array(
+		'userid'=>$userid
+	));
+}
+
+
+$pagesize = 10;
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+$lstart = ($page-1)*$pagesize;
+if($cateid){
+	$url = tsUrl('share','index',array('cateid'=>$cateid,'page'=>''));
+}else{
+	$url = tsUrl('share','index',array('page'=>''));
+}
+
+//获取分享
+if(!empty($cateid)){
+	$arrShare = $new['share']->findAll('share',array(
+		'cateid'=>$cateid,
+		'isaudit'=>'1',
+		'status'=>'1'
+	),'istop desc,uptime desc',null,$lstart.','.$pagesize);
+}else{
+	$arrShare = $new['share']->findAll('share',array(
+		'isaudit'=>'1',
+		'status'=>'1'
+	),'istop desc,uptime desc',null,$lstart.','.$pagesize);
+}
+foreach($arrShare as $key=>$item){
+	//添加及格式化数据
+	$arrShare[$key] = $new['share']->getOneShare($item['shareid']);
+	$arrShare[$key]['title'] = htmlspecialchars($item['title']);
+	$arrShare[$key]['user'] = aac('user')->getOneUser($item['userid']);
+	$arrShare[$key]['addtime'] = getTime($item['addtime'], time());
+}
+
+//分享总数
+if(!empty($cateid)){
+	$shareNum = $new['share']->findCount('share',array(
+		'cateid'=>$cateid,
+		'isaudit'=>'1',
+		'status'=>'1'
+	));
+}else{
+	$shareNum = $new['share']->findCount('share',array(
+		'isaudit'=>'1',
+		'status'=>'1'
+	));
+}
+
+//分页
+$pageUrl = pagination($shareNum, $pagesize, $page, $url);
+
+$title = '分享列表';
+
+if ($TS_CF ['mobile'])
+	$sitemb = tsUrl ( 'moblie', 'share' );
+
+include template("index");

@@ -1,0 +1,47 @@
+{template header}
+
+<div id="bd" class="bd clearfix">
+	<h1 id="user-title">
+		<span class="icon icon-cog"></span>
+		用户设置
+	</h1>
+	<div class="bd-left">
+		
+		<div class="com-box">
+			<div id="set-menu">
+				{template set_menu}
+			</div>
+			<div id="set-body">
+				
+				<form method="post" action="{SITE_URL}index.php?app=user&ac=do&ts=setpwd">
+				<table class="com-table">
+					<tr>
+						<th>旧密码：</th>
+						<td><input class="uinput" name="oldpwd" value="" type="password" /></td>
+					</tr>
+					<tr>
+						<th>新密码：</th>
+						<td><input class="uinput" name="newpwd" value="" type="password" /></td>
+					</tr>
+					<tr>
+						<th>输入新密码：</th>
+						<td><input class="uinput" name="renewpwd" value="" type="password" /></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td><button class="btn btn-success" type="submit">修改</button></td>
+					</tr>
+				</table>
+				</form>
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{template set_right}
+		
+	</div>
+</div>
+
+{template footer}

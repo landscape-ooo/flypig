@@ -1,0 +1,522 @@
+{template header}
+
+<link type="text/css" href="{SITE_URL}public/js/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet" />
+<script type="text/javascript" src="{SITE_URL}public/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+
+<div id="path" class="bd clearfix">
+	<span class="icon icon-home"></span>
+	<a href="{SITE_URL}" title="{$TS_SITE[base][site_title]}首页">首页</a>  &gt;  <a href="{tsUrl('book','index')}" title="飞猪网精品图书汇">精品汇</a>  &gt;  图书详情
+</div>
+
+<div id="bd" class="bd clearfix">
+	<div class="bd-left">
+		
+		<div id="show_base" class="clearfix">
+			<div class="pic">
+				<a href="{$strBook[bookicon]}" title="《{$strBook[bookname]}》封面" class="bookicon_image" target="_blank"><img src="{$strBook[icon_180]}" alt="《{$strBook[bookname]}》封面" /></a>
+				<script type="text/javascript">
+				$(document).ready(function() {
+					$(".bookicon_image").fancybox();
+				});
+				</script>
+			</div>
+			<div class="info">
+				<h1><a href="{tsUrl('book','show',array('id'=>$strBook['bookid']))}" class="name">《{$strBook[bookname]}》</a></h1>
+				{if $strBook[title] && $strBook[title]!=$strBook[bookname]}<p class="title"><em>——</em> {$strBook[title]}</p>{/if}
+				{if $strBook[description]}
+				<div class="description">
+					<div class="sup">
+						<div class="sub">
+							<p class="desc">{$strBook[description]}</p>
+							{if $strBook[awardsrecord]}<p class="awards">{$strBook[awardsrecord]}</p>{/if}
+						</div>
+					</div>
+				</div>
+				{/if}
+				<ul class="baseinfo">
+					{if $strBook[author]}
+					<li class="author">
+						<dl>
+							<dt>作者：</dt>
+							<dd>{$strBook[author]}</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[isbn]}
+					<li class="price">
+						<dl>
+							<dt>ISBN：</dt>
+							<dd>$strBook[isbn]</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[price]}
+					<li class="price">
+						<dl>
+							<dt>定价：</dt>
+							<dd>$strBook[price] 元</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[pubdate]!='0000-00-00'}
+					<li class="price">
+						<dl>
+							<dt>出版日期：</dt>
+							<dd>$strBook[pubdate]</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[numrev]}
+					<li class="price">
+						<dl>
+							<dt>版次：</dt>
+							<dd>$strBook[numrev]</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[prtdate]!='0000-00-00'}
+					<li class="price">
+						<dl>
+							<dt>印刷日期：</dt>
+							<dd>$strBook[prtdate]</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[num_print]}
+					<li class="price">
+						<dl>
+							<dt>印次：</dt>
+							<dd>$strBook[num_print]</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[cnt_pages]}
+					<li class="price">
+						<dl>
+							<dt>页数：</dt>
+							<dd>$strBook[cnt_pages]</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[cnt_words]}
+					<li class="price">
+						<dl>
+							<dt>字数：</dt>
+							<dd>$strBook[cnt_words]</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[paper]}
+					<li class="price">
+						<dl>
+							<dt>纸张：</dt>
+							<dd>$strBook[paper]</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[packing]}
+					<li class="price">
+						<dl>
+							<dt>包装：</dt>
+							<dd>$strBook[packing]</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[format]}
+					<li class="price">
+						<dl>
+							<dt>开本：</dt>
+							<dd>$strBook[format]</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[pubhouse]}
+					<li class="star">
+						<dl>
+							<dt>出版社：</dt>
+							<dd>{$strBook[pubhouse]}</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[company]}
+					<li class="star">
+						<dl>
+							<dt>出版商：</dt>
+							<dd>{$strBook[company]}</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[star]}
+					<li class="star">
+						<dl>
+							<dt>推荐星级：</dt>
+							<dd>{$strBook[star]}</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[age]}
+					<li class="age">
+						<dl>
+							<dt>阅读年龄：</dt>
+							<dd>{$strBook[age]}</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[intel]}
+					<li class="intel">
+						<dl>
+							<dt>图书智能：</dt>
+							<dd>{$strBook[intel]}</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[theme]}
+					<li class="theme">
+						<dl>
+							<dt>阅读主题：</dt>
+							<dd>{$strBook[theme]}</dd>
+						</dl>
+					</li>
+					{/if}
+					{if $strBook[spec]}
+					<li class="spec">
+						<dl>
+							<dt>其　　它：</dt>
+							<dd>{$strBook[spec]}</dd>
+						</dl>
+					</li>
+					{/if}
+				</ul>
+			</div>
+			<div class="brtool">
+				<a href="javascript:void(0);" onclick="doBook('{$strBook['bookid']}',1)" class="btn_do{if $strBook['dotype']=='1'} btn_on{/if}"><span>想读({$strBook['count_want']})</span></a>
+				<a href="javascript:void(0);" onclick="doBook('{$strBook['bookid']}',2)" class="btn_do{if $strBook['dotype']=='2'} btn_on{/if}"><span>正读({$strBook['count_read']})</span></a>
+				<a href="javascript:void(0);" onclick="doBook('{$strBook['bookid']}',3)" class="btn_do{if $strBook['dotype']=='3'} btn_on{/if}"><span>已读({$strBook['count_done']})</span></a>
+			</div>
+		</div>
+		{if $strBook[bookphoto]}
+		<div id="show_photo">
+			<div class="com-bar clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-images"></span>
+					内页展示
+				</div>
+			</div>
+			<div class="photo_box">
+				<div class="next" style="display: none;"><span class="icon icon-arrow-right2"></span></div>
+				<div class="prev" style="display: none;"><span class="icon icon-arrow-left3"></span></div>
+				<ul>
+					{loop $strBook[bookphoto] $key $item}
+					<li><a href="{$item[src]}" title="{$item[title]}" class="bookphoto_image" rel="bookphoto_image" target="_blank"><img src="{$item[thumb]}" alt="{$item[title]}"></a></li>
+					{/loop}
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$(".bookphoto_image").fancybox({
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'titlePosition' 	: 'over',
+				'titleFormat'       : function(title, currentArray, currentIndex, currentOpts) {
+					return '<span id="fancybox-title-over">Image ' +  (currentIndex + 1) + ' / ' + currentArray.length + ' ' + title + '</span>';
+				}
+			});
+			$('#show_photo .photo_box').hover(function () {
+				var timeLeft = 0;
+				var leg = $(this).find('li').length;
+				var sum = 0;
+				for (i = 0; i < leg; i++) {
+					var liWidth = $($(this).find('li').get(i)).width() + 15;
+					sum += liWidth;
+				};
+
+				$(this).find('ul').css('width', sum+2);
+
+				rollStatus($(this).find('ul'));
+
+				function rollStatus(box) {
+					function checkStatus() {
+						var offset = parseInt(box.position().left);
+						if (offset < 0) {
+							box.parent().find('.prev').unbind('click').one('click', leftClick);
+						} if (offset > -(sum - 640)) {
+							box.parent().find('.next').unbind('click').one('click', rightClick);
+						};
+						if (offset == 0) {
+							box.parent().find('.prev').hide();
+						} else {
+							box.parent().find('.prev').show();
+						}
+						if (offset <= -(sum - 640)) {
+							box.parent().find('.next').hide().unbind();
+						} else {
+							box.parent().find('.next').show();
+						}
+					};
+					function leftClick() {
+						var left = box.position().left;
+						if (-left < 640) {
+							box.animate({ 'left': '+=' + (-left) }, 500, function () {
+								checkStatus();
+							});
+							var left = 0;
+						} else {
+							box.animate({ 'left': '+=' + 640 }, 500, function () {
+								checkStatus();
+							});
+						}
+					};
+					function rightClick() {
+						var left = box.position().left - 640;
+						if ((sum + left) < 640) {
+							box.animate({ 'left': '-=' + (sum + left) }, 500, function () {
+								checkStatus();
+							});
+						} else {
+							box.animate({ 'left': '-=' + 640 }, 500, function () {
+								checkStatus();
+							});
+						};
+					};
+					checkStatus(box);
+				};
+			}, function () {
+				$('.next').hide();
+				$('.prev').hide();
+			});
+		});
+		</script>
+		{/if}
+		{if $strBook[bookadd1]}
+		<div id="show_bookadd1">
+			<div class="com-bar clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-newspaper"></span>
+					内容介绍
+				</div>
+			</div>
+			<div class="bookadd_box">
+				<div class="con">
+					{$strBook[bookadd1]}
+				</div>
+			</div>
+			<div class="bookadd_btn">
+				<div class="down">展开内容</div>
+				<div class="up">收起内容</div>
+			</div>
+		</div>
+		{/if}
+		{if $strBook[bookadd2]}
+		<div id="show_bookadd2">
+			<div class="com-bar clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-user"></span>
+					专家推荐
+				</div>
+			</div>
+			<div class="bookadd_box">
+				<div class="con">
+					{$strBook[bookadd2]}
+				</div>
+			</div>
+			<div class="bookadd_btn">
+				<div class="down">展开内容</div>
+				<div class="up">收起内容</div>
+			</div>
+		</div>
+		{/if}
+		{if $strBook[bookadd3]}
+		<div id="show_bookadd3">
+			<div class="com-bar clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-image"></span>
+					图画赏析
+				</div>
+			</div>
+			<div class="bookadd_box">
+				<div class="con">
+					{$strBook[bookadd3]}
+				</div>
+			</div>
+			<div class="bookadd_btn">
+				<div class="down">展开内容</div>
+				<div class="up">收起内容</div>
+			</div>
+		</div>
+		{/if}
+		{if $strBook[bookadd1] || $strBook[bookadd2] || $strBook[bookadd3]}
+		<script type="text/javascript">
+		$(function(){
+			$('.bookadd_box .con').each(function () {
+				if ($(this).height() > 120) {
+					$(this).parent().parent().find('.down').css('display', 'block');
+					$(this).parent().prepend("<span class=\"mark\"></span>");
+				};
+			});
+			$('.bookadd_btn .down').click(function () {
+				var el = $(this).parent().parent().find('.bookadd_box'),
+					curHeight = el.height(),
+					autoHeight = el.css('height', 'auto').height();
+				el.height(curHeight).animate({height: autoHeight});
+				$(this).hide();
+				$(this).parent().find('.up').show();
+			});
+			$('.bookadd_btn .up').click(function () {
+				var el = $(this).parent().parent().find('.bookadd_box');
+				el.animate({height:'120px'});
+				$(this).hide();
+				$(this).parent().find('.down').show();
+			});
+		});
+		</script>
+		{/if}
+		<div id="show_review">
+			<div class="com-bar clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-bubbles4"></span>
+					精彩书评
+				</div>
+				<div class="com-bar-more">
+					<span class="icon icon-eye"></span>
+					<a href="{tsUrl('review','index',array('bookid'=>$strBook['bookid']))}" class="look_all">查看全部({$reviewNum})</a>
+					{if $TS_APP[options][iscreate]==0 || $TS_USER[user][isadmin]==1}
+					&nbsp;&nbsp;<span class="icon icon-pencil2"></span> <a target="_blank" href="{tsUrl('review','add',array('bookid'=>$strBook[bookid]))}">写书评</a>
+					{/if}
+				</div>
+			</div>
+			<div class="review_box">
+				{if $arrReview}
+				<div class="review_list">
+					<ul>
+						{loop $arrReview $key $item}
+						<li>
+							<div class="show-face">
+								<a href="{tsUrl('user','space',array('id'=>$item[user][userid]))}"><img class="userface" src="{$item[user][face]}" width="75" height="75" alt="{$item['user']['username']}" title="{$item['user']['username']}" /></a>
+								<a class="username" href="{tsUrl('user','space',array('id'=>$item[userid]))}">{$item[user][username]}</a>
+							</div>
+							<div class="show-info">
+								<div class="review_title">
+									{if $item[typeid] != 0}
+									<a href="{tsUrl('book','show',array('id'=>$item[bookid],typeid=>$item[typeid]))}">[{$item[typename]}]</a>
+									{/if}
+									<a target="_blank" title="{$item[title]}" href="{tsUrl('review','show',array('id'=>$item[reviewid]))}">{$item[title]}</a>
+									{if $item[istop]=='1'}
+									<img src="{SITE_URL}public/images/tops.gif" title="[置顶]" alt="[置顶]" /> 
+									{/if} 
+									{if $item[isposts] == '1'}
+									<img src="{SITE_URL}public/images/posts.gif" title="[精华]" alt="[精华]" />
+									{/if}
+									{if $item['postby']==1}
+									<a href="{tsUrl('home','phone')}"><img align="absmiddle" alt="通过Iphone手机端发布" title="通过Iphone手机端发布" src="{SITE_URL}public/images/ios.jpg" /></a>
+									{/if}
+									<span class="data">
+										<span class="icon icon-eye"></span>
+										<a target="_blank" href="{tsUrl('review','show',array('id'=>$item[reviewid]))}" title="浏览数">{$item[count_view]}</a>
+										<span class="icon icon-bubble2"></span>
+										<a target="_blank" href="{tsUrl('review','show',array('id'=>$item[reviewid]))}" title="回复数">{$item[count_comment]}</a>
+										<span class="icon icon-heart"></span>
+										<a target="_blank" href="{tsUrl('review','show',array('id'=>$item[reviewid]))}" title="喜欢数">{$item[count_love]}</a>
+									</span>
+								</div>
+								<div class="review_content">
+									{php echo cututf8(t($item[content]),0,80)}
+								</div>
+								<div class="review_info">
+									<span style="float:left;">
+									{php echo getTime($item[uptime],time())}
+									</span>
+									<span style="float:right;">
+										
+									</span>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</li>
+						{/loop}
+					</ul>
+				</div>
+				<div class="com-page">{$pageUrl}</div>
+				{else}
+				<p style="width:640px;margin:15px 15px 30px 15px;text-align:center;color:gray;">暂无书评</p>
+				{/if}
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		<p class="clearfix">
+			<a href="{tsUrl('review','add',array('bookid'=>$strBook[bookid]))}" class="btn3d btn3d-two"><span class="icon-pen"></span> 发布书评({$strBook['count_review']})</a>
+			<a href="javascript:void('0');" onclick="collectBook('{$strBook['bookid']}')" class="btn3d btn3d-two fr"><span class="icon-heart2"></span> 收藏({$strBook['count_collect']})</a>
+		</p>
+		
+		<div id="book_set" class="com-box">
+			<div class="content">
+				<p class="info">
+					<span class="icon icon-user2"></span> <a href="{tsUrl('user','space',array('id'=>$strLeader[userid]))}"  rel="face" uid="{$strLeader['userid']}">{$strLeader[username]}</a>
+					<span class="icon icon-file2"></span> 书评(<a href="{tsUrl('book','show',array('id'=>$strBook['bookid']))}">{$reviewNum}</a>)<!--&nbsp;&nbsp;<span class="icon icon-users2"></span> <a href="{tsUrl('book','user',array('id'=>$strBook['bookid']))}">{$strBook['count_user']}</a> 成员-->
+				</p>
+				<!--<p class="status">
+					{if $isBookUser > 0 && $TS_USER[user][userid] != $strBook[userid]}
+					，我是本书的{$strBook[role_user]}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="j a_confirm_link" href="{tsUrl('book','do',array('ts'=>'exit','bookid'=>$strBook['bookid'],'token'=>$_SESSION['token']))}" style="margin-left: 6px;">&gt;退出</a>
+					{elseif $isBookUser > 0 && $TS_USER[user][userid] == $strBook[userid]}
+					，我是本书的{$strBook[role_leader]}
+					{elseif $strBook[joinway] == '0'}
+					，<a href="{tsUrl('book','do',array('ts'=>'join','bookid'=>$strBook['bookid'],'token'=>$_SESSION['token']))}">加入本图书成员</a>
+					{else}
+					，本图书圈子目前禁止加入
+					{/if}
+				</p>
+				{if $strBook['joinway']==1 && $strBook['userid'] == $TS_USER['user']['userid']}
+				<p>
+					<form method="post" action="{tsUrl('book','do',array('ts'=>'invite'))}">
+						<input type="text" name="userid" value="" /> 
+						<input type="hidden" name="bookid" value="{$strBook['bookid']}" />
+						<button class="btn btn-success" type="submit">邀请</button>
+					</form>
+				</p>
+				{/if}
+				-->
+				{if $TS_USER[user][userid] == $strBook[userid] || $TS_USER['user']['isadmin']=='1'}
+				<p class="do">
+					<span class="icon icon-pen"></span> <a href="{tsUrl('book','edit',array('ts'=>'icon','bookid'=>$strBook[bookid]))}">图书修改</a>
+					{if $count_review_audit>0}
+					&nbsp;&nbsp;<span class="icon icon-quill"></span> <a href="{tsUrl('book','audit',array('ts'=>'review','bookid'=>$strBook[bookid]))}">书评审核</a> ({$count_review_audit})
+					{/if}
+					<!--
+					&nbsp;&nbsp;<span class="icon icon-cog"></span> <a href="{tsUrl('book','edit',array(bookid=>$strBook[bookid],ts=>set))}">图书设置</a>
+					-->
+				</p>
+				{/if}
+				<div class="clear"></div>
+				<!--<p class="pl"><span class="feed"><a href="{tsUrl('book','rss',array(bookid=>$strBook[bookid]))}">feed: rss 2.0</a></span></p>-->
+
+			</div>
+		</div>
+		
+		<!--
+		<div id="book_user" class="com-box">
+			<h3>
+				<span class="icon icon-users2"></span>
+				图书成员
+			</h3>
+			<div class="content">
+				{loop $arrBookUser $key $item}
+				<dl>
+				<dt>
+					<a href="{tsUrl('user','space',array('id'=>$item[userid]))}" rel="face" uid="{$item['userid']}"><img class="m_sub_img" src="{$item[face]}" width="48" height="48" alt="{$item[username]}" title="{$item[username]}" /></a></dt>
+					<dd>{$item[username]}</dd>
+				</dl>
+				{/loop}
+			</div>
+		</div>
+		-->
+		
+		<!--广告位-->
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{template footer}

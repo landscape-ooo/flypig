@@ -1,0 +1,58 @@
+{php include template("admin/header");}
+<div class="midder">
+
+{php include template("admin/menu");}
+
+<div>
+<form method="get" action="{SITE_URL}index.php">
+<input type="hidden" name="app" value="user" />
+<input type="hidden" name="ac" value="admin" />
+<input type="hidden" name="mg" value="majia" />
+<input type="hidden" name="ts" value="list" />
+UID：<input type="text" name="userid" value="{$userid}" /> 
+用户名：<input type="text" name="username" value="{$username}" />
+<input type="submit" value="搜索" />
+<a href="{SITE_URL}index.php?app=user&ac=admin&mg=user&ts=list">清除条件？</a>
+<a class="btn" href="{SITE_URL}index.php?app=user&ac=admin&mg=user&ts=clean" onclick="return confirm('确定要删除吗?')">一键删除被停用用户</a>
+</form>
+</div>
+
+<div class="page">{$pageUrl}</div>
+
+<table  cellpadding="0" cellspacing="0">
+	<tr class="old">
+		<td width="60">UID</td>
+		<td width="200">Email</td>
+		<td width="100">用户名</td>
+		<td>注册时间</td>
+		<td>登录IP</td>
+		<td>验证Email</td>
+		<td width="100">操作</td>
+	</tr>
+	{loop $arrAllUser $key $item}
+	<tr class="odd">
+		<td>{$item[userid]}</td>
+		<td>{$item[email]}</td>
+		<td>{$item[username]}</td>
+		<td>{php echo date('Y-m-d H:i:s',$item[addtime])}</td>
+		<td>{$item['ip']}</td>
+		<td>{if $item['isverify']==1}已验证{else}<font color="red">未验证</a>{/if}</td>
+		<td>
+			{if $item['refuserid']!='0' && $item['refuserid']!=$TS_USER['admin']['userid']}
+			<font color="grey">[已被认领]</font>
+			{else}
+			<a href="{SITE_URL}index.php?app=user&ac=admin&mg=majia&ts=get_do&userid={$item['userid']}">
+			{if $item['refuserid']==$TS_USER['admin']['userid']}
+			<font color="red">[取消认领]</font>
+			{else}
+			[认领马甲]
+			{/if}
+			</a>
+			{/if}
+		</td>
+	</tr>
+	{/loop}
+</table>
+
+</div>
+{php include template("admin/footer");}

@@ -1,0 +1,32 @@
+{template header}
+<div class="midder">
+<div class="mc bbox">
+<h1>补评：《{$strReview['title']}》</h1>
+<div class="bc">
+<form method="POST" action="{tsUrl('book','after',array('ts'=>'ado'))}"  enctype="multipart/form-data">
+<table class="commtable">
+<tr>
+<th valign="top">
+内容*
+</th><td><textarea style="width:600px;" id="tseditor" name="content"></textarea></td></tr>
+
+<tr><th>标题：</th>
+<td><input style="padding:3px 0;width:300px;" type="text" name="title" /> (可选)</td></tr>	
+
+<tr><th></th><td>
+<input type="hidden" name="reviewid" value="{$strReview['reviewid']}" />
+
+<input type="hidden" name="token" value="{$_SESSION['token']}" />
+
+<button class="btn btn-success" type="submit">补评</button>
+
+<a href="{tsUrl('book','review',array('id'=>$strReview['reviewid']))}">返回</a>
+</td></tr>
+</table>
+</form>
+</div>
+</div>
+
+</div>
+{php doAction('tseditor')}
+{template footer}

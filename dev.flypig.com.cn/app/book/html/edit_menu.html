@@ -1,0 +1,12 @@
+<div class="com-tabnav">
+	<ul>
+		<li {if $ts=="base"}class="on"{/if}><a href="{tsUrl('book','edit',array('ts'=>'base','bookid'=>$strBook['bookid']))}">基本信息</a></li>
+		<li {if $ts=="icon"}class="on"{/if}><a href="{tsUrl('book','edit',array('ts'=>'icon','bookid'=>$strBook['bookid']))}">图书封面</a></li>
+		<li {if $ts=="cate"}class="on"{/if}><a href="{tsUrl('book','edit',array('ts'=>'cate','bookid'=>$strBook['bookid']))}">图书分类</a></li>
+		<li {if $ts=="photo"}class="on"{/if}><a href="{tsUrl('book','edit',array('ts'=>'photo','bookid'=>$strBook['bookid']))}">内页展示</a></li>
+		<li {if $ts=="intro"}class="on"{/if}><a href="{tsUrl('book','edit',array('ts'=>'intro','bookid'=>$strBook['bookid']))}">内容介绍</a></li>
+		<li {if $ts=="recommend"}class="on"{/if}><a href="{tsUrl('book','edit',array('ts'=>'recommend','bookid'=>$strBook['bookid']))}">专家推荐</a></li>
+		<li {if $ts=="art"}class="on"{/if}><a href="{tsUrl('book','edit',array('ts'=>'art','bookid'=>$strBook['bookid']))}">图画赏析</a></li>
+		<!--<li {if $ts=="set"}class="on"{/if}><a href="{tsUrl('book','edit',array('ts'=>'set','bookid'=>$strBook['bookid']))}">高级设置</a></li>-->
+	</ul>
+</div>

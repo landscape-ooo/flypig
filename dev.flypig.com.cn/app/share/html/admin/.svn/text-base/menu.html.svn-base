@@ -1,0 +1,11 @@
+<h2>分享管理</h2>
+<div class="tabnav">
+<ul>
+<li {if $mg=='options'}class="select"{/if}><a href="{SITE_URL}index.php?app=share&ac=admin&mg=options">分享配置</a></li>
+<li {if $mg=='share' && $ts=='list'}class="select"{/if}><a href="{SITE_URL}index.php?app=share&ac=admin&mg=share&ts=list">分享管理</a></li>
+
+<li {if $mg=='share' && $ts=='list_delete'}class="select"{/if}><a href="{SITE_URL}index.php?app=share&ac=admin&mg=share&ts=list_delete">已失效的分享</a></li>
+<li {if $mg=='share' && $ts=='list_edit'}class="select"{/if}><a href="{SITE_URL}index.php?app=share&ac=admin&mg=share&ts=list_edit">修改的分享</a></li>
+
+</ul>
+</div>

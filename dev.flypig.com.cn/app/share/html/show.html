@@ -1,0 +1,210 @@
+{template header}
+
+<div id="path" class="bd clearfix">
+	<span class="icon icon-home"></span>
+	<a href="{SITE_URL}" title="{$TS_SITE['base']['site_title']}首页">首页</a>  &gt;  <a href="{tsUrl($app)}" title="{$TS_APP['options']['appname']}">{$TS_APP['options']['appname']}</a>  &gt;  分享内容
+</div>
+
+<div id="bd" class="bd clearfix">
+	<div class="bd-left">
+		
+		<div id="share-show">
+			<div class="show clearfix">
+				
+				<div class="show-content">
+					<h1 class="title wordfix">
+						{$strShare['title']}
+					</h1>
+					<div class="meta">
+						<span class="icon icon-clock"></span> {php echo date('Y-m-d H:i:s',$strShare['addtime'])}&nbsp;&nbsp;•&nbsp;&nbsp;By <a href="{tsUrl('user','space',array('id'=>$strShare['userid']))}" target="_blank">{$strShare['user']['username']}</a>&nbsp;&nbsp;•&nbsp;&nbsp;分类：<a class="tag" href="{tsUrl('share', 'index', array('cateid'=>{$strShare['cateid']}))}">{$strShare['catename']}</a>
+					</div>
+					<div class="content wordfix">
+						{if $strShare['src']}<center><a href="{$strShare['src']}" target="_blank"><img src="{$strShare['src']}"></a></center>{/if}
+						{$strShare['content']}
+					</div>
+					
+					{if $strShare[tags]}
+					<div id="share_tags">
+						<span class="icon-tags"></span>
+						{loop $strShare[tags] $key $item}
+						<a href="{tsUrl('share','tag',array('id'=>urlencode($item[tagname])))}">{$item[tagname]}</a>
+						{/loop}
+					</div>
+					{/if}
+					
+					<div class="com-tool" style="text-align:right;">
+						{if $TS_USER['user']['userid'] == $strShare['userid'] || $TS_USER['user']['isadmin']=='1'}
+						<a class="btn-tool" href="{tsUrl('share','edit',array('shareid'=>$strShare['shareid']))}">修改</a> 
+						{/if}
+						{if $TS_USER['user']['isadmin']=='1'}
+						<a class="btn-tool" href="{tsUrl('share','do',array('ts'=>'audit','shareid'=>$strShare['shareid']))}">{if $strShare['isaudit']==0}审核{else}取消审核{/if}</a>
+						<a class="btn-tool" href="{tsUrl('share','do',array('ts'=>'del','shareid'=>$strShare['shareid']))}" onClick="return confirm('确定删除吗?')">删除</a>
+						{/if}
+					</div>
+					<script type="text/javascript">
+					$(function(){
+						var _w = 600;
+						$('.content img').each(function(i){
+							var img = $(this);
+							var realWidth;//真实的宽度
+							var realHeight;//真实的高度
+							$("<img/>").attr("src", $(img).attr("src")).load(function() {
+								realWidth = this.width;
+								realHeight = this.height;
+								//如果真实的宽度大于浏览器的宽度就按照100%显示
+								if(realWidth>=_w){
+									$(img).css("width","100%").css("height","auto");
+								}else{//如果小于浏览器的宽度按照原尺寸显示
+									$(img).css("width",realWidth+'px').css("height",realHeight+'px');
+								}
+							});
+						});
+					});
+					</script>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div id="share_comment">
+			<a name="comment_add"></a>
+			<div class="com-bar clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-image"></span>
+					用户评论({$strShare['count_comment']})
+				</div>
+			</div>
+			<ul class="comment">
+				{if is_array($arrShareComment)}
+				{loop $arrShareComment $key $item}
+				<li class="clearfix" id="l_{$item[commentid]}">
+					<div class="show-face">
+						<a href="{tsUrl('user','space',array('id'=>$item[user][userid]))}" rel="face" uid="$item[user][userid]"><img title="{$item['user']['username']}" alt="{$item['user']['username']}" src="{$item[user][face]}" width="48" /></a>
+					</div>
+					<div class="show-info">
+						<div class="meta">
+							{php echo date('Y-m-d H:i:s',$item[addtime])}
+							<a href="{tsUrl('user','space',array('id'=>$item[user][userid]))}" rel="face" uid="$item[user][userid]" style="margin-left:5px; margin-right:5px;">{$item['user']['username']}</a>
+							<i>$item['lou']#</i>
+						</div>
+						<div class="content wordfix">
+						{$item[content]}
+						</div>
+						<div class="com-tool" style="text-align:right">
+							{if $TS_USER['user']['userid'] == $strShare['userid'] || $TS_USER['user']['userid'] == $item[userid] || $TS_USER['user']['isadmin']==1}
+							<a class="btn-tool" href="{SITE_URL}index.php?app=share&ac=comment&ts=delete&commentid={$item[commentid]}" onClick="return confirm('确定删除吗?')">删除</a>
+							{/if}
+						</div>
+						<div id="rcomment_{$item[commentid]}" style="display:none">
+							<textarea style="width:90%;height:60px;font-size:14px;" id="recontent_{$item[commentid]}" type="text" onKeyDown="keyRecomment({$item[commentid]},{$item[shareid]},event)"></textarea>
+							<p>
+								<a class="btn" href="javascript:void(0);" onClick="recomment({$item[commentid]},{$item[shareid]},'{$_SESSION['token']}')" id="recomm_btn_$item[commentid]">提交</a> <a href="javascript:void('0');" onclick="commentOpen({$item['commentid']},{$item['shareid']})">取消</a>
+							</p>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</li>
+				{/loop}
+				{/if}
+			</ul>
+			<div class="com-page">{$pageUrl}</div>
+			<div class="commentform">
+				{if intval($TS_USER['user']['userid'])=='0'}
+				<div class="commentmsg" style="border:1px dotted #ccc;">
+					提示：需要登陆才能评论，<a href="{tsUrl('user','login')}">登陆</a> | <a href="{tsUrl('user','register')}">注册</a>
+				</div>
+				{elseif $strShare['iscomment'] == '0' && $strShare['userid'] != $TS_USER['user']['userid'] && $TS_USER['user']['isadmin']==1}
+				<div class="commentmsg">
+				本帖除作者外不允许任何人评论
+				</div>
+				{elseif $strShare[isclose]=='1'}
+				<div class="commentmsg">
+				该分享已被关闭，无法评论
+				</div>
+				{else}
+				<form method="POST" action="{SITE_URL}index.php?app=share&ac=comment&ts=do" enctype="multipart/form-data">
+					<textarea type="text" style="width:638px;" id="content" name="content"></textarea>
+					<p>
+						<input type="hidden" name="shareid" value="{$strShare[shareid]}" />
+						<input type="hidden" name="token" value="{$_SESSION['token']}" />
+						<div class="authcode">
+							{if $TS_SITE['base']['isauthcode']}
+							验证码：<input name="authcode" />
+							<img align="absmiddle" src="{tsUrl('pubs','code')}" onclick="javascript:newgdcode(this,this.src);" title="点击刷新验证码" alt="点击刷新验证码" style="cursor:pointer;"/>
+							{/if}
+						</div>
+						<div class="submit">
+							<button class="btn btn-success" type="submit">提交评论</button>
+						</div>
+					</p>
+				</form>
+				{/if}
+			</div>
+		</div>
+
+	</div>
+	<div class="bd-right">
+		
+		<p class="clearfix">
+			<a href="#comment_add" class="btn3d btn3d-two"><span class="icon-bubble"></span> 回复({$strShare['count_comment']})</a>
+			<a href="javascript:void('0');" onclick="collectShare('{$strShare['shareid']}')" class="btn3d btn3d-two fr"><span class="icon-heart2"></span> 喜欢({$strShare['count_love']})</a>
+		</p>
+		
+		<div id="new_share" class="com-box">
+			<h3>
+				<span class="icon icon-clock2"></span>
+				最新分享
+			</h3>
+			<ul class="content line23">
+				{loop $newShare $key $item}
+				<li>
+					{if $item['appkey'] != 'share' && $item['appkey']!=''}
+					<a href="{SITE_URL}{php echo tsUrl($item['appkey'])}" target="_blank" style="color:#999999;font-size: 12px;margin-right: 5px;" class="titles-type">[{$item['appname']}]</a>
+					<a href="{SITE_URL}{php echo tsUrl($item['appkey'],$item['appaction'],array('id'=>$item['shareid']))}" title="{$item[title]}" target="_blank">{$item[title]}</a>
+					{else}
+					<a title="{$item[title]}" href="{tsUrl('share','show',array('id'=>$item[shareid]))}">{php echo cututf8($item[title],0,25)}</a> 
+					{/if}
+				</li>
+			{/loop}
+			</ul>
+		</div>
+		
+		<div id="hot_share" class="com-box">
+			<h3>
+				<span class="icon icon-fire"></span>
+				热门分享
+			</h3>
+			<ul class="content line23">
+				{loop $arrHotShare $key $item}
+				<li><a href="{tsUrl('share','show',array('id'=>$item['shareid']))}" target="_blank">{$item['title']}</a></li>
+				{/loop}
+			</ul>
+		</div>
+		
+		<div id="share_user" class="com-box">
+			<h3>
+				<span class="icon icon-heart2"></span>
+				喜欢这个分享的用户
+			</h3>
+			<div class="content" id="collects">
+				{if !$arrCollectUser}
+				<div style="color: #999999;margin-bottom: 10px;padding: 20px 0">还没有人喜欢，赶快来做第一个喜欢者吧^_^</div>
+				{else}
+				<div style="margin-bottom: 10px;overflow: hidden;">
+					{loop $arrCollectUser $key $item}
+					<a href="{tsUrl('user','space',array('id'=>$item['userid']))}" target="_blank"><img src="{$item[face]}" alt="{$item['username']}" title="{$item['username']}" width="48" height="48" /></a>&nbsp;
+					{/loop}
+				</div>
+				{/if}
+			</div>
+		</div>
+		
+		<!--广告位-->
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{php doAction('tseditor2','#content','share_comment')}
+
+{template footer}

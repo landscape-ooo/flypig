@@ -1,0 +1,53 @@
+{template header}
+
+<div id="bd" class="bd clearfix">
+	<h1 id="user-title">
+		<span class="icon icon-cog"></span>
+		用户设置
+	</h1>
+	<div class="bd-left">
+		
+		<div class="com-box">
+			<div id="set-menu">
+				{template set_menu}
+			</div>
+			<div id="set-body">
+				
+				{if intval($strUser['isverify'])==0 && intval($TS_SITE['base']['isverify'])==1}
+				<div class="alert">提示：你必须通过Email验证才可以正常使用本社区</div>
+				{/if}
+				
+				{if $strUser['isverify']==1}
+				您已经通过Email验证！
+				{else}
+				<table class="com-table">
+					<tr>
+						<th>Email：</th>
+						<td><input type="email" disabled value="{$strUser['email']}" /></td>
+					</tr>
+					<tr>
+						<th>选择本地头像：</th>
+						<td><input type="file" name="picfile" /></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<a class="btn btn-success" href="{tsUrl('user','verify',array('ts'=>'post','token'=>$_SESSION['token']))}">开始认证</a>
+							<a href="{tsUrl('user','set',array('ts'=>'email'))}">Email不对？去更换帐号</a>
+						</td>
+					</tr>
+				</table>
+				{/if}
+			</div>
+
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{template set_right}
+		
+	</div>
+</div>
+
+{template footer}

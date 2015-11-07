@@ -1,0 +1,34 @@
+{php include template("admin/header");}
+
+<div class="midder">
+
+{php include template("admin/menu");}
+
+<div class="page">{$pageUrl}</div>
+
+<table>
+	<tr class="old">
+		<td width="100">ID</td>
+		<td>活动标题</td>
+		<td>操作</td>
+	</tr>
+
+	{loop $arrEvent $key $item}
+	<tr class="odd">
+		<td>{$item[eventid]}</td>
+		<td>
+			<a target="_blank" href="{SITE_URL}index.php?app=event&ac=show&eventid={$item[eventid]}">{$item[title]}</a>
+		</td>
+		<td>
+			{if $item['status']==0}<font color="lightgrey">隐藏</font>{else}正常{/if}
+			<a href="{SITE_URL}index.php?app=event&ac=admin&mg=event&ts=isaudit&eventid={$item[eventid]}">{if $item['isaudit'] == 0}<font color="red">审核</font>{else}取消审核{/if}</a>
+			<a href="{SITE_URL}index.php?app=event&ac=admin&mg=event&ts=delete&eventid={$item[eventid]}" onclick="return confirm('确定删除?')">删除</a>
+		</td>
+	</tr>
+	{/loop}
+
+</table>
+
+</div>
+
+{php include template("admin/footer");}

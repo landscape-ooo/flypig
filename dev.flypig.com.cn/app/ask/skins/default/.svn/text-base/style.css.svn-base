@@ -1,0 +1,63 @@
+@charset "utf-8";
+
+/* 问答通用列表 */
+#ask_list li{border-bottom:1px dotted #ccc;padding:0 0 30px 0;margin:0 0 30px 0;}
+
+/* 右侧tag标签 */
+.side-tags{margin-top:20px;padding:0 10px;}
+.side-tags a{font-size:12px;}
+.side-tags li{background:url("1_line.jpg") repeat-x scroll 0 center transparent;margin-bottom:10px;overflow:hidden;}
+.side-tags .side-tags-l{float:left;padding:0 10px 0 0;background:#fff;}
+.side-tags .tag{background:#ccc;color:#fff;float:left;height:20px;line-height:20px;padding:0 6px;white-space:nowrap;border-radius:15px 15px 15px 15px;}
+.side-tags .selected{background-color:#87BD43;}
+.side-tags .tag span{color:#fff;margin:0 0 0 8px;}
+.side-tags .side-tags-unfollow{color:#999999;}
+.side-tags .side-tags-follow,.side-tags .side-tags-unfollow{background:#fff;float:right;padding:0 0 0 10px;}
+
+/* 问答分类列表 */
+.main-tag{}
+.main-tag .main-tag-tit{height:30px;line-height:30px;margin:10px 0;background:url("1_line.jpg") repeat-x scroll 0 center transparent;}
+.main-tag h1{float:left;padding:0 10px 0 0;background:#fff;}
+.main-tag .tag{float:left;font-size:20px;padding:0 12px;height:30px;line-height:30px;color:#fff;background:#ccc;border-radius:15px 15px 15px 15px;}
+.main-tag .selected{background-color:#87BD43;}
+.main-tag .tag span{font-size:12px;vertical-align:3px;color:#fff;margin:0 0 0 8px;}
+.main-tag .main-tag-unfollow{color:#999999;}
+.main-tag .main-tag-follow,.main-tag .main-tag-unfollow{background:#fff;float:right;padding:0 0 0 10px;}
+.main-tag .main-tag-desc{padding:10px;margin:10px 0;color:#666666;background:#f9f9f9;}
+
+/* 他们关注了这个分类 */
+#follow-users .pack{margin:10px 0 20px 0;}
+.pack_u, .pack_s{float:left;margin:10px 0 0;overflow:hidden;width:72px;}
+.pack_s dt, .pack_u dt{height:48px;text-align:center;}
+.pack_s img, .pack_u img{display:inline;}
+.pack_s dd, .pack_u dd{height:48px;overflow:hidden;line-height:20px;margin-left:5px;margin-right:5px;margin-top:5px;text-align:center;word-wrap:break-word;}
+
+/* 该分类的活跃用户 */
+.side-chippys{counter-reset:chippys 0;margin:10px 0 20px 0;}
+.side-chippys-num, .side-chippys li:before{background-color:#87BD43;border-radius:4px 4px 4px 4px;color:white;content:counter(chippys, decimal);counter-increment:chippys 1;float:left;height:16px;line-height:16px;margin:0 20px 0 0;overflow:hidden;padding:0 5px;text-align:center;}
+.side-chippys li{border-bottom:1px dashed #CCCCCC;overflow:hidden;padding:10px 0;}
+.pt-txt{overflow:hidden;}
+.pt-txt h3{display:inline;margin-right:4px;font-weight:normal;}
+.pt-txt-d{color:#666666;margin-top:5px;}
+.side-chippys .side-chippys-brief .side-chippys-num, .side-chippys .side-chippys-brief:before{background-color:#B4B4B4;}
+.main-tag-unfollow{color:#999999;}
+.pt-pic{float:left;}
+.side-chippys .side-chippys-brief .pt-txt-d, .side-chippys .side-chippys-brief .pt-pic{display:none;}
+
+/* 问答详情 */
+.show{border-bottom:1px dotted #ccc;padding:20px 0 30px 0;margin:0 0 30px 0;}
+.answers{}
+.answers li{margin-top:20px;overflow:hidden;}
+.answers li.best{background:#e0ffbf;position:relative;z-index:50;}
+.answers li .icon-best{position:absolute;right:10px;top:20px;z-index:51;}
+.answers li .icon-best .icon{font-size:48px;color:#8d9c01;}
+.answers li .digg{margin:8px 0 10px 0;}
+.answers li .digg_box{display:inline-block;padding:0 10px 0 0;font-size:16px;background:#dedede;border-radius: 6px;}
+.answers li .btn_digg{display:inline-block;height:25px; line-height:25px;padding:0 5px;color:#ffffff;background:#81d8d0;border-radius: 6px;}
+.answers li .btn_digg .icon{padding:0 10px 0 0;}
+.answers li .btn_undigg{color:#fffff;padding:0 0 0 10px;}
+
+/* 发布答案 */
+.post_commet{}
+.post_commet .post_commet-usr{float:left;width:100px;}
+.post_commet .post_commet-form{float:right;width:530px;}

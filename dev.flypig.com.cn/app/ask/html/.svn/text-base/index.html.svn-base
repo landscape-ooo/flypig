@@ -1,0 +1,100 @@
+{template header}
+
+<div id="path">
+	<span class="icon icon-home"></span>
+	<a href="{SITE_URL}" title="{$TS_SITE[base][site_title]}首页">首页</a>  &gt;  <a href="{tsUrl('ask')}" title="{$TS_APP[options][appname]}">{$TS_APP[options][appname]}</a>  &gt;  问答列表
+</div>
+
+<div id="bd" class="bd clearfix">
+	<div class="bd-left">
+		
+		<div class="com-bar clearfix">
+			{if $ts == 'new'}
+			<div class="com-bar-tit">
+				<span class="icon icon-question"></span>
+				待解决的问题
+				<span class="f12 color-gray">({$askNum})</span>
+			</div>
+			<div class="com-bar-more">
+				&nbsp;&nbsp;<span class="icon icon-bubbles3"></span> <a href="{tsUrl('ask')}">最新问答</a>
+			</div>
+			{else}
+			<div class="com-bar-tit">
+				<span class="icon icon-bubbles3"></span>
+				最新问答
+				<span class="f12 color-gray">({$askNum})</span>
+			</div>
+			<div class="com-bar-more">
+				&nbsp;&nbsp;<span class="icon icon-question"></span> <a href="{tsUrl('ask', 'index', array('ts'=>'new'))}">待解决的问题</a>
+			</div>
+			{/if}
+		</div>
+		
+		<ul id="ask_list">
+			{loop $askArr $v}
+			<li class="clearfix">
+				<div class="li-face">
+					<a href="{tsUrl('user','space',array('id'=>$v[userid]))}">
+						<img alt="{$v[user][username]}" class="userface" src="{$v[user][face]}" width="75" height="75" />
+						<span class="username">{$v['user']['username']}</span>
+					</a>
+				</div>
+				<div class="li-info">
+					
+					<h2 class="title wordfix">
+						<a href="{tsUrl('ask', 'show', array('id'=>{$v['askid']}))}" target="_blank">{$v['title']}</a>
+					</h2>
+					
+					<div class="meta">
+						{$v['actionarr']['addtime']}{if $v['cate']}&nbsp;&nbsp;•&nbsp;&nbsp;分类：{loop $v['cate'] $k $c}<a href="{tsUrl('ask', 'cate', array('cateid'=>{$c['cateid']}))}">{$c['catename']}</a>{if ((count($v['cate'])-1)>$k)}、{/if}{/loop}{/if}&nbsp;&nbsp;•&nbsp;&nbsp;{$v['count_comment']} 答案
+					</div>
+					
+					<div class="content wordfix">
+						{php echo cututf8(t($v['summary']),0,80)}
+					</div>
+					
+					<div class="more">
+						<a class="btn-more" href="{tsUrl('ask', 'show', array('id'=>{$v['askid']}))}" target="_blank">Read More</a>
+					</div>
+					
+				</div>
+			</li>
+			{/loop}
+		</ul>
+		
+		<div class="com-page">{$pageUrl}</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{if $TS_APP['options']['iscreate']==0 || $TS_USER['user']['isadmin']=='1'}
+		<a class="btn3d btn3d-full" href="{tsUrl('ask', 'add')}"><span class="icon-pen"></span> 我要提问</a><br><br>
+		{/if}
+		
+		<div class="com-box">
+			<div class="com-bar3 clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-tags"></span>
+					问答分类
+				</div>
+				<div class="com-bar-more">
+					&nbsp;&nbsp;
+				</div>
+			</div>
+			<ul class="side-tags" id="tagList">
+				{loop $arrCate $v}
+				<li>
+					<p class="side-tags-l"><a class="tag{if $myCateArr}{loop $myCateArr $cate}{if $cate['cateid']==$v['cateid']} selected{/if}{/loop}{/if}" href="{tsUrl('ask', 'cate', array('cateid'=>{$v['cateid']}))}">{$v['catename']}<span class="followCounter">({$v['count_ask']})</span></a></p>
+					<a data-id="{$v['cateid']}" data-operation="follow" class="followBt side-tags-{if $myCateArr}{loop $myCateArr $cate}{if $cate['cateid']==$v['cateid']}un{/if}{/loop}{/if}follow" href="javascript:void 0;">{if $myCateArr}{loop $myCateArr $cate}{if $cate['cateid']==$v['cateid']}取消{/if}{/loop}{/if}关注</a>
+				</li>
+				{/loop}
+			</ul>
+		</div>
+		
+		<!--广告位-->
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{template footer}

@@ -1,0 +1,75 @@
+{template header}
+
+<div id="path" class="bd clearfix">
+	<span class="icon icon-home"></span>
+	<a href="{SITE_URL}" title="{$TS_SITE['base']['site_title']}首页">首页</a>  &gt;  <a href="{tsUrl('special')}" title="{$TS_APP['options']['appname']}">{$TS_APP['options']['appname']}</a>  &gt;  {if !empty($cateid)}<a href="{tsUrl('special','index',array('cateid'=>$cateid))}">{$catename}</a>  &gt;  {/if}专题列表
+</div>
+
+<div id="bd" class="bd clearfix">
+	<div class="bd-left">
+		
+		<div id="special_list">
+			<ul>
+				{loop $arrSpecial $key $item}
+				<li class="special-box clearfix">
+					<div class="li-pic">
+						<a href="{tsUrl('special','show',array('id'=>$item['specialid']))}" target="_blank"><img src="{$item['thumb']}"></a>
+					</div>
+					<div class="li-text">
+						<a class="title wordfix" href="{tsUrl('special','show',array('id'=>$item['specialid']))}" target="_blank">{$item['title']}</a>
+						<div class="desc wordfix">{php echo cututf8(t($item[content]),'0','250')}</div>
+						{if $TS_USER['user']['userid'] == $item['userid'] || $TS_USER['user']['isadmin']=='1'}
+						<div class="com-tool" style="text-align:right;">
+							<a class="btn-tool" href="{tsUrl('special','edit',array('specialid'=>$item['specialid']))}">修改</a> 
+							{if $TS_USER['user']['isadmin']=='1'}
+							<a class="btn-tool" href="{tsUrl('special','do',array('ts'=>'isaudit','specialid'=>$item['specialid']))}">{if $item['isaudit']==0}审核{else}取消审核{/if}</a>
+							<a class="btn-tool" href="{tsUrl('special','do',array('ts'=>'del','specialid'=>$item['specialid']))}" onClick="return confirm('确定删除吗?')">删除</a>
+							{/if}
+						</div>
+						{/if}
+					</div>
+				</li>
+				{/loop}
+			</ul>
+			<div class="com-page">{$pageUrl}</div>
+			
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{if $TS_APP['options']['iscreate']=='0' || $TS_USER['user']['isadmin']=='1'}
+		<a class="btn3d btn3d-full" href="{if $cateid>0}{tsUrl('special', 'add', array('cateid'=>$cateid))}{else}{tsUrl('special', 'add')}{/if}"><span class="icon-pencil"></span> 发布专题</a>
+		{/if}
+		
+		<div id="special-cate-list" class="com-box" style="margin-top:20px;">
+			<div class="com-bar3 clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-tags"></span>
+					专题分类
+				</div>
+				<div class="com-bar-more">
+					&nbsp;&nbsp;
+				</div>
+			</div>
+			<ul>
+				<li>
+					<a class="tag{if $cateid=='0'} current{/if}" href="{tsUrl('special')}"><span>全部</span></a>
+					<a class="tag_count" href="{tsUrl('special')}">{$specialNumAll}</a>
+				</li>
+				{loop $arrSpecialCate $key $item}
+				<li>
+					<a class="tag{if $cateid==$item['cateid']} current{/if}" href="{tsUrl('special','index',array(cateid=>$item['cateid']))}"><span>{$item['catename']}</span></a>
+					<a class="tag_count" href="{tsUrl('special','index',array(cateid=>$item['cateid']))}">{$item['count_special']}</a>
+				</li>
+				{/loop}
+			</ul>
+		</div>
+		
+		<!--广告位-->
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{template footer}

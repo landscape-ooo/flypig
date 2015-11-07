@@ -1,0 +1,90 @@
+@charset "utf-8";
+/* icon font */
+@import url("icomoon/style.css");
+
+/* base */
+
+html,body,ol,ul,li,h1,h2,h3,h4,h5,h6,p,form,fieldset,img,table,th,td,dl,dt,dd{padding:0; margin:0;}
+h1,h2,h3,h4,h5,h6{font-size:14px;font-weight:normal;}
+input,textarea,select{font-family:'\5FAE\8F6F\96C5\9ED1','Microsoft YaHei';}
+textarea{}
+input{ vertical-align:middle;}
+input[type='checkbox'],input[type='radio']{cursor:pointer; margin:0; vertical-align:middle;}
+input[type='file']{font-size:12px;}
+select{ vertical-align:middle;}
+button{border:0;}
+label{cursor:pointer;}
+
+body{
+color:#4C4C4C;
+background:#fff;
+font-family:'\5FAE\8F6F\96C5\9ED1','Microsoft YaHei';
+font-size:14px;
+line-height: 24px;
+}
+
+li{list-style: none;}
+a img,img{border:0; vertical-align:middle;}
+
+sup,sub{vertical-align:baseline!important; vertical-align:bottom; position:relative;}
+sup{bottom:.5em;}
+sub{top:.3em;}
+
+h1{font-size:23px;font-weight:200;line-height:38px;}
+
+/* default link style */
+a:link,a:visited{
+-webkit-transition: all 0.2s ease-out;
+-moz-transition: all 0.2s ease-out;
+-ms-transition: all 0.2s ease-out;
+-o-transition: all 0.2s ease-out;
+color: #333;
+text-decoration: none;
+}
+
+a:hover,a:active{
+color:#919f0a;/*text-decoration:underline;*/
+}
+/* default link style */
+a{color:#333;text-decoration:none;}
+a:hover{color:#919f0a;text-decoration:none;/*text-decoration:underline;*/}
+
+strong{font-weight: 600;}
+
+/* clear float */
+.clearfix:after{content:" ";height:0;display:block;font-size:0;clear:both;visibility:hidden;}
+.clearfix{display:inline-table;}
+/* Hides from IE-mac \*/
+* html .clearfix{height:1%;}
+.clearfix{display:block;}
+/* End hide from IE-mac */
+
+.wordfix{table-layout:fixed;word-break:break-all;word-wrap:break-word;}
+
+.clear{clear:both;font-size:0;line-height:0}
+
+/* zoom fix 
+div, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, a {zoom:1;}
+*/
+table{border-collapse:collapse;border-spacing:0;}
+th,caption{font-weight:normal;font-style:normal;text-align:left}
+caption{font-weight:bold}
+
+button,input,select,textarea{margin:0;padding:0;vertical-align:middle;/*background-color:transparent;*/}
+input,select,textarea{border:1px solid #cccccc;font-size:14px;margin:3px 0;}
+input:focus{border-color:gray}
+input[type='text'],input[type='password'],input[type='file'],textarea{padding:3px;}
+
+pre{background:#f8f8f8;border:1px dashed #cccccc;padding:5px;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}
+blockquote{background:#f8f8f8}
+
+.fl{float:left}
+.fr{float:right}
+.f12{font-size:12px}
+.f14{font-size:14px}
+.ht10{height:10px;}
+.line23{line-height:23px}
+.alert{background-color:#fcf8e3;border:1px solid #fbeed5;color:#c09853;margin-bottom:18px;padding:8px 35px 8px 14px;}
+.alert .close{line-height:18px;position:relative;right:-21px;top:-2px}
+
+.color-gray{color:#dedede;}

@@ -1,0 +1,72 @@
+{template header}
+
+<link rel="stylesheet" href="{SITE_URL}public/js/multiselect2side/style.css" type="text/css" media="screen" />
+<script type="text/javascript" src="{SITE_URL}public/js/multiselect2side/jquery.multiselect2side.js"></script>
+<script type="text/javascript" src="{SITE_URL}public/js/date/WdatePicker.js?4.72"></script>
+<div id="bd" class="bd clearfix">
+	<h1 id="edit-title">
+		<span class="icon icon-pen"></span>
+		申请创建图书
+	</h1>
+	<div class="bd-left">
+		
+		<div id="edit-base" class="com-box">
+			<div id="edit-body">
+				
+				<form method="post" action="{SITE_URL}index.php?app=book&ac=add&ts=do" enctype="multipart/form-data">
+				<table class="com-table">
+					<tr>
+						<th>书名：</th>
+						<td colspan="3">
+							<input type="text" style="width:480px;" value="{$strBook[bookname]}" name="bookname" />
+						</td>
+					</tr>
+					<tr>
+						<th>图书简介：</th>
+						<td colspan="3">
+							<textarea style="width:480px;height:80px;" name="description">{$strBook[description]}</textarea>
+						</td>
+					</tr>
+					<tr>
+						<th>图书封面：</th>
+						<td colspan="3"><input type="file" name="picfile"> 仅支持jpg，gif，png格式图片</td>
+					</tr>
+					{if $TS_SITE['base']['isauthcode']}
+					<tr>
+						<th>验证码：</th>
+						<td>
+							<input name="authcode" /> <img align="absmiddle" src="{tsUrl('pubs','code')}" onclick="javascript:newgdcode(this,this.src);" title="点击刷新验证码" alt="点击刷新验证码" style="cursor:pointer;"/>
+						</td>
+					</tr>
+					{/if}
+					<tr>
+						<th></th>
+						<td colspan="3">
+							<input type="checkbox" name="grp_agreement" value="1" checked />我已认真阅读并同意<a href="">《社区指导原则》</a>和<a href="">《免责声明》</a><br><br>
+							<input type="hidden" name="token" value="{$_SESSION['token']}" />
+							<button class="btn btn-success" type="submit">创建图书</button>
+							&nbsp;&nbsp;<a href="{tsUrl('book','index')}">返回</a>
+						</td>
+					</tr>
+				</table>
+				</form>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		<div class="com-box">
+			<div class="content">
+				&gt; 提示说明
+				<p>图书创建以后，需经过管理员后台审核并完善资料后方可在前台显示</p>
+			</div>
+		</div>
+
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{template footer}

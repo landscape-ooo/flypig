@@ -1,0 +1,120 @@
+{template header}
+
+<div id="path">
+	<span class="icon icon-home"></span>
+	<a href="{SITE_URL}" title="{$TS_SITE[base][site_title]}首页">首页</a>  &gt;  <a href="{tsUrl('ask','index')}" title="{$TS_APP[options][appname]}">{$TS_APP[options][appname]}</a>  &gt;  <a href="{tsUrl('ask','cate',array('cateid'=>$curCateArr['cateid']))}" title="{$TS_APP[options][appname]}分类：{$curCateArr['catename']}">{$curCateArr['catename']}</a>  &gt;  问答列表
+</div>
+
+<div id="bd" class="bd clearfix">
+	<div class="bd-left">
+		
+		<div class="main-tag" id="mainTag">
+			<div class="main-tag-tit clearfix">
+				<h1 class="side-tags-l">
+					<span class="tag{if $myCateArr} selected{/if}">
+						{$curCateArr['catename']}
+						<span class="followCounter">{$curCateArr['count_ask']}</span>
+					</span>
+				</h1>
+				<a data-id="{$curCateArr['cateid']}" data-operation="follow" class="followBt main-tag-{if $myCateArr}un{/if}follow" href="javascript:void 0;">{if $myCateArr}取消关注{else}关注{/if}</a>
+			</div>
+			<div class="main-tag-desc">
+				{$curCateArr['catedesc']}
+			</div>
+		</div>
+		
+		<div class="com-bar clearfix">
+			{if $ts == 'new'}
+			<div class="com-bar-tit">
+				<span class="icon icon-question"></span>
+				待解决的问题
+				<span class="f12 color-gray">({$askNum})</span>
+			</div>
+			<div class="com-bar-more">
+				&nbsp;&nbsp;<span class="icon icon-bubbles3"></span> <a href="{tsUrl('ask', 'cate', array('cateid'=>{$cateid}))}">最新问答</a>
+			</div>
+			{else}
+			<div class="com-bar-tit">
+				<span class="icon icon-bubbles3"></span>
+				最新问答
+				<span class="f12 color-gray">({$askNum})</span>
+			</div>
+			<div class="com-bar-more">
+				&nbsp;&nbsp;<span class="icon icon-question"></span> <a href="{tsUrl('ask', 'cate', array('cateid'=>{$cateid}, 'ts'=>'new'))}">待解决的问题</a>
+			</div>
+			{/if}
+		</div>
+
+		<ul id="ask_list">
+			{loop $askArr $v}
+			<li class="clearfix">
+				<div class="li-face">
+					<a href="{tsUrl('user','space',array('id'=>$v[userid]))}">
+						<img alt="{$v[user][username]}" class="userface" src="{$v[user][face]}" width="75" height="75" />
+						<span class="username">{$v['user']['username']}</span>
+					</a>
+				</div>
+				<div class="li-info">
+					
+					<h2 class="title wordfix">
+						<a href="{tsUrl('ask', 'show', array('id'=>{$v['askid']}))}" target="_blank">{$v['title']}</a>
+					</h2>
+					
+					<div class="meta">
+						{$v['actionarr']['addtime']}{if $v['cate']}&nbsp;&nbsp;•&nbsp;&nbsp;分类：{loop $v['cate'] $k $c}<a href="{tsUrl('ask', 'cate', array('cateid'=>{$c['cateid']}))}">{$c['catename']}</a>{if ((count($v['cate'])-1)>$k)}、{/if}{/loop}{/if}&nbsp;&nbsp;•&nbsp;&nbsp;{$v['count_comment']} 答案
+					</div>
+					
+					<div class="content wordfix">
+						{php echo cututf8(t($v['content']),0,80)}
+					</div>
+					
+					<div class="more">
+						<a class="btn-more" href="{tsUrl('ask', 'show', array('id'=>{$v['askid']}))}" target="_blank">Read More</a>
+					</div>
+					
+				</div>
+			</li>
+			{/loop}
+		</ul>
+		
+		<div class="com-page">{$pageUrl}</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{if $TS_APP['options']['iscreate']==0 || $TS_USER['user']['isadmin']=='1'}
+		<a class="btn3d btn3d-full" href="{tsUrl('ask', 'add', array('cateid'=>$cateid))}"><span class="icon-pen"></span> 我要提问</a><br><br>
+		{/if}
+		
+		<div id="follow-users" class="com-box">
+			<div class="com-bar3 clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-users"></span>
+					他们关注了这个分类
+					<span class="com-bar-count"><a href="javascript:void(0)">({$follownum})</a></span>
+				</div>
+				<div class="com-bar-more">
+					&nbsp;&nbsp;
+				</div>
+			</div>
+			<div class="pack clearfix">
+				{loop $followUsersArr $v}
+				<dl class="pack_u">
+					<dt>
+						<a href="{tsUrl('user','space',array('id'=>{$v['userid']}))}" title="{$v['username']}" ><img width="48" height="48" src="{$v['face']}" alt="{$v['username']}"></a>
+					</dt>
+					<dd>
+						<a href="{tsUrl('user','space',array('id'=>{$v['userid']}))}" title="{$v['username']}" >{$v['username']}</a>
+					</dd>
+				</dl>
+				{/loop}
+			</div>
+		</div>
+		
+		<!--广告位-->
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{template footer}

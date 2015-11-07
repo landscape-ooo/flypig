@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+/* 首页列表 */
+.share-box{padding:20px 0;border-bottom:1px dashed #999999;margin:20px 0;}
+.share-box:hover{background:#f4ffe8;}
+
+#share-cate-list{}
+#share-cate-list li{margin:6px 0;overflow:hidden;}
+#share-cate-list li .tag{float:left;display:inline-block;padding-left:10px;background:#fff;}
+#share-cate-list li .tag span{height:20px;line-height:20px;padding:0 6px;color:#fff;background:#ccc;border-radius:15px 15px 15px 15px;white-space:nowrap;}
+#share-cate-list li .current span{background:#87BD43;}
+#share-cate-list li .tag_count{background:#fff;float:right;padding-left:10px;}
+.tag.selected {background-color:#87BD43;}
+
+/************************************************************************************/
+								/* show */
+/************************************************************************************/
+/*问题详细*/
+.show {margin:10px 0 15px;}
+.show-face{float:left;width:50px;}
+.show-face img{border-radius:5px;}
+.show-info{float:right;width:570px;}
+.show-info h1 {color:#333;font-size:18px;margin:0 0 10px 0;width:100%;word-wrap:break-word;}
+.show-info .show-tags {margin-bottom:5px;overflow:hidden;width:100%;}
+.show-info .show-tags .tag {margin:0 5px 0 0;}
+.show-info .show-base {border-bottom:1px solid #ccc;color:#999;padding-bottom:5px;}
+.show-info .show-user {margin-right:5px;}
+.show-info .show-content {line-height:24px;overflow:hidden;padding:1.5em 0;word-wrap:break-word;}
+
+.split{border-left:1px solid #999999;color:#999999;display:inline-block;height:10px;line-height:10px;margin:0 8px;overflow:hidden;width:0;}
+
+/*******************************************添加编辑*********************************************************/
+/* title */
+#edit-title{height:38px;line-height:38px;margin:5px 0;font-size:18px;}
+#edit-title .icon{color:#919f0a;}
+.editor {overflow:hidden;padding:10px;}
+.editor i{color:#ccc;font-size:11px;}
+
+#createTip p{color:#999999;}
+#createTip ul{margin:10px 0 15px 0;}
+#createTip li{list-style-position:outside;list-style-type:decimal;margin:5px 0 0 20px;}

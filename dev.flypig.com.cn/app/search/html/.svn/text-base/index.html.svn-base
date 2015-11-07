@@ -1,0 +1,59 @@
+{template header}
+
+<div class="midder">
+
+<div class="mc">
+
+<div class="bbox mh400">
+
+<div class="bc s_index">
+
+<div class="s_menu">
+<a {if $ts==''}class="s_select"{/if} href="{tsUrl('search')}">全部</a> | 
+<a {if $ts=='book'}class="s_select"{/if} href="{tsUrl('search','index',array(ts=>ask))}">阅读问</a> | 
+<a {if $ts=='book'}class="s_select"{/if} href="{tsUrl('search','index',array(ts=>book))}">精品汇</a> | 
+<a {if $ts=='book'}class="s_select"{/if} href="{tsUrl('search','index',array(ts=>review))}">好书评</a> | 
+<!-- 
+<a {if $ts=='book'}class="s_select"{/if} href="{tsUrl('search','index',array(ts=>share))}">分享秀</a> | 
+<a {if $ts=='book'}class="s_select"{/if} href="{tsUrl('search','index',array(ts=>special))}">专题品</a> | 
+ -->
+<a {if $ts=='book'}class="s_select"{/if} href="{tsUrl('search','index',array(ts=>event))}">活动推</a> | 
+<a {if $ts=='user'}class="s_select"{/if} href="{tsUrl('search','index',array(ts=>user))}">用户</a>
+</div>
+
+<div>
+<form method="GET" action="{SITE_URL}index.php">
+<input type="hidden" name="app" value="search" />
+<input type="hidden" name="ac" value="s" />
+
+{if $ts=='ask'}
+<input type="hidden" name="ts" value="ask" />
+{elseif $ts=='book'}
+<input type="hidden" name="ts" value="book" />
+{elseif $ts=='review'}
+<input type="hidden" name="ts" value="review" />
+{elseif $ts=='share'}
+<input type="hidden" name="ts" value="share" />
+{elseif $ts=='special'}
+<input type="hidden" name="ts" value="special" />
+{elseif $ts=='event'}
+<input type="hidden" name="ts" value="event" />
+{elseif $ts=='user'}
+<input type="hidden" name="ts" value="user" />
+{else}
+{/if}
+
+<input class="s_input" name="kw" x-webkit-speech /> 
+<button class="btn btn-success" type="submit">搜索</button>
+
+</form>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+{template footer}

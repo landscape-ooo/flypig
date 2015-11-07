@@ -1,0 +1,86 @@
+{template header}
+
+<div id="bd" class="bd clearfix">
+	<h1 id="edit-title">
+		<span class="icon icon-pen"></span>
+		{$title}
+	</h1>
+	<div class="bd-left">
+		
+		<div id="edit-set" class="com-box">
+			<div id="edit-menu">
+				{template edit_menu}
+			</div>
+			<div id="edit-body">
+				
+				<form method="post" action="{SITE_URL}index.php?app=book&ac=do&ts=edit_set">
+				<table class="com-table">
+					<tr>
+						<th>书名：</th>
+						<td>
+							<input type="text" style="width:320px;" value="{$strBook[bookname]}" name="bookname" disabled />
+						</td>
+					</tr>
+					<!--
+					<tr>
+						<th>加入方式：</th>
+						<td>
+							<input {if $strBook[joinway]=='0'}checked="select"{/if} name="joinway" type="radio" value="0" />
+							自由加入(开放图书)
+							&nbsp;&nbsp;<input {if $strBook[joinway]=='1'}checked="select"{/if}  name="joinway" type="radio" value="1" />
+							禁止加入(私密图书)
+						</td>
+					</tr>
+					<tr>
+						<th>发书评方式：</th>
+						<td>
+							<input {if $strBook[ispost]=='0'}checked="select"{/if} type="radio" name="ispost" value="0" />
+							允许会员发书评
+							&nbsp;&nbsp;<input {if $strBook[ispost]=='1'}checked="select"{/if} type="radio" name="ispost" value="1" />
+							不允许会员发书评
+						</td>
+					</tr>
+					<tr>
+						<th>浏览权限：</th>
+						<td>
+							<input {if $strBook[isopen]=='0'}checked="select"{/if} type="radio" name="isopen" value="0" />
+							完全开放 
+							&nbsp;&nbsp;<input {if $strBook[isopen]=='1'}checked="select"{/if} type="radio" name="isopen" value="1" />
+							仅组员
+						</td>
+					</tr>
+					<tr>
+						<th>书评审核：</th>
+						<td>
+							<input {if $strBook['ispostaudit']=='0'}checked="select"{/if} type="radio" name="ispostaudit" value="0" />
+							不审核
+							&nbsp;&nbsp;<input {if $strBook['ispostaudit']=='1'}checked="select"{/if} type="radio" name="ispostaudit" value="1" />
+							审核
+						</td>
+					</tr>
+					-->
+					<tr>
+						<th></th>
+						<td>
+							<input type="hidden" name="bookid" value="{$strBook[bookid]}" />
+							<button class="btn btn-success" type="submit">更新设置</button>
+							&nbsp;&nbsp;<a href="{tsUrl('book','show',array('id'=>$strBook[bookid]))}">返回</a>
+						</td>
+					</tr>
+				</table>
+				</form>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{template edit_right}
+		
+	</div>
+</div>
+
+{php doAction('tseditor','mini')}
+
+{template footer}

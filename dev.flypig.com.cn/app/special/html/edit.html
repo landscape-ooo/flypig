@@ -1,0 +1,135 @@
+{template header}
+<script type="text/javascript" src="{SITE_URL}public/js/date/WdatePicker.js?4.72"></script>
+<script type="text/javascript">
+$(function(){
+	$("#sel_province").change(function(){
+		var provinceId = $(this).val();
+		var provinceUrl = "{SITE_URL}index.php?app=user&ac=city&provinceid=" + provinceId;
+		$("#citySpan").load(provinceUrl, function(){
+			$("#areaSpan").html('<select id="sel_area" name="sel_area"><option value="0">请选择区</option></select>');
+			if($("#sel_city").length > 0){
+				$("#sel_city").change(function(){
+					var cityId = $(this).val();
+					var cityUrl = "{SITE_URL}index.php?app=user&ac=area&cityid=" + cityId;
+					$("#areaSpan").load(cityUrl);
+				});
+			}
+		});
+	});
+})
+</script>
+
+<div id="path" class="bd clearfix">
+	<span class="icon icon-home"></span>
+	<a href="{SITE_URL}" title="{$TS_SITE[base][site_title]}首页">首页</a>  &gt;  <a href="{tsUrl('special')}" title="{$TS_APP[options][appname]}">{$TS_APP[options][appname]}</a>  &gt;  编辑专题
+</div>
+
+<div id="bd" class="bd clearfix">
+	<div class="bd-left">
+		
+		<div id="special-edit" class="com-box">
+			<div class="editor">
+				
+				<form method="POST" action="{tsUrl('special','edit',array('ts'=>'do'))}" enctype="multipart/form-data" onsubmit="return mainFormCheck()">
+				<table class="com-table">
+					<tr>
+						<th>专题标题：</th>
+						<td><input type="text" name="title" value="{$strSpecial['title']}" style="width:494px;" maxlength="64"></td>
+					</tr>
+					<tr>
+						<th>专题类型：</th>
+						<td>
+							<select name="cateid">
+								<option value='0' >请选择专题类型</option>
+								{loop $arrCate $key $item}
+								<option value="{$item['cateid']}"{if $strSpecial['cateid']==$item['cateid']} selected{/if}>{$item['catename']}</option>
+								{/loop}
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th>跳转链接：</th>
+						<td>
+							<i>示例：① http://www.flypig.com.cn/special/abc/　② /special/abc/</i><br>
+							<input type="text" name="linkurl" value="{$strSpecial['linkurl']}" style="width:494px;">
+						</td>
+					</tr>
+					<tr>
+						<th>专题简介：</th>
+						<td>
+							<textarea name="content" style="width:494px;height:100px;" id="content">{$strSpecial['content']}</textarea>
+						</td>
+					</tr>
+					<tr>
+						<th>专题海报：</th>
+						<td>
+							<input type="file" name="photo">
+							<br><img src="{$strSpecial['thumb']}?v={php echo rand();}" width="200" />
+						</td>
+					</tr>
+					{if $TS_SITE['base']['isauthcode']}
+					<tr>
+						<th>验证码：</th>
+						<td>
+							<input name="authcode" /> <img align="absmiddle" src="{tsUrl('pubs','code')}" onclick="javascript:newgdcode(this,this.src);" title="点击刷新验证码" alt="点击刷新验证码" style="cursor:pointer;"/>
+						</td>
+					</tr>
+					{/if}
+					<tr>
+						<th></th>
+						<td>
+							<input type="hidden" name="specialid" value="{$strSpecial['specialid']}" />
+							<input type="hidden" name="token" value="{$_SESSION['token']}" />
+							<button class="btn btn-success" type="submit">提 交</button>
+							&nbsp;&nbsp;<a href="{tsUrl('special')}">取消</a>
+						</td>
+					</tr>
+				</table>
+				</form>
+				<script type="text/javascript">
+				function mainFormCheck(){
+					var title = $("input[name='title']").val();
+					var content = $("textarea[name='content']").val();
+					if(title == '' || content == ''){
+						alert('请填写标题和内容');
+						return false;
+					}
+					var cateid = $("select[name='cateid'] option:selected").val();
+					if(cateid == '0'){
+						alert('请选择专题类型');
+						return false;
+					}
+					var linkurl = $("input[name='linkurl']").val();
+					if(linkurl == ''){
+						alert('请填写专题链接');
+						return false;
+					}
+					{if $TS_SITE['base']['isauthcode']}
+					var authcode = $('input[name=authcode]').val();
+					if(authcode == ''){
+						alert('请填写验证码');
+						return false;
+					}
+					{/if}
+					$("button[type='submit']").html('正在提交^_^').css({'background':'#ccc'}).removeAttr('type');
+				}
+				</script>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		<div class="com-box">
+			<div class="content">
+				&gt; 返回 <a href="{tsUrl('special')}">专题列表</a>
+			</div>
+		</div>
+		
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{template footer}

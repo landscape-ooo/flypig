@@ -1,0 +1,74 @@
+{template header}
+
+<div class="midder">
+<div class="mc">
+
+<div class="bbox">
+<div class="bc">
+{template s_menu}
+
+<div class="s_top">获得约 {$all_num} 条结果</div>
+
+<!-- 
+{loop $arrGroup $key $item}
+<div class="result">
+<div class="content">
+<h3><span>[小组] </span>&nbsp;<a  href="{tsUrl('group','show',array('id'=>$item[groupid]))}">{$item[groupname]}</a></h3>
+<div class="info">创建于 {php echo date('Y-m-d',$item[addtime])} &nbsp; <a href="#">{$item[count_user]} 人</a></div>
+<p>{php echo t($item[groupdesc])}</p>
+</div>
+</div>
+{/loop}
+
+{loop $arrTopic $key $item}
+<div class="result">
+<div class="content">
+<h3><span>[话题] </span>&nbsp;<a  href="{tsUrl('group','topic',array('id'=>$item[topicid]))}">{$item[title]}</a></h3>
+<div class="info">发表于 {php echo date('Y-m-d',$item[addtime])} &nbsp; <a href="#">{$item[count_comment]} 回复</a></div>
+<p></p>
+</div>
+</div>
+{/loop}
+ -->
+<div class="result">
+<div class="content">
+
+{loop $arrAlls $key $item}
+
+{if $item['type'] == 'ask'}
+<h3><span>[问答] </span>&nbsp;<a href="{tsUrl('ask','show',array('id'=>$item[id]))}" target="_blank">{$item[title]}</a></h3>
+<div class="info">{php echo date('Y-m-d',$item[addtime])}&nbsp;</div>
+<p></p>
+
+{elseif $item['type'] == 'book'}
+<h3><span>[图书] </span>&nbsp;<a href="{tsUrl('book','show',array('id'=>$item[id]))}" target="_blank">{$item[title]}</a></h3>
+<div class="info">{php echo date('Y-m-d',$item[addtime])}&nbsp;</div>
+<p></p>
+
+{elseif $item['type'] == 'review'}
+<h3><span>[书评] </span>&nbsp;<a href="{tsUrl('review','show',array('id'=>$item[id]))}" target="_blank">{$item[title]}</a></h3>
+<div class="info">{php echo date('Y-m-d',$item[addtime])}&nbsp;</div>
+<p></p>
+
+{elseif $item['type'] == 'event'}
+<h3><span>[活动] </span>&nbsp;<a href="{tsUrl('event','show',array('id'=>$item[id]))}" target="_blank">{$item[title]}</a></h3>
+<div class="info">{php echo date('Y-m-d',$item[addtime])}&nbsp;</div>
+<p></p>
+
+{elseif $item['type'] == 'user'}
+<h3><span>[用户] </span>&nbsp;<a href="{tsUrl('user','space',array('id'=>$item[id]))}" target="_blank">{$item[title]}</a></h3>
+<div class="info">{php echo date('Y-m-d',$item[addtime])}&nbsp;</div>
+<p>{$item[signed]}</p>
+{/if}
+
+{/loop}
+</div>
+</div>
+
+<div class="page">{$pageUrl}</div>
+</div>
+</div>
+</div>
+</div>
+
+{template footer}

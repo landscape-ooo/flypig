@@ -1,0 +1,11 @@
+<h2>书评管理</h2>
+<div class="tabnav">
+<ul>
+<li {if $mg=='options'}class="select"{/if}><a href="{SITE_URL}index.php?app=review&ac=admin&mg=options">书评配置</a></li>
+<li {if $mg=='review' && $ts=='list'}class="select"{/if}><a href="{SITE_URL}index.php?app=review&ac=admin&mg=review&ts=list">书评管理</a></li>
+
+<li {if $mg=='review' && $ts=='list_delete'}class="select"{/if}><a href="{SITE_URL}index.php?app=review&ac=admin&mg=review&ts=list_delete">已失效的书评</a></li>
+<li {if $mg=='review' && $ts=='list_edit'}class="select"{/if}><a href="{SITE_URL}index.php?app=review&ac=admin&mg=review&ts=list_edit">修改的书评</a></li>
+
+</ul>
+</div>

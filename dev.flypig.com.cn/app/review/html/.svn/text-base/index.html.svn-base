@@ -1,0 +1,153 @@
+{template header}
+
+<div id="path" class="bd clearfix">
+	<span class="icon icon-home"></span>
+	<a href="{SITE_URL}" title="{$TS_SITE['base']['site_title']}首页">首页</a>  &gt;  <a href="{tsUrl('review','index')}" title="飞猪网好书评">好书评</a>  &gt;  {if !empty($bookid)}《{$bookname}》的书评{else}书评列表{/if}
+</div>
+
+<div id="bd" class="bd clearfix">
+	<div class="bd-left">
+		
+		<div id="review_list">
+			{if !empty($bookid)}
+			<div class="com-bar clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-file2"></span>
+					最新书评
+					<span class="f12 color-gray">({$reviewNum})</span>
+				</div>
+				<div class="com-bar-more">
+					&nbsp;&nbsp;<span class="icon icon-redo"></span> <a href="{tsUrl('book','show',array('id'=>$bookid))}">返回《{$bookname}》</a>
+				</div>
+			</div>
+			{else}
+			<div class="com-bar clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-file2"></span>
+					最新书评
+					<span class="f12 color-gray">({$reviewNum})</span>
+				</div>
+				<div class="com-bar-more">
+					&nbsp;&nbsp;<span class="icon icon-books"></span> <a href="{tsUrl('book')}" target="_blank">去选书</a>
+				</div>
+			</div>
+			{/if}
+			<div class="review_box">
+				{if $arrReview}
+				<div class="review_list">
+					<ul>
+						{loop $arrReview $key $item}
+						<li class="clearfix">
+							<div class="bookimg">
+								<a href="{tsUrl('book','show',array('id'=>$item['book']['bookid']))}" title="{$item['book']['bookname']}" target="_blank"><img src="{$item['book']['icon_120']}" width="92" alt="{$item['book']['bookname']}" /></a>
+							</div>
+							<div class="content">
+								<div class="review_title">
+									<a target="_blank" title="{$item['title']}" href="{tsUrl('review','show',array('id'=>$item['reviewid']))}">{$item['title']}</a>
+									{if $item[istop]==1}
+									<img src="{SITE_URL}public/images/tops.gif" title="[置顶]" alt="[置顶]" /> 
+									{/if} 
+									{if $item[isbrilliant]==1}
+									<img src="{SITE_URL}public/images/posts.gif" title="[精华]" alt="[精华]" />
+									{/if}
+									{if $item['postby']==1}
+									<a href="{tsUrl('home','phone')}"><img align="absmiddle" alt="通过Iphone手机端发布" title="通过Iphone手机端发布" src="{SITE_URL}public/images/ios.jpg" /></a>
+									{/if}
+									<span class="data">
+										<span class="icon icon-eye"></span>
+										<a target="_blank" href="{tsUrl('review','show',array('id'=>$item['reviewid']))}" title="浏览数">{$item[count_view]}</a>
+										<span class="icon icon-bubble2"></span>
+										<a target="_blank" href="{tsUrl('review','show',array('id'=>$item['reviewid']))}" title="回复数">{$item[count_comment]}</a>
+										<span class="icon icon-heart"></span>
+										<a target="_blank" href="{tsUrl('review','show',array('id'=>$item['reviewid']))}" title="喜欢数">{$item[count_love]}</a>
+									</span>
+								</div>
+								<div class="review_content">
+									{php echo cututf8(t($item['summary']),0,120)}
+								</div>
+								<div class="review_info">
+									<span style="float:left;">
+										{php echo getTime($item[uptime],time())}
+										，By <a href="{tsUrl('user','space',array('id'=>$item[userid]))}">{$item[user][username]}</a>
+										，来自<a target="_blank" title="{$item['book']['bookname']}" href="{tsUrl('book','show',array('id'=>{$item['book']['bookid']}))}">《{$item['book']['bookname']}》</a>
+									</span>
+									<span style="float:right;text-align:right;">
+										<span class="icon icon-quill"></span> <a href="{tsUrl('review','add',array('bookid'=>{$item['book']['bookid']}))}" target="_blank">我也写书评</a>
+									</span>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</li>
+						{/loop}
+					</ul>
+				</div>
+				<div class="com-page">{$pageUrl}</div>
+				{else}
+				<p style="width:640px;margin:15px 15px 30px 15px;text-align:center;color:gray;">暂无书评</p>
+				{/if}
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{if $TS_APP['options']['iscreate']==0 || $TS_USER['user']['isadmin']==1}
+		{if !empty($bookid)}
+		<a class="btn3d btn3d-full" href="{tsUrl('review','add',array('bookid'=>$bookid))}" style="margin-top:30px;"><span class="icon-pen"></span> 发布书评</a>
+		{else}
+		<a class="btn3d btn3d-full" href="{tsUrl('book')}" style="margin-top:30px;" onClick="return confirm('亲，先去选本图书吧！');return false;"><span class="icon-pen"></span> 发布书评</a>
+		{/if}
+		{/if}
+		
+		<div id="hot_review" class="com-box" style="margin-top:30px;">
+			<div class="com-bar3 clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-fire"></span>
+					热门书评
+				</div>
+				<div class="com-bar-more">
+					&nbsp;&nbsp;
+				</div>
+			</div>
+			<ul class="content">
+				{loop $arrReview $key $item}
+				<li>
+					<h4><a href="{tsUrl('review','show',array('id'=>$item['reviewid']))}" target="_blank">{$item['title']}</a></h4>
+					<span class="r-grey">
+						<span class="icon icon-bubble2"></span>
+						<a href="{tsUrl('review','show',array('id'=>$item['reviewid']))}" target="_blank" title="评论数">{$item['count_comment']}</a>
+					</span>
+					<p class="b-titles">
+						<span class="b-titles-l">来自：<a title="{$item['book']['bookname']}" target="_blank" href="{tsUrl('book','show',array('id'=>$item['bookid']))}">《{php echo cututf8(t($item['book']['bookname']),0,14)}》</a></span>
+					</p>
+				</li>
+				{/loop}
+			</ul>
+		</div>
+		
+		<div class="com-box">
+			<div class="com-bar3 clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-clock2"></span>
+					最新图书
+				</div>
+				<div class="com-bar-more">
+					&nbsp;&nbsp;
+				</div>
+			</div>
+			<div class="content line23">
+				{if $arrNewBook}
+				{loop $arrNewBook $key $item}
+				<a href="{tsUrl('book','show',array('id'=>$item['bookid']))}">《{$item['bookname']}》</a><br><br>
+				{/loop}
+				{/if}
+			</div>
+		</div>
+		
+		<!--广告位-->
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{template footer}

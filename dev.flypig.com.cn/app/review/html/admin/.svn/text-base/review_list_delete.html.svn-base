@@ -1,0 +1,23 @@
+{php include template("admin/header");}
+
+<!--main-->
+<div class="midder">
+
+{php include template("admin/menu");}
+
+<div class="page">{$pageUrl}</div>
+
+<table>
+<tr class="old"><td>ID</td><td>UserID</td><td>标题</td><td>关联图书</td><td>时间</td><td>操作</td></tr>
+{loop $arrReview $key $item}
+<tr class="odd"><td>{$item['reviewid']}</td><td>{$item['userid']}</td><td><a target="_blank" href="{tsUrl('review','review',array('id'=>$item['reviewid']))}">{$item['title']}</a></td><td>{$item['bookname']}</td><td>{php echo date('Y-m-d H:i:s',$item['addtime'])}</td><td>
+
+<a href="{SITE_URL}index.php?app=review&ac=admin&mg=review&ts=delete&reviewid={$item['reviewid']}">删除</a>
+
+</td>
+</tr>
+{/loop}
+</table>
+
+</div>
+{php include template("admin/footer");}

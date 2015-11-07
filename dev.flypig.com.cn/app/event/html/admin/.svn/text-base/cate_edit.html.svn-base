@@ -1,0 +1,31 @@
+{php include template("admin/header");}
+
+<div class="midder">
+
+{php include template("admin/menu");}
+
+<form method="POST" action="{SITE_URL}index.php?app=event&ac=admin&mg=cate&ts=edit_do">
+<table>
+	<tr>
+		<td width="100">分类名称：</td>
+		<td><input name="catename" value="{$strCate['catename']}" /></td>
+	</tr>
+	<!--
+	<tr>
+		<td width="100">分类描述：</td>
+		<td><textarea style="width:300px;" name="catedesc">{$strCate[catedesc]}</textarea></td>
+	</tr>
+	-->
+	<tr>
+		<td></td>
+		<td>
+			<input type="hidden" name="cateid" value="{$strCate['cateid']}" />
+			<input type="submit" value="修改分类" />
+		</td>
+	</tr>
+</table>
+</form>
+
+</div>
+
+{php include template("admin/footer");}

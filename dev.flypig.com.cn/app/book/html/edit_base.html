@@ -1,0 +1,308 @@
+{template header}
+
+<link rel="stylesheet" href="{SITE_URL}public/js/multiselect2side/style.css" type="text/css" media="screen" />
+<script type="text/javascript" src="{SITE_URL}public/js/multiselect2side/jquery.multiselect2side.js"></script>
+<script type="text/javascript" src="{SITE_URL}public/js/date/WdatePicker.js?4.72"></script>
+<div id="bd" class="bd clearfix">
+	<h1 id="edit-title">
+		<span class="icon icon-pen"></span>
+		{$title}
+	</h1>
+	<div class="bd-left">
+		
+		<div id="edit-base" class="com-box">
+			<div id="edit-menu">
+				{template edit_menu}
+			</div>
+			<div id="edit-body">
+				
+				<form method="POST" action="{SITE_URL}index.php?app=book&ac=do&ts=edit_base">
+				<table class="com-table">
+					<tr>
+						<th>书名：</th>
+						<td colspan="3">
+							<i>书的标准名称</i><br>
+							<input type="text" style="width:480px;" value="{$strBook[bookname]}" name="bookname" />
+						</td>
+					</tr>
+					<tr>
+						<th>标题：</th>
+						<td colspan="3">
+							<i>辅助标题</i><br>
+							<input type="text" style="width:480px;" value="{$strBook[title]}" name="title" />
+						</td>
+					</tr>
+					<tr>
+						<th>图书简介：</th>
+						<td colspan="3">
+							<textarea style="width:480px;height:80px;" name="description">{$strBook[description]}</textarea>
+						</td>
+					</tr>
+					<tr>
+						<th>获奖记录：</th>
+						<td colspan="3">
+							<textarea style="width:480px;height:80px;" name="awardsrecord">{$strBook[awardsrecord]}</textarea>
+						</td>
+					</tr>
+					<tr>
+						<th>（文）作者：</th>
+						<td colspan="3" class="author-box">
+							<select name="author1s[]" id='author1' multiple='multiple' size="8"></select>
+							<script type="text/javascript">
+							$().ready(function() {
+								var url1 = "{SITE_URL}index.php?app=book&ac=ajax&ts=edit_author&bookid={$strBook[bookid]}&autype=1";
+								$('#author1').load(url1,function(){
+									$('#author1').multiselect2side({
+										selectedPosition: "left",
+										maxSelected: 4,
+										optGroupSearch: "&nbsp;",
+										optGroupDefault: "&nbsp;~国家~&nbsp;",
+										labelsx: "&nbsp;已选择:&nbsp;",
+										//moveOptions: false,
+										//labeldx: 'Selected',
+										labelTop: "┬",
+										labelBottom: "┴",
+										labelUp: "↑",
+										labelDown: "↓",
+										labelSort: false,
+										search: "&nbsp;<span class=\"icon-search\"></span>&nbsp;"
+									});
+								});
+							});
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th>（图）作者：</th>
+						<td colspan="3" class="author-box">
+							<select name="author2s[]" id='author2' multiple='multiple' size="8"></select>
+							<script type="text/javascript">
+							$().ready(function() {
+								var url2 = "{SITE_URL}index.php?app=book&ac=ajax&ts=edit_author&bookid={$strBook[bookid]}&autype=2";
+								$('#author2').load(url2,function(){
+									$('#author2').multiselect2side({
+										selectedPosition: "left",
+										maxSelected: 4,
+										optGroupSearch: "&nbsp;",
+										optGroupDefault: "&nbsp;~国家~&nbsp;",
+										labelsx: "&nbsp;已选择:&nbsp;",
+										//moveOptions: false,
+										//labeldx: 'Selected',
+										labelTop: "┬",
+										labelBottom: "┴",
+										labelUp: "↑",
+										labelDown: "↓",
+										labelSort: false,
+										search: "&nbsp;<span class=\"icon-search\"></span>&nbsp;"
+									});
+								});
+							});
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th>翻译：</th>
+						<td colspan="3" class="author-box">
+							<select name="author3s[]" id='author3' multiple='multiple' size="8"></select>
+							<script type="text/javascript">
+							$().ready(function() {
+								var url3 = "{SITE_URL}index.php?app=book&ac=ajax&ts=edit_author&bookid={$strBook[bookid]}&autype=3";
+								$('#author3').load(url3,function(){
+									$('#author3').multiselect2side({
+										selectedPosition: "left",
+										maxSelected: 4,
+										optGroupSearch: "&nbsp;",
+										optGroupDefault: "&nbsp;~国家~&nbsp;",
+										labelsx: "&nbsp;已选择:&nbsp;",
+										//moveOptions: false,
+										//labeldx: 'Selected',
+										labelTop: "┬",
+										labelBottom: "┴",
+										labelUp: "↑",
+										labelDown: "↓",
+										labelSort: false,
+										search: "&nbsp;<span class=\"icon-search\"></span>&nbsp;"
+									});
+								});
+							});
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th>ISBN：</th>
+						<td><input type="text" style="width:150px;" value="{$strBook[isbn]}" name="isbn" /></td>
+						<th>定价：</th>
+						<td><input type="text" style="width:80px;" value="{$strBook[price]}" name="price" /> 元</td>
+					</tr>
+					<tr>
+						<th>出版社：</th>
+						<td colspan="3" class="pubhouse-box">
+							<span class="cell">
+								<i>全称:</i><br>
+								<input type="hidden" value="{$strBook[pubhouse]}" name="pubhouse" />
+								<input type="text" style="width:220px;" value="{$strBook[pubhousepuname]}" name="pubhouses" readonly="true" />
+							</span>
+							<span class="cell" style="margin-left:20px;"><i>快捷选择:</i><br>
+								<select id="sel-pubhouse" name="sel-pubhouse">
+									<option value='0' >~出版社~</option>
+									{loop $arrPubhouse $k $v}
+									<option value="$k">{$v['puname']}</option>
+									{/loop}
+								</select>
+							</span>
+							<script type="text/javascript">
+							$(function() {
+								$("#sel-pubhouse").change(function(){
+									$('input[name=pubhouse]').val($(this).val());
+									$('input[name=pubhouses]').val($(this).find("option:selected").text());
+								});
+							});
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th>出版商：</th>
+						<td colspan="3" class="company-box">
+							<span class="cell">
+								<i>全称:</i><br>
+								<input type="hidden" value="{$strBook[company]}" name="company" />
+								<input type="text" style="width:220px;" value="{$strBook[companyconame]}" name="companys" readonly="true" />
+							</span>
+							<span class="cell" style="margin-left:20px;"><i>快捷选择:</i><br>
+								<select id="sel-company" name="sel-company">
+									<option value='0' >~出版商~</option>
+									{loop $arrCompany $k $v}
+									<option value="$k">{$v['coname']}</option>
+									{/loop}
+								</select>
+							</span>
+							<script type="text/javascript">
+							$(function() {
+								$("#sel-company").change(function(){
+									$('input[name=company]').val($(this).val());
+									$('input[name=companys]').val($(this).find("option:selected").text());
+								});
+							});
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th>出版日期：</th>
+						<td>
+							<i>格式:0000-00-00</i><br>
+							<input type="text" style="width:150px;" value="{$strBook[pubdate]}" name="pubdate" readonly="true" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'0000-00-00',})" />
+						</td>
+						<th>页数：</th>
+						<td>
+							<i>数字</i><br>
+							<input type="text" style="width:80px;" value="{$strBook[cnt_pages]}" name="cnt_pages" />
+						</td>
+					</tr>
+					<tr>
+						<th>版次：</th>
+						<td><input type="text" style="width:150px;" value="{$strBook[num_rev]}" name="num_rev" /></td>
+						<th>字数：</th>
+						<td>
+							<i>数字</i><br>
+							<input type="text" style="width:120px;" value="{$strBook[cnt_words]}" name="cnt_words" />
+						</td>
+					</tr>
+					<tr>
+						<th>印刷日期：</th>
+						<td>
+							<i>格式:0000-00-00</i><br>
+							<input type="text" style="width:150px;" value="{$strBook[prtdate]}" name="prtdate" readonly="true" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" />
+						</td>
+						<th>印次：</th>
+						<td><input type="text" style="width:80px;" value="{$strBook[num_print]}" name="num_print" /></td>
+					</tr>
+					<tr>
+						<th>纸张：</th>
+						<td>
+							<select id="sel-paper" name="paper">
+								<option value=''>~纸张~</option>
+								{loop $arrPaper $k $v}
+								<option value="$k" {if $strBook[paper] == $k}selected{/if}>{$v['catename']}</option>
+								{/loop}
+							</select>
+						</td>
+						<th>包装：</th>
+						<td>
+							<select id="sel-packing" name="packing">
+								<option value=''>~包装~</option>
+								{loop $arrPacking $k $v}
+								<option value="$k" {if $strBook[packing] == $k}selected{/if}>{$v['catename']}</option>
+								{/loop}
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th>开本：</th>
+						<td>
+							<select id="sel-format" name="format">
+								<option value=''>~开本~</option>
+								{loop $arrFormat $k $v}
+								<option value="$k" {if $strBook[format] == $k}selected{/if}>{$v['catename']}</option>
+								{/loop}
+							</select>
+						</td>
+						<th>星级：</th>
+						<td>
+							<select id="sel-star" name="star">
+								<option value=''>~星级~</option>
+								{loop $arrStar $k $v}
+								<option value="$k" {if $strBook[star] == $k}selected{/if}>{$v['catename']}</option>
+								{/loop}
+							</select>
+						</td>
+					</tr>
+					{if $TS_USER['user']['isadmin']=='1'}
+					<tr>
+						<th>对应当当ID：</th>
+						<td colspan="3">
+							<i>格式:23353917</i><br>
+							<input type="text" style="width:150px;" value="{$strBook[dangdangid]}" name="dangdangid" />
+							<a href="/theme/flypig/show_dangdangid.jpg" target="_blank" style="margin-left:20px;"><span class="icon-question"></span></a>
+						</td>
+					</tr>
+					<tr>
+						<th>对应亚马逊ID：</th>
+						<td colspan="3">
+							<i>格式:B00FXONTU6</i><br>
+							<input type="text" style="width:150px;" value="{$strBook[amazonid]}" name="amazonid" />
+							<a href="/theme/flypig/show_amazonid.jpg" target="_blank" style="margin-left:20px;"><span class="icon-question"></span></a>
+						</td>
+					</tr>
+					<tr>
+						<th>对应京东ID：</th>
+						<td colspan="3">
+							<i>格式:11366865</i><br>
+							<input type="text" style="width:150px;" value="{$strBook[jdid]}" name="jdid" />
+							<a href="/theme/flypig/show_jdid.jpg" target="_blank" style="margin-left:20px;"><span class="icon-question"></span></a>
+						</td>
+					</tr>
+					{/if}
+					<tr>
+						<th></th>
+						<td colspan="3">
+							<input type="hidden" name="bookid" value="{$strBook[bookid]}" />
+							<input type="hidden" name="token" value="{$_SESSION['token']}" />
+							<button class="btn btn-success" type="submit">更新设置</button>
+							&nbsp;&nbsp;<a href="{tsUrl('book','show',array('id'=>$strBook[bookid]))}">返回</a>
+						</td>
+					</tr>
+				</table>
+				</form>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="bd-right">
+		
+		{template edit_right}
+		
+	</div>
+</div>
+
+{template footer}

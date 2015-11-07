@@ -1,0 +1,26 @@
+<!--{loop $arrRecommendBook $key $item}-->
+<div class="sub-item" id="book_g">
+<div class="pic">
+<a href="{tsUrl('book','show',array('id'=>$item[bookid]))}">
+<img src="{$item[icon_48]}" alt="{$item[bookname]}" />
+</a>
+<div style="background:#F0F0F0;text-align:center;padding:3px 0;">
+
+{if in_array($item['bookid'],$myBook)}
+已加入
+{else}
+<a href="{tsUrl('book','do',array('ts'=>'join','bookid'=>$item['bookid']))}">+加入</a>
+{/if}
+
+</div>
+</div>
+<div class="info">
+<a href="{tsUrl('book','show',array('id'=>$item[bookid]))}">{$item[bookname]}</a>  <font color="#999999">{$item[count_user]}人加入</font>             
+<p>{$item[bookdesc]}</p>
+</div>
+</div>
+<!--{/loop}-->
+<script>
+lastid=lastid+1;
+
+</script>

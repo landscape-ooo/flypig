@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title} - {$TS_APP[options][appname]} - {$TS_SITE[base][site_title]}</title>
+
+<style>
+body{margin:0;padding:0;background:#eee;}
+html,body,div,h1,form,button,p,a{font-family:Arial,Helvetica,sans-serif;}
+.login{width:400px;margin:0 auto;background:#3a81c0; overflow: hidden;margin-top:100px;border-radius:200px;}
+.login .logo{float:left;font-size:14px;color:#FFFFFF;width:0px;text-align:center;overflow:hidden;}
+.login .logo a{color:#FFFFFF;border:none;text-decoration: none;}
+.login .logo img{border:none;}
+
+.login .info{clear:both;width:230px;margin:50px auto;overflow:hidden;}
+.login .info a{color:#FFFFFF;text-decoration: none;font-size:12px;}
+
+.login .info h1{font-size:16px;color:#FFFFFF;}
+.login .info .login-form{}
+
+.login .info p{font-size:14px;color:#FFFFFF;}
+.login .info p input{border:solid 1px #FFFFFF;padding:5px;background:#FFFFFF;}
+.login .info button{border:none;background:#F0F0F0;padding:5px 10px;cursor:pointer;}
+.login .info .button{text-align:right;}
+</style>
+</head>
+<body>
+<div class="login">
+	
+	<div class="logo">
+		<!--<a href="http://www.flypig.com.cn/" target="_blank">
+		<img src="{SITE_URL}app/{$app}/skins/{$skin}/logo_login.gif" />
+		<br />
+		www.flypig.com.cn
+		</a>-->
+	</div>
+	
+	<div class="info">
+		<h1>Admin Panel</h1>
+		<div class="login-form">
+			<form method="POST" action="{SITE_URL}index.php?app=system&ac=login&ts=do">
+			<p>
+				Email<br />
+				<input style="width:230px;" name="email" required />
+			</p>
+			<p>
+				Password<br />
+				<input style="width:230px;" type="password" name="pwd" required />
+			</p>
+			<p class="button">
+				<a href="{SITE_URL}" class="home">&gt; Home Page</a>&nbsp;&nbsp;
+				<input type="hidden" name="cktime" value="2592000">
+				<input type="hidden" name="token" value="{$_SESSION['token']}" />
+				<button type="submit">Sign In</button>
+			</p>
+			</form>
+		</div>
+	</div>
+	
+</div>
+
+</body>
+</html>

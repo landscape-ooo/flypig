@@ -1,0 +1,62 @@
+{template header}
+
+<div id="path" class="bd clearfix">
+	<span class="icon icon-home"></span>
+	<a href="{SITE_URL}" title="{$TS_SITE[base][site_title]}首页">首页</a>  &gt;  <a href="{tsUrl('book','index')}" title="飞猪网精品图书汇">精品汇</a>  &gt;  图书审核
+</div>
+
+<div id="bd" class="bd clearfix">
+	<div class="bd-left">
+		
+		<div id="show_error">
+			<div class="error_box clearfix">
+				<div class="pic">
+					<img src="{$strBook[icon_48]}" valign="top" alt="{$strBook[bookname]}" />
+				</div>
+				<div class="text">
+					<h2><a href="{tsUrl('book','show',array('id'=>$strBook['bookid']))}">《{$strBook[bookname]}》</a><h2>
+					<p class="notice">本书正在审核中，请关注其它推荐图书......</p>
+				</div>
+			</div>
+		</div>
+
+		{if $arrRecommendBook}
+		<div id="recommend">
+			<div class="com-bar clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-fire"></span>
+					热门推荐
+				</div>
+			</div>
+			<ul class="clearfix">
+				{loop $arrRecommendBook $key $item}
+				{if $item[bookid]!=$bookid}
+				<li>
+					<div class="pic">
+						<a href="{tsUrl('book','show',array('id'=>$item[bookid]))}" title="{$item[bookname]}" target="_blank"><img src="{$item[icon_120]}" alt="{$item[bookname]}封面" title="{$item[bookname]}" /></a>
+					</div>
+					<div class="info" onclick="window.open('{tsUrl('book','show',array('id'=>$item[bookid]))}', '_blank');return false;">
+						<a href="{tsUrl('book','show',array('id'=>$item[bookid]))}" class="name">《{$item[bookname]}》</a>
+					</div>
+				</li>
+				{/if}
+				{/loop}
+			</ul>
+		</div>
+		<script type="text/javascript">
+		$(function(){
+			$("#recommend img").imgLoader(true,150,150);
+		});
+		</script>
+		{/if}
+		
+	</div>
+	<div class="bd-right">
+		
+		<!--广告位-->
+		{php doAction('gobad','300')}
+		
+	</div>
+</div>
+
+{template footer}

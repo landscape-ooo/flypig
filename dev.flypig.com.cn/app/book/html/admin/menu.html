@@ -1,0 +1,14 @@
+<h2>图书管理</h2>
+<div class="tabnav">
+<ul>
+<li {if $mg=='options'}class="select"{/if}><a href="{SITE_URL}index.php?app=book&ac=admin&mg=options">图书配置</a></li>
+<li {if $mg=='book' && $ts=='list'}class="select"{/if}><a href="{SITE_URL}index.php?app=book&ac=admin&mg=book&ts=list">全部图书</a></li>
+
+<li {if $mg=='cate' && ($ts=='list' || $ts=='edit')}class="select"{/if}><a href="{SITE_URL}index.php?app=book&ac=admin&mg=cate&ts=list">图书分类</a></li>
+
+<li {if $mg=='cate' && $ts=='add'}class="select"{/if}><a href="{SITE_URL}index.php?app=book&ac=admin&mg=cate&ts=add">添加分类</a></li>
+
+<li {if $mg=='author' && $ts=='list'}class="select"{/if}><a href="{SITE_URL}index.php?app=book&ac=admin&mg=author&ts=list">作者管理</a></li>
+
+</ul>
+</div>

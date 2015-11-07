@@ -1,0 +1,33 @@
+{php include template("admin/header");}
+
+<div class="midder">
+
+{php include template("admin/menu");}
+
+<form method="POST" action="{SITE_URL}index.php?app=book&ac=admin&mg=book&ts=edit_do">
+<table  cellpadding="0" cellspacing="0">
+<tr><td width="100">图书名称：</td><td><input name="bookname" value="{$arrBook[bookname]}" /></td></tr>
+<tr><td>图书介绍：</td><td><textarea style="width:500px;height:200px;" name="bookdesc">{$arrBook[bookdesc]}</textarea></td></tr>
+
+<tr><td>组长(ID)：</td><td><input name="userid" value="{$arrBook[userid]}" /></td></tr>
+
+<tr>
+<td>会员发帖设置：</td>
+<td>
+<select name="ispost">
+<option {if $arrBook[ispost]==0} selected="selected"{/if} value="0">允许会员发帖</option>
+<option {if $arrBook[ispost]==1} selected="selected"{/if} value="1">不允许会员发帖</option>
+</select>
+</td>
+</tr>
+
+<tr><td></td><td>
+<input type="hidden" name="bookid" value="{$arrBook[bookid]}" />
+<input type="hidden" name="token" value="{$_SESSION['token']}" />
+<input type="submit" value="更新图书" />
+</td></tr>
+</table>
+</form>
+
+</div>
+{php include template("admin/footer");}

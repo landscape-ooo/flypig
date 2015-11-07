@@ -1,0 +1,241 @@
+@charset "utf-8";
+
+/************************************************************************************/
+								/*  index  */
+/************************************************************************************/
+/* 分类筛选 */
+.com-cate-opt {color:#666; line-height:20px; margin-bottom:20px;}
+.com-cate-opt ul {padding-top:5px; }
+.com-cate-opt li {border-top:1px dotted #c1c1c1; padding-top:10px;}
+.com-cate-opt .first {border-top:0; }
+.com-cate-opt .t {float:left; display:block; width:140px; text-align:right; vertical-align:top;text-align: left;margin-left: 15px;}
+.com-cate-opt .c {float:left; width:480px;display:block; }
+.com-cate-opt a {color:#666; display:inline-block; padding:0 6px; margin:0 10px 10px 0; _margin:5px 10px 5px 0; _padding-top:2px; }
+.com-cate-opt a:hover, #cate_opt a.on {color:#fff; background:#ff8c26; text-decoration:none; border-radius:4px; }
+
+/* 推荐图书 */
+#recommend{}
+#recommend ul{padding:10px 0 20px 0;}
+#recommend li{float:left;width:160px;height:180px;text-align:center;}
+#recommend .pic{
+	width:150px;height:150px;margin:0 auto;			/*非IE的主流浏览器识别的垂直居中的方法*/  
+	display: table-cell;			vertical-align:middle;			/*设置水平居中*/
+	text-align:center;			/* 针对IE的Hack */
+	*display: block;			*font-size: 131px;/*约为高度的0.873*/
+	*font-family:Arial;/*防止非utf-8引起的hack失效问题，如gbk编码*/
+}
+#recommend .pic img{vertical-align:middle;}
+
+
+/************************************************************************************/
+								/*  cate  */
+/************************************************************************************/
+
+/* 分类筛选微调 */
+#cate_opt{border:1px solid #e6e9ea; border-width:0 0 1px 0; }
+
+/* 筛选结果 图书列表 */
+#cate_opt_list{}
+#cate_opt_list h2{}
+#cate_opt_list h2 .total{float:left;height:38px;line-height:38px;padding:0 10px;font-size:14px;border-bottom:3px solid #ff8c26;}
+#cate_opt_list h2 .total span{color:#8c9c00;}
+#cate_opt_list h2 .look_bookreview{float:left;width:84px;display:block;line-height:40px;text-align:center;color:#8c9c00;}
+#cate_opt_list h2 .page_mini{float: right;line-height: 20px;padding: 9px 8px 0 0;white-space: nowrap;}
+#cate_opt_list h2 .page_mini .number {color: #3DAEB6;font-weight: bold;}
+#cate_opt_list h2 .page_mini .prev, .page_mini .next {width:5px;height:9px;display:block;margin:6px auto 0;background: url("arrow.png") -28px top no-repeat;overflow:hidden;}
+#cate_opt_list ul{}
+#cate_opt_list li{border-bottom:1px solid #dedede;padding:10px 0 20px 0;cursor:pointer;}
+#cate_opt_list li.hover{background:#f4ffe8;}
+#cate_opt_list li .pic{float:left;width:120px;margin:8px 0 0 5px;}
+#cate_opt_list li .pic img{}
+#cate_opt_list li .info{float:left;width:480px;margin-left:20px;}
+#cate_opt_list li .info em{color:#888;}
+#cate_opt_list li .info p{padding:2px 0 3px 0;text-indent:2em;}
+#cate_opt_list li .info .name{line-height:30px;font-size:20px;font-weight:100;padding-left:24px;}
+#cate_opt_list li .info .title{color:#666;}
+#cate_opt_list li .info .desc{line-height:22px;}
+#cate_opt_list li .info .star{}
+
+/*热门书评*/
+#hot_review{}
+#hot_review ul{word-wrap:break-word;}
+#hot_review li{border-bottom:1px dashed #CCCCCC;color:#999999;overflow:hidden;padding:6px 0;}
+#hot_review .font_icon{color: #EEEEEE;font-size: 18px;padding: 0 6px 0 14px;font-family: 'xinyan-font';}
+#hot_review h4{color:#666666;float:left;font-size:12px;margin:0;}
+#hot_review .r-grey{color:#999999;float:right;}
+#hot_review .b-titles{color:#999999;overflow:hidden;width:100%;margin:0;}
+#hot_review .b-titles-l{float:left;}
+#hot_review .b-titles a{color:#999999;}
+
+/************************************************************************************/
+								/* show */
+/************************************************************************************/
+
+/* 图书基本信息 */
+#show_base{border-top:1px solid #dedede;margin-bottom:20px;}
+#show_base .pic{float:left;width:180px;}
+#show_base .pic img{margin-top:25px;}
+#show_base .info{float:right;width:420px;}
+#show_base h1{margin:18px 0 10px 0;}
+<<<<<<< .mine
+<<<<<<< .mine
+#show_base .name{font-size: 23px;font-weight: 200;}
+=======
+#show_base .name{font-size:21px;font-weight:100;color:#8c9c00;}
+=======
+#show_base .name{font-size:26px;font-weight:100;color:#8c9c00;}
+>>>>>>> .r169
+>>>>>>> .r145
+#show_base .title{margin:2px 0 10px 0;}
+#show_base .info em{color:#888;}
+#show_base .title{color:#666;}
+#show_base .description{background:#f4ffe8;border-radius:10px;padding:10px;margin:16px 0;}
+#show_base .description .sup{background:url('/theme/flypig/sup.png') top left no-repeat; }
+#show_base .description .sub{background:url('/theme/flypig/sub.png') bottom right no-repeat; }
+#show_base .desc{padding:5px 16px;text-indent:2em;line-height:26px;}
+#show_base .awards{padding:3px 20px 3px 45px;line-height:20px;}
+#show_base ul{}
+#show_base ul li{line-height:26px;}
+#show_base dl{}
+#show_base dl dt{float:left;width:80px;text-align:right;padding-right:5px;color:#888;overflow:hidden; }
+#show_base dl dd{float:left;width:300px;overflow:hidden;}
+#show_base .brtool{clear:both;padding:20px 0 10px 0;}
+#show_base .btn_do{background:#dedede;border:1px solid #ccc;border-radius:5px;padding:5px;}
+#show_base .btn_on{background:#919f0a;border:1px solid #919f0a;}
+#show_base .btn_on span{color:#fff;}
+
+/* 相关书评 */
+/* 书评 */
+#show_review{}
+#show_review .review_type{}
+#show_review .review_type ul{border-bottom:dashed 1px #DDDDDD;padding:5px;}
+#show_review .review_type li{float:left;height: 20px;line-height: 20px;padding: 0 6px;margin-right:10px;}
+#show_review .review_type .on{background-color: #CCCCCC;border-radius: 15px;color: #FFFFFF;}
+#show_review .review_type .on a{color: #FFFFFF;}
+#show_review .review_list{}
+#show_review ul{overflow:hidden;}
+#show_review li{overflow:hidden;padding:15px 0;display:block;border-top:1px dotted #999999;}
+#show_review .userimg{float:left;width:38px;overflow:hidden;}
+#show_review .userimg img{border-radius:5px 5px 5px 5px;}
+#show_review .content{margin:0 0 0 50px;overflow:hidden;}
+#show_review .review_title{}
+#show_review .review_title a{color:#343434;font-size:16px;}
+#show_review .review_title .data{float: right;font-family: Arial;line-height: 24px;text-align: right;}
+#show_review .review_title .data a{font-size:13px;}
+#show_review .review_title .data span{color:#dedede;font-size: 14px;padding: 0 3px 0 12px;}
+#show_review .review_content{font-size:14px;color:#999;margin:10px 0 10px 0;}
+#show_review .review_info{overflow:hidden;font-size:12px;color:#999999;}
+#show_review .rank {background:none repeat scroll 0 0 #BBBBBB;height:15px;line-height:15px;margin:0 0 0 5px;padding:0 3px;border-radius:5px 5px 5px 5px;}
+
+/* 内页图片 */
+#show_photo{}
+#show_photo .photo_box{width: 640px; height:180px; position: relative; overflow: hidden;margin:10px 0 0 0;}
+#show_photo .photo_box ul{position: absolute; left: 0; top: 0; width:10000px;}
+#show_photo .photo_box li {float:left; margin-left:15px;}
+#show_photo .photo_box li img{display: block;border:1px solid #dedede;}
+#show_photo .photo_box li:hover img{border:1px solid #95a214;}
+#show_photo .photo_box .next, .photo_box .prev { width: 30px; height: 30px; position: absolute; left: 0; top: 60px; z-index: 10; filter: alpha(opacity = 80); opacity: 0.8; cursor: pointer;display:none; }
+#show_photo .photo_box .next .icon, .photo_box .prev .icon{width: 30px; height: 30px; display:block;font-size:30px;}
+#show_photo .photo_box .next { left: auto; right: 0; }
+
+/* 附加信息 */
+/* 展开样式*/
+.bookadd_box{height:120px;position: relative;overflow:hidden;}
+.bookadd_box .con{}
+.bookadd_box .con p{padding:6px 0 6px 0;text-indent:2em;line-height:24px;font-size:14px;}
+.bookadd_btn{padding:0 10px 20px 10px;text-align:center;}
+.bookadd_box span.mark{background:url("/theme/flypig/gradient-white.png") repeat-x scroll 0 0;display: block;bottom: 0;height: 31px;position: absolute;width: 100%;}
+.bookadd_btn .down,.bookadd_btn .up{height:20px;color: #5cc9de;cursor:pointer;margin:0 15px;display:none;}
+
+/* 图书成员列表 */
+#book_user{}
+#book_user dl{display:inline;float:left;margin:0 0 10px;width:70px;}
+#book_user dt{height:50px;line-height:16px;margin:0;overflow:hidden;text-align:center;}
+#book_user dd{height:30px;margin:0;overflow:hidden;text-align:center;}
+
+/* 图书相关设置 */
+#book_set{}
+#book_set p{padding:5px 0;}
+#book_set .status{color:#666;}
+#book_set .do .icon,
+#book_set .info .icon,
+#book_set .status .icon{color:#919f0a;}
+#book_set .addreview_btn{background:#a6b21e;border-radius:6px;box-shadow:0 2px 0 #767f15;color:#FFFFFF;display: inline-block;font-size:15px;height:38px;line-height:38px;margin-bottom:15px;text-align:center;width:100%;}
+#book_set .addreview_btn:hover{color:#e5ef70;text-decoration:none;}
+
+/* show_error */
+#show_error{}
+#show_error .error_box{margin:10px 0 20px 0;padding:20px;}
+#show_error .pic{float:left;width:80px;text-align:center;}
+#show_error .text{float:left;width:480px;}
+#show_error .notice{font-size:22px;}
+
+/**********************************   review    ******************************************************/
+/* 书评内容 */
+#review-title{width:100%;height:40px;line-height:40px;font-size:18px;font-weight:bold;border-bottom:3px solid #dedede;}
+#review-title .icon{color:#919f0a;}
+#review-tools{width:100%;height:40px;line-height:40px;background:#f6f6f6;border-bottom:1px solid #efefef;}
+#review-tools .review-from{font-size:14px;}
+#review-tools .review-from a{color:#919f0a;}
+
+#review-content{padding:10px;}
+#review-content .user-face{float:left;width:48px;text-align:center;}
+#review-content .user-face img{margin-top:15px;}
+#review-content .review-doc {margin-bottom:20px;overflow:hidden;margin-left:60px;}
+#review-content .review-doc .review-view p{font-size:14px;line-height:24px;padding:12px 0;text-indent:2em;}
+#review-content .review-doc .author {height:auto;margin:0;margin-bottom:1px;color:#666666;background:#f4f4ec;padding:5px;font-size:12px;}
+#review-content .review-doc h3 {background:#F8F8F8;border-top:1px solid #eeeeee;color:#999999;font-size:12px;height:auto;margin:0;padding:5px;}
+#review-content .review-doc img{max-width:500px;}
+#review-content .review-doc .review-view{font-size:14px;line-height:30px;overflow:hidden;word-wrap:break-word;word-break:normal;}
+#review-content .review-doc .review-view table{border:#CCCCCC 1px solid;}
+#review-content .review-doc .review-view table td{border:1px #cccccc solid; border-right:none; border-top:none;}
+
+#review_tags{padding:10px 0;}
+#review_tags a{margin:0 10px 0 0;}
+
+/* 回复 */
+#review_comment .com-bar2 .icon{color:#919f0a;}
+
+/*最新书评*/
+#new_review{}
+#new_review ul{word-wrap:break-word;}
+#new_review li{border-bottom:1px dashed #CCCCCC;color:#999999;overflow:hidden;padding:6px 0;}
+#new_review .font_icon{color: #EEEEEE;font-size: 18px;padding: 0 6px 0 14px;font-family: 'xinyan-font';}
+#new_review h4{color:#666666;float:left;font-size:12px;margin:0;}
+#new_review .r-grey{color:#999999;float:right;}
+#new_review .b-titles{color:#999999;overflow:hidden;width:100%;margin:0;}
+#new_review .b-titles-l{float:left;}
+#new_review .b-titles a{color:#999999;}
+
+
+/*最新CSS*/
+.book_show{overflow:hidden;}
+.book_show .face{float:left;}
+.book_show .face img{}
+.book_show .title{float:left;margin-left:20px;}
+.book_show .title h1{margin:0;padding:0;}
+.book_show .title p{color:#999;}
+.book_show .join{float:left;margin-left:20px;color:#999;}
+/*最新CSS*/
+
+/*******************************************编辑图书*********************************************************/
+/* 编辑版title */
+#edit-title{height:38px;line-height:38px;margin:10px 0;font-size:18px;}
+#edit-title .icon{color:#ff7b01;}
+
+#edit-base .author-box .cell{display:inline-block;}
+#edit-base .company-box .cell{display:inline-block;}
+#edit-base .pubhouse-box .cell{display:inline-block;}
+#edit-base i{color:#ccc;font-size:11px;}
+#edit-base .cell i{padding:0 0 0 5px;}
+
+/* 编辑版menu */
+#edit-menu{}
+
+/* 编辑版body */
+#edit-body{padding:10px;}
+
+#edit-photo{}
+#edit-photo .cover{float:left;width:160px;text-align:center;}
+#edit-photo .intro{float:left;width:250px;}
+#edit-photo .photo-item{padding:5px 0;}
