@@ -70,7 +70,7 @@ $url = tsUrl('index', 'index', array('ts'=>$ts,'page'=>''));
 $pageUrl = pagination($indexNum, $pagesize, $page, $url);
 
 //推荐的图书
-$arrRecommendBook = aac('book')->getRecommendBook(8);
+$arrRecommendBook = aac('book')->getRecommendBook(6);
 
 //最新签到用户
 $arrUser = aac('user')->getHotUser(16);

@@ -65,6 +65,34 @@ class user extends tsApp{
 		}
 		return $strUser;
 	}
+	/**
+	 * 获取more 用户的信息
+	 * @param int list $userid_list
+	 * @return boolean|list (useritemInfo,str....)
+	 */
+	function getBatchUser($userid_list=array()){
+		if(!$userid_list) return false;
+		$strUserList = $this->findAll('user_info',array(
+				'userid in ('.implode(",",$userid_list).") ",
+		));
+		foreach($strUserList  as &$strUser ){
+			if($strUser){
+				if($strUser['face'] && $strUser['path']){
+					//$strUser['face'] = tsXimg($strUser['face'],'user',48,48,$strUser['path'],1);
+					$strUser['face'] = tsXimg($strUser['face'],'user',120,120,$strUser['path'],1);
+				}elseif($strUser['face'] && $strUser['path']==''){
+					$strUser['face'] = SITE_URL.'public/images/'.$strUser['face'];
+				}else{
+					//没有头像
+					//$strUser['face'] = SITE_URL.'public/images/user_normal.jpg';
+					$strUser['face'] = SITE_URL.'public/images/user_large.jpg';
+				}
+			}else{
+				$strUser = '';
+			}
+		}
+		return $strUserList;
+	}
 	
 	//用户是否存在
 	public function isUser($userid){
@@ -337,5 +365,30 @@ class user extends tsApp{
 	public function __destruct(){
 		
 	}
+	
+	/**
+	 * my follower 
+	 * @param int $userid 
+	 *   int  limit 
+	 * @return list 
+	 */
+	public function getMyFollowInfoList($userid,$limit){
+		if(!$userid) return false;
+		//关注的用户
+		$arrUsers = $this->findAll('user_follow',array(
+				'userid'=>intval($userid),
+		),'addtime desc',null,$limit?$limit:20);
+		
+		if(is_array($arrUsers)){
+			foreach($arrUsers as $item){
+				$useridlist[]=$item['userid_follow'];
+			}
+			$myfollowerUserInfoList=$this->getBatchUser($useridlist);
+			return $myfollowerUserInfoList;
+		}
+		
+		return false;
+	}
+	
 					
 }

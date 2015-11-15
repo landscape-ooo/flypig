@@ -16,16 +16,16 @@ if(!empty($bookid)){
 }
 
 //推荐的图书
-$arrRecommendBook = aac('book')->getRecommendBook(8);
+$arrRecommendBook = aac('book')->getRecommendBook(4);
 
 //最新10个图书
-$arrNewBook = aac('book')->getNewBook(10);
+$arrNewBook = aac('book')->getNewBook(4);
 
 //热门书评
 $arrHotReview = $new['review']->findAll('review',array(
 		'isaudit'=>'1',
 		'status'=>'1'
-	),'count_comment desc','bookid,reviewid,title,count_comment',10);
+	),'count_comment desc','bookid,reviewid,title,count_comment',4);
 foreach($arrHotReview as $key=>$item){
 	$arrHotReview[$key]['title'] = htmlspecialchars($item['title']);
 	$arrHotReview[$key]['book'] = aac('book')->getOneBook($item['bookid']);
@@ -80,4 +80,6 @@ $title = '书评列表';
 if ($TS_CF ['mobile'])
 	$sitemb = tsUrl ( 'moblie', 'review' );
 
+$toprelation_share=$new['review']->getFriendVisitlist();
+$myreview_list= $new['review']->getMyToplist();
 include template("index");

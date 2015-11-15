@@ -100,6 +100,7 @@ $pageUrl = pagination($askNum, $pagesize, $page, $url);
  * */
 //top visit share
 $topvisitlist=$new['ask']->getTopVisitlist();
+$toprelation_share=$new['ask']->getFriendVisitlist();
 
 
 

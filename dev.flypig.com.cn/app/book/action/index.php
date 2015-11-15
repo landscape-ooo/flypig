@@ -147,4 +147,6 @@ foreach($arrReviews as $key=>$item){
 
 $title = '分类筛选';
 
+$mine_bookcollect=$new['book']->getMyToplist();
+$friend_list=$new['book']->getFriendVisitlist();
 include template('index');

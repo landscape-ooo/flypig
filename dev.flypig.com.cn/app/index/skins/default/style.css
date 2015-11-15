@@ -11,7 +11,7 @@
 #friend-link ol li{height:24px;line-height:24px;}
 
 #recommend-book ul{}
-#recommend-book ul li{float:left;width:150px;margin:0 0 20px 0;}
+#recommend-book ul li{float:left;width:90px;margin:0 0 20px 0;border:2px solid;height:130px;}
 #recommend-book .pic{text-align:center;overflow:hidden;}
 
 .inforight{margin:0 80px;}

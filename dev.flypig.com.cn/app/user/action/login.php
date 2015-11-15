@@ -17,9 +17,9 @@ switch ($ts) {
 	case "do" :
 		
 		// 验证token
-		if ($_POST ['token'] != $_SESSION ['token']) {
-			tsNotice ( '非法操作！' );
-		}
+// 		if ($_POST ['token'] != $_SESSION ['token']) {
+// 			tsNotice ( '非法操作！' );
+// 		}
 		
 		/* 禁止以下IP用户登陆或注册 */
 		$arrIp = aac ( 'system' )->antiIp ();

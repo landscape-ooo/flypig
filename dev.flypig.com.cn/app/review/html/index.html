@@ -110,7 +110,7 @@
 				</div>
 			</div>
 			<ul class="content">
-				{loop $arrReview $key $item}
+				{loop $arrHotReview $key $item}
 				<li>
 					<h4><a href="{tsUrl('review','show',array('id'=>$item['reviewid']))}" target="_blank">{$item['title']}</a></h4>
 					<span class="r-grey">
@@ -124,6 +124,7 @@
 				{/loop}
 			</ul>
 		</div>
+		
 		
 		<div class="com-box">
 			<div class="com-bar3 clearfix">
@@ -142,6 +143,38 @@
 				{/loop}
 				{/if}
 			</div>
+		</div>
+		
+		<div id="hot_review" class="com-box">
+			<h3>
+				<span class="icon icon-fire"></span>
+				我的书评
+			</h3>
+			<ul class="content">
+				{loop $myreview_list $key $item}
+				<li>
+					<h4><span 
+					style="background: #87bd43 none repeat scroll 0 0;">{$item['user']['username']}</span>   <a
+					  href="{tsUrl('review','show',array('id'=>$item['reviewid']))}" target="_blank">{$item['title']}</a></h4>
+				</li>
+				{/loop}
+			</ul>
+		</div>
+		
+		<div id="hot_review" class="com-box">
+			<h3>
+				<span class="icon icon-fire"></span>
+				好友的最新书评
+			</h3>
+			<ul class="content">
+				{loop $toprelation_share $key $item}
+				<li>
+					<h4><span 
+					style="background: #87bd43 none repeat scroll 0 0;">{$item['user']['username']}</span>   <a
+					  href="{tsUrl('review','show',array('id'=>$item['reviewid']))}" target="_blank">{$item['title']}</a></h4>
+				</li>
+				{/loop}
+			</ul>
 		</div>
 		
 		<!--广告位-->

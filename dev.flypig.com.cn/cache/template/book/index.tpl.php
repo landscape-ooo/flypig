@@ -73,25 +73,49 @@
 			</div>
 		</div>
 		
-		<div id="hot_review" class="com-box">
+		
+		 <div id="hot_review" class="com-box">
 			<h3>
 				<span class="icon icon-fire"></span>
-				热门书评
+				我的书柜
 			</h3>
 			<ul class="content">
-				<?php foreach((array)$arrReview as $key=>$item) {?>
+				<?php foreach((array)$mine_bookcollect as $key=>$item) {?>
 				<li>
-					<h4><a href="<?php echo tsurl('review','show',array('id'=>$item['reviewid']))?>" target="_blank"><?php echo $item['title'];?></a></h4>
-					<span class="r-grey">
-						<span class="icon icon-bubble2"></span>
-						<a href="<?php echo tsurl('review','show',array('id'=>$item['reviewid']))?>" target="_blank" title="评论数"><?php echo $item['count_comment'];?></a>
-					</span>
-					<p class="b-titles">
-						<span class="b-titles-l">来自：<a title="<?php echo $item['book']['bookname'];?>" target="_blank" href="<?php echo tsurl('book','show',array('id'=>$item['bookid']))?>">《<?php echo cututf8(t($item['book']['bookname']),0,14)?>》</a></span>
-					</p>
+					<h4><a href="<?php echo tsurl('book','show',array('id'=>$item['bookid']))?>" target="_blank">《<?php echo $item['bookname'];?>》</a></h4>
 				</li>
 				<?php }?>
 			</ul>
+		</div>
+		
+		<div id="hot_review" class="com-box">
+			<h3>
+				<span class="icon icon-fire"></span>
+				朋友的收藏
+			</h3>
+			<ul class="content">
+				<?php foreach((array)$friend_list as $key=>$item) {?>
+				<li>
+					<h4><a href="<?php echo tsurl('book','show',array('id'=>$item['book']['bookid']))?>" target="_blank">《<?php echo $item['book']['bookname'];?>》</a></h4>
+				</li>
+				<?php }?>
+			</ul>
+		</div>
+		
+		
+		<div id="friend-link" class="com-box" style="margin-top:30px;">
+			<div class="com-bar3 clearfix">
+				<div class="com-bar-tit">
+					<span class="icon icon-tags"></span>
+					友情链接
+				</div>
+				<div class="com-bar-more">
+					&nbsp;&nbsp;<!--<a href="javascript:;">申请</a>-->
+				</div>
+			</div>
+			<ol>
+				<li><a href="http://www.7jia8.com" target="_blank">启发童书</a></li>
+			</ol>
 		</div>
 		
 		<!--广告位-->

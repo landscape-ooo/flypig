@@ -45,7 +45,7 @@
 				<?php foreach((array)$arrRecommendBook as $key=>$item) {?>
 				<li>
 					<div class="pic">
-						<a href="<?php echo tsurl('book','show',array('id'=>$item['bookid']))?>" title="<?php echo $item['bookname'];?>" target="_blank"><img src="<?php echo $item['icon_120'];?>" width="140" alt="<?php echo $item['bookname'];?>封面" title="<?php echo $item['bookname'];?>" /></a>
+						<a href="<?php echo tsurl('book','show',array('id'=>$item['bookid']))?>" title="<?php echo $item['bookname'];?>" target="_blank"><img src="<?php echo $item['icon_120'];?>" width="90" alt="<?php echo $item['bookname'];?>封面" title="<?php echo $item['bookname'];?>" /></a>
 					</div>
 				</li>
 				<?php }?>
@@ -63,22 +63,6 @@
 		</script>
 		<?php } ?>
 		
-		<div id="friend-link" class="com-box" style="margin-top:30px;">
-			<div class="com-bar3 clearfix">
-				<div class="com-bar-tit">
-					<span class="icon icon-tags"></span>
-					友情链接
-				</div>
-				<div class="com-bar-more">
-					&nbsp;&nbsp;<!--<a href="javascript:;">申请</a>-->
-				</div>
-			</div>
-			<ol>
-				<li><a href="http://www.7jia8.com" target="_blank">启发童书</a></li>
-			</ol>
-		</div>
-		
-		
 		
 		<div id="hot_review" class="com-box">
 			<h3>
@@ -88,7 +72,8 @@
 			<ul class="content">
 				<?php foreach((array)$topvisitlist as $key=>$item) {?>
 				<li>
-					<h4><a href="<?php echo tsurl($item['type'],'show',array('id'=>$item[$item['type'].'id']))?>" target="_blank"><?php echo $item['title'];?></a></h4>
+					<h4><a href="<?php echo tsurl($item['type'],'show',array('id'=>$item[$item['type'].'id']))?>"
+					 target="_blank"><?php echo getsubstrutf8($item['title'],0,16);?></a></h4>
 				</li>
 				<?php }?>
 			</ul>

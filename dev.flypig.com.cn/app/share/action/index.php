@@ -80,7 +80,7 @@ if ($TS_CF ['mobile'])
  * */
 //top visit share
 $topvisitlist=$new['share']->getTopVisitlist();
-
-
+$toprelation_share=$new['share']->getFriendVisitlist();
+$mine_list=$new['share']->getMyToplist();
 
 include template("index");

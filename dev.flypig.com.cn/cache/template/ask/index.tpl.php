@@ -104,6 +104,24 @@
 				<?php }?>
 			</ul>
 		</div>
+		
+		
+		<div id="hot_review" class="com-box">
+			<h3>
+				<span class="icon icon-fire"></span>
+				好友问答
+			</h3>
+			<ul class="content">
+				<?php foreach((array)$toprelation_share as $key=>$item) {?>
+				<li>
+					<h4><span 
+					style="background: #87bd43 none repeat scroll 0 0;"><?php echo $item['user']['username'];?></span>   <a
+					  href="<?php echo tsurl('ask','show',array('id'=>$item['askid']))?>" target="_blank"><?php echo $item['title'];?></a></h4>
+				</li>
+				<?php }?>
+			</ul>
+		</div>
+		
 		<!--广告位-->
 		<?php doAction('gobad','300')?>
 		

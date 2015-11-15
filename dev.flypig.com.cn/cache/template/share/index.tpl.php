@@ -66,7 +66,6 @@
 		</div>
 		<?php } ?>
 		
-		
 		<div id="hot_review" class="com-box">
 			<h3>
 				<span class="icon icon-fire"></span>
@@ -75,7 +74,40 @@
 			<ul class="content">
 				<?php foreach((array)$topvisitlist as $key=>$item) {?>
 				<li>
-					<h4><a href="<?php echo tsurl('review','show',array('id'=>$item['reviewid']))?>" target="_blank"><?php echo $item['title'];?></a></h4>
+					<h4><a href="<?php echo tsurl('share','show',array('id'=>$item['shareid']))?>" 
+					target="_blank"><?php echo getsubstrutf8($item['title'],0,16); ?></a></h4>
+				</li>
+				<?php }?>
+			</ul>
+		</div>
+		
+		<div id="hot_review" class="com-box">
+			<h3>
+				<span class="icon icon-fire"></span>
+				我的分享
+			</h3>
+			<ul class="content">
+				<?php foreach((array)$mine_list as $key=>$item) {?>
+				<li>
+					<h4><a href="<?php echo tsurl('share','show',array('id'=>$item['shareid']))?>" 
+					target="_blank"><?php echo getsubstrutf8($item['title'],0,16); ?></a></h4>
+				</li>
+				<?php }?>
+			</ul>
+		</div>
+		
+		
+		
+		<div id="hot_review" class="com-box">
+			<h3>
+				<span class="icon icon-fire"></span>
+				好友的分享
+			</h3>
+			<ul class="content">
+				<?php foreach((array)$toprelation_share as $key=>$item) {?>
+				<li>
+					<h4><span 
+					style="background: #87bd43 none repeat scroll 0 0;"><?php echo $item['user']['username'];?></span>   <a href="<?php echo tsurl('share','show',array('id'=>$item['shareid']))?>" target="_blank"><?php echo $item['title'];?></a></h4>
 				</li>
 				<?php }?>
 			</ul>

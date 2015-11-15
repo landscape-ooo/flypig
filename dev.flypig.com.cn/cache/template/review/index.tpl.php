@@ -110,7 +110,7 @@
 				</div>
 			</div>
 			<ul class="content">
-				<?php foreach((array)$arrReview as $key=>$item) {?>
+				<?php foreach((array)$arrHotReview as $key=>$item) {?>
 				<li>
 					<h4><a href="<?php echo tsurl('review','show',array('id'=>$item['reviewid']))?>" target="_blank"><?php echo $item['title'];?></a></h4>
 					<span class="r-grey">
@@ -124,6 +124,7 @@
 				<?php }?>
 			</ul>
 		</div>
+		
 		
 		<div class="com-box">
 			<div class="com-bar3 clearfix">
@@ -142,6 +143,38 @@
 				<?php }?>
 				<?php } ?>
 			</div>
+		</div>
+		
+		<div id="hot_review" class="com-box">
+			<h3>
+				<span class="icon icon-fire"></span>
+				我的书评
+			</h3>
+			<ul class="content">
+				<?php foreach((array)$myreview_list as $key=>$item) {?>
+				<li>
+					<h4><span 
+					style="background: #87bd43 none repeat scroll 0 0;"><?php echo $item['user']['username'];?></span>   <a
+					  href="<?php echo tsurl('review','show',array('id'=>$item['reviewid']))?>" target="_blank"><?php echo $item['title'];?></a></h4>
+				</li>
+				<?php }?>
+			</ul>
+		</div>
+		
+		<div id="hot_review" class="com-box">
+			<h3>
+				<span class="icon icon-fire"></span>
+				好友的最新书评
+			</h3>
+			<ul class="content">
+				<?php foreach((array)$toprelation_share as $key=>$item) {?>
+				<li>
+					<h4><span 
+					style="background: #87bd43 none repeat scroll 0 0;"><?php echo $item['user']['username'];?></span>   <a
+					  href="<?php echo tsurl('review','show',array('id'=>$item['reviewid']))?>" target="_blank"><?php echo $item['title'];?></a></h4>
+				</li>
+				<?php }?>
+			</ul>
 		</div>
 		
 		<!--广告位-->

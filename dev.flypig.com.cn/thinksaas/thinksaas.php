@@ -33,7 +33,14 @@ ini_set('display_errors', 'on');   //正式环境关闭错误输出
 set_time_limit (0);
 
 ini_set('session.cookie_path', '/');
-
+$currentCookieParams = session_get_cookie_params();
+session_set_cookie_params(
+	$currentCookieParams["lifetime"],
+	$currentCookieParams["path"],
+	'.flypig.com.cn',
+	$currentCookieParams["secure"],
+	$currentCookieParams["httponly"]
+);
 //ini_set('session.save_path', THINKROOT.'/cache/sessions');
 
 //载入htmlpurifier库
@@ -88,7 +95,6 @@ if($_REQUEST['token']){
 		tsNotice('非法操作！');
 	}
 }
-
 //前台用户基本数据,$TS_USER数组
 $TS_USER = array(
 	'user' => isset($_SESSION['tsuser']) ? $_SESSION['tsuser'] : '',

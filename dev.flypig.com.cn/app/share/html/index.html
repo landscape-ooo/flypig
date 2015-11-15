@@ -66,7 +66,6 @@
 		</div>
 		{/if}
 		
-		
 		<div id="hot_review" class="com-box">
 			<h3>
 				<span class="icon icon-fire"></span>
@@ -75,7 +74,40 @@
 			<ul class="content">
 				{loop $topvisitlist $key $item}
 				<li>
-					<h4><a href="{tsUrl('review','show',array('id'=>$item['reviewid']))}" target="_blank">{$item['title']}</a></h4>
+					<h4><a href="{tsUrl('share','show',array('id'=>$item['shareid']))}" 
+					target="_blank">{php echo getsubstrutf8($item['title'],0,16); }</a></h4>
+				</li>
+				{/loop}
+			</ul>
+		</div>
+		
+		<div id="hot_review" class="com-box">
+			<h3>
+				<span class="icon icon-fire"></span>
+				我的分享
+			</h3>
+			<ul class="content">
+				{loop $mine_list $key $item}
+				<li>
+					<h4><a href="{tsUrl('share','show',array('id'=>$item['shareid']))}" 
+					target="_blank">{php echo getsubstrutf8($item['title'],0,16); }</a></h4>
+				</li>
+				{/loop}
+			</ul>
+		</div>
+		
+		
+		
+		<div id="hot_review" class="com-box">
+			<h3>
+				<span class="icon icon-fire"></span>
+				好友的分享
+			</h3>
+			<ul class="content">
+				{loop $toprelation_share $key $item}
+				<li>
+					<h4><span 
+					style="background: #87bd43 none repeat scroll 0 0;">{$item['user']['username']}</span>   <a href="{tsUrl('share','show',array('id'=>$item['shareid']))}" target="_blank">{$item['title']}</a></h4>
 				</li>
 				{/loop}
 			</ul>

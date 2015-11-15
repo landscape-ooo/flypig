@@ -286,6 +286,60 @@ class book extends tsApp{
 		return $arrList;
 	}
 	
+// 	
+	//最top visit 分享
+	public function getMyToplist($limit=5){
+		
+		$userid=$GLOBALS['TS_USER']['user']['userid'];
+		if(!$userid) return false;
+		$bookids = $this->findAll('book_collect',array('userid'=>$userid),
+				'addtime desc',
+				null,
+				intval($limit)
+		);
+		$booklist=array();
+		if($bookids){
+				foreach($bookids as $item ){
+					$booklist[]=$this->getOneBook($item['bookid']);
+					//$item['bookid'];
+				}
+		}else{
+			return false;
+		}
+		foreach($booklist as $key=>$item){
+			$booklist[$key]['title']=htmlspecialchars($item['title']);
+		}
+		return $booklist;
+	}
+	
+	
+	
+	public function getFriendVisitlist($limit=5){
+		$user_id=$GLOBALS['TS_USER']['user']?$GLOBALS['TS_USER']['user']['userid']:0;
+		if(!$user_id){
+			return false;
+		}
+		$relationList=aac('user')->getMyFollowInfoList($user_id);
+	
+		$f_userlist=$f_userid_list=array();
+		foreach($relationList as $item) {
+			$f_userid_list[]=$item['userid'];
+			$f_userlist[$item['userid']]=$item;
+		}
+		if(!$f_userlist) return false;
+		$s=$this->findAll('book_collect',
+				'userid in ('.implode(",",$f_userid_list).") ",
+				'addtime desc ',
+				null,
+				$limit
+		);
+	
+		foreach ($s as &$shareinfo){
+			$shareinfo['user']=$f_userlist[$shareinfo['userid']];
+			$shareinfo['book']=$this->getOneBook($shareinfo['bookid']);
+		}
+		return $s;
+	}
 	//析构函数
 	public function __destruct(){
 		

@@ -126,4 +126,30 @@ class ask extends tsApp{
 		}
 		return $arrList;
 	}
+	
+	
+	public function getFriendVisitlist(){
+		$user_id=$GLOBALS['TS_USER']['user']?$GLOBALS['TS_USER']['user']['userid']:0;
+		if(!$user_id){
+			return false;
+		}
+		$relationList=aac('user')->getMyFollowInfoList($user_id);
+	
+		$f_userlist=$f_userid_list=array();
+		foreach($relationList as $item) {
+			$f_userid_list[]=$item['userid'];
+			$f_userlist[$item['userid']]=$item;
+		}
+		if(!$f_userlist) return false;
+		$s=$this->findAll('ask',
+				'userid in ('.implode(",",$f_userid_list).") ",
+				'addtime desc ',
+				null,
+				5
+		);
+		foreach ($s as &$shareinfo){
+			$shareinfo['user']=$f_userlist[$shareinfo['userid']];
+		}
+		return $s;
+	}
 }

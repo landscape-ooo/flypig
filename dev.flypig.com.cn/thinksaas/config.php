@@ -4,8 +4,8 @@ return array(
 	
 	//Memcache配置
 	'memcache'=>array(
-		//'host' => '127.0.0.1',
-		//'port' => 11211,
+// 		'host' => '10.3.2.9',
+// 		'port' => 12000,
 	),
 	
 	//是否开启debug，正式环境下请关闭
@@ -45,8 +45,8 @@ return array(
 		'host'=>'localhost',
 		'port'=>'3306',
 		'user'=>'root',
-		'pwd'=>'',
-		'name'=>'thinksaas',
+		'pwd'=>'jianjian',
+		'name'=>'flypig',
 		'pre'=>'ts_',
 	),
 	
