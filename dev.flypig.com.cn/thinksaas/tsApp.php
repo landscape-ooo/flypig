@@ -35,6 +35,7 @@ class tsApp {
 				return $newinserid;
 			}
 		}
+		var_dump($this->db,mysql_error());
 		return FALSE;
 	}
 	

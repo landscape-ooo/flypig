@@ -57,7 +57,6 @@ switch($ts){
 		if($title=='' || $cateid=='' || $time_start=='' || $content==''){
 			tsNotice("请完善活动必填信息！");
 		}
-		
 		//是否审核
 		$isaudit = '0';
 		if($TS_APP['options']['isaudit']=='0' || $TS_USER['user']['isadmin']=='1'){

@@ -101,6 +101,14 @@ switch($ts){
 		));
 		//统计关注和被关注结束
 		
+		
+		
+		//对积分进行处理
+		aac('user')->doScore($app,$ac,$ts,$userid_follow);
+			
+		
+		
+		
 		echo json_encode(array(
 			'status'=>2,
 			'msg'=>'关注成功！',

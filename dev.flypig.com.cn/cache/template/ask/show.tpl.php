@@ -149,7 +149,7 @@
 						<br><a href="<?php echo tsurl('user','space',array('id'=>$TS_USER['user']['userid']))?>"><?php echo $TS_USER['user']['username'];?></a>
 					</div>
 					<div class="show-info">
-						<form method="POST" action="<?php echo tsurl('ask', 'comment', array('askid'=>$askid))?>" id="comment_add">
+						<form method="POST" action="<?php echo tsurl('ask', 'comment', array('ts'=>'add','askid'=>$askid))?>" id="comment_add">
 						<textarea style="width:528px;" id="editor_comment_add" name="content"></textarea>
 						<br><span id="editor_comment_add_tip"></span> <a class="btn btn-ok fr" href="javascript:;" id="btn_comment_add">新增答案</a>
 						</form>

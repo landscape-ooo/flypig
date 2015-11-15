@@ -44,12 +44,17 @@ switch($ts){
 			$invitecode = trim($_POST['invitecode']);
 			if($invitecode == '') tsNotice("邀请码不能为空！");
 
-			$codeNum = $new['user']->findCount('user_invites',array(
+			$inviteList = $new['user']->findOne('user_invites',array(
 				'invitecode'=>$invitecode,
 				'isused'=>0,
 			));
 			
-			if($codeNum == 0) tsNotice("邀请码已经被使用，请更换其他邀请码！");
+			if(@cout($inviteList)==0){
+				tsNotice("邀请码已经被使用，请更换其他邀请码！");
+			}else{
+				//对积分进行处理
+				aac('user')->doScore($app,$ac,$ts,$inviteList['userid'],'2');
+			}
 		
 		}
 

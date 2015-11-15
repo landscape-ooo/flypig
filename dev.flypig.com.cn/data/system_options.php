@@ -9,7 +9,7 @@ return array (
   'site_email' => 'admin@admin.com',
   'site_icp' => '京ICP备12049363号',
   'isface' => '1',
-  'isinvite' => '0',
+  'isinvite' => '1',
   'isverify' => '0',
   'isauthcode' => '0',
   'isfeed' => '1',

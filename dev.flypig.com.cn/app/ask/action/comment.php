@@ -8,7 +8,7 @@ switch($ts){
 	//添加评论
 	case "add":
 
-		$askid = intval($_POST['askid']);//问题id
+		$askid = intval($_REQUEST['askid']);//问题id
 
 		$content = htmlClean($_POST['content']);
 		if ($content == ''){

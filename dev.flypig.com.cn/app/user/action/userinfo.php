@@ -7,16 +7,20 @@ $userid = intval($_GET['id']);
 
 //是否存在用户
 $isUser = $new['user']->isUser($userid);
-
 if(!$isUser){
-	/*
-	header("HTTP/1.1 404 Not Found");
-	header("Status: 404 Not Found");
-	$title = '404';
-	include pubTemplate("404");
-	*/
-	header("Location: ".SITE_URL);
-	exit;
+	if(!$_SESSION['tsuser']){
+		$isUser=true;
+		$userid=$_SESSION['tsuser']['userid'];
+	}else{
+		/*
+		header("HTTP/1.1 404 Not Found");
+		header("Status: 404 Not Found");
+		$title = '404';
+		include pubTemplate("404");
+		*/
+		header("Location: ".SITE_URL);
+		exit;
+	}
 }
 
 $strUser = $new['user']->getOneUser($userid);

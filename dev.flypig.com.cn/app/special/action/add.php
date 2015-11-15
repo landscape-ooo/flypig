@@ -123,6 +123,11 @@ switch($ts){
 		}
 		//index结束
 		
+		//对积分进行处理
+		aac('user')->doScore($app,$ac,$ts);
+			
+		
+		
 		header("Location: ".tsUrl('special'));
 		break;
 
